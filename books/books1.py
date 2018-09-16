@@ -4,7 +4,7 @@ import re
 
 def scanner(name):
     '''parses the csv file and returns an array of csv rows'''
-    
+
     booksData = []
     with open(name, newline='') as f:
         reader = csv.reader(f)
@@ -14,19 +14,21 @@ def scanner(name):
 
 def getBooks(data):
     '''Returns a array of book names, unsorted'''
+    return []
 def getAuthors(data):
     '''Returns a array of book authors, unsorted'''
+    return []
 def sort(array):
     '''Sorts whatever it gets'''
+    return []
 
 
 def main():
 
-    if len(sys.argv)>1:
-        csv = sys.argv[1]
-    else:
+    if len(sys.argv)<2:
         sys.exit("What CSV file do you want me to use?")
 
+    csv = sys.argv[1]
     booksData = scanner(csv)
     books = []
     authors = []

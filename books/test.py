@@ -3,15 +3,13 @@
 #
 # Meant to Test books1.py
 #
+import unittest
+import books1
 
-import books1.py
+class testParse(unittest.TestCase):
 
-books(forward)
-books(reverse)
-books()
-authors(forward)
-authors(reverse)
-authors()
+    def test_hello(self):
+        self.assertEqual(len(books1.getBooks([])), 0)
 
-
-
+if __name__ == "__main__":
+    unittest.main() # run all tests
