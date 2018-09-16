@@ -13,6 +13,7 @@ def scanner(name) :
 
 def main():
     csv = sys.argv[1]
+<<<<<<< HEAD
     booksData = scanner(csv)
     #print(booksData)
     books = []
@@ -40,4 +41,9 @@ def main():
     #print(books)
     #print("AUTHORS ")
     #print(authors)
+=======
+    scanner(csv)
+
+
+>>>>>>> 6ff06368bd4805f01986cee8a7fda8fce86e571e
 main()
