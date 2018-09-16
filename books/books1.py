@@ -1,9 +1,10 @@
 import csv
-import os
 import sys
 import re
 
-def scanner(name) :
+def scanner(name):
+    '''parses the csv file and returns an array of csv rows'''
+    
     booksData = []
     with open(name, newline='') as f:
         reader = csv.reader(f)
@@ -11,21 +12,32 @@ def scanner(name) :
             booksData.append(row)
     return booksData
 
+def getBooks(data):
+    '''Returns a array of book names, unsorted'''
+def getAuthors(data):
+    '''Returns a array of book authors, unsorted'''
+def sort(array):
+    '''Sorts whatever it gets'''
+
+
 def main():
-    csv = sys.argv[1]
-<<<<<<< HEAD
+
+    if len(sys.argv)>1:
+        csv = sys.argv[1]
+    else:
+        sys.exit("What CSV file do you want me to use?")
+
     booksData = scanner(csv)
-    #print(booksData)
     books = []
     authors = []
     authorsTemp = []
     authorsTempData = []
     authorsFinal = []
-    
+
     for bookList in booksData:
         books.append(bookList[0])
-        authors.append(bookList[2]) 
-    
+        authors.append(bookList[2])
+
     for author in authors:
         authorsTemp = re.split(' \(|\) and ',author)
         authorsTemp.pop()
@@ -35,15 +47,13 @@ def main():
         authorsTempData.append(authorsTemp)
         # Need to compare lists of two authors
 
-    print(authorsTempData)
-    
+    # print(authorsTempData)
     #print("BOOKS ")
     #print(books)
     #print("AUTHORS ")
     #print(authors)
-=======
     scanner(csv)
 
 
->>>>>>> 6ff06368bd4805f01986cee8a7fda8fce86e571e
-main()
+if __name__=="__main__":
+    main()
