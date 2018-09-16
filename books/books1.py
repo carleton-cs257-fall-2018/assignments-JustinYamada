@@ -9,3 +9,6 @@ def scanner(name) :
 def main():
     csv = sys.argv[1]
     scanner(csv)
+
+
+main()
