@@ -14,31 +14,19 @@ def scanner(name):
 
 def getBooks(data):
     '''Returns a array of book names, unsorted'''
-    return []
+    books = []
+    for row in data:
+        books.append(row[0])
+    return books
+
 def getAuthors(data):
     '''Returns a array of book authors, unsorted'''
-    return []
-def sort(array):
-    '''Sorts whatever it gets'''
-    return []
-
-
-def main():
-
-    if len(sys.argv)<2:
-        sys.exit("What CSV file do you want me to use?")
-
-    csv = sys.argv[1]
-    booksData = scanner(csv)
-    books = []
     authors = []
     authorsTemp = []
     authorsTempData = []
     authorsFinal = []
-
-    for bookList in booksData:
-        books.append(bookList[0])
-        authors.append(bookList[2])
+    for row in data:
+        authors.append(row[2])
 
     for author in authors:
         authorsTemp = re.split(' \(|\) and ',author)
@@ -48,6 +36,31 @@ def main():
             # does not account for three authors
         authorsTempData.append(authorsTemp)
         # Need to compare lists of two authors
+
+    return authors
+    
+def sort(array):
+    '''Sorts whatever it gets'''
+    return []
+
+def search(array, key):
+    '''Just here for temp testing purposes, ignore this'''
+    for item in array:
+        if item==key:
+            return True
+    return False
+
+
+def main():
+
+    if len(sys.argv)<2:
+        sys.exit("What CSV file do you want me to use?")
+
+    csv = sys.argv[1]
+    data = scanner(csv)
+    getBooks(data)
+    getAuthors(data)
+
 
     # print(authorsTempData)
     #print("BOOKS ")

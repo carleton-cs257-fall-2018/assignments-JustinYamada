@@ -6,10 +6,18 @@
 import unittest
 import books1
 
-class testParse(unittest.TestCase):
+class testBooks(unittest.TestCase):
+
+
+
+    def setUp(self):
+        self.data=books1.scanner('books.csv')
 
     def test_hello(self):
-        self.assertEqual(len(books1.getBooks([])), 0)
+        self.assertEqual(len(books1.getBooks(self.data)), 31)
+
+    def test_books(self):
+        self.assertTrue(books1.search(books1.getBooks(self.data), "Omoo"))
 
 if __name__ == "__main__":
     unittest.main() # run all tests
