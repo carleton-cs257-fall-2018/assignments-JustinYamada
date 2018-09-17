@@ -24,6 +24,7 @@ def getAuthors(data):
     authorsTemp = []
     authorsTempData = []
     authorsFinal = []
+
     for row in data:
         authors.append(row[2])
 
@@ -40,7 +41,7 @@ def getAuthors(data):
     return authorsTempData
 
 def sort(array, type):
-    '''Sorts whatever it gets'''
+    '''Sorts array according to its type'''
     if len(sys.argv)<3:
         return array
 
@@ -57,6 +58,7 @@ def sort(array, type):
         sys.exit("Please use either \"forward\" or \"reverse\" to specify order")
 
 def printer(array) :
+    '''Prints each element of the array NICLEY'''
     for item in array :
         print(item)
 
@@ -64,6 +66,7 @@ def main():
 
     if len(sys.argv)<2:
         sys.exit("What CSV file do you want me to use?")
+
     if sys.argv[2] == "books":
         books = getBooks(scanner(sys.argv[1]))
         sortedBooks = sort(books, "book")
