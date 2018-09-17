@@ -19,13 +19,6 @@ def getBooks(data):
         books.append(row[0])
     return books
 
-# def getBooksR(data):
-#     '''Returns a array of book names, sorted backwards'''
-#     booksR = []
-#     for row in reversed(x):
-#         booksR.append(row[x])
-#     return booksR
-
 def getAuthors(data):
     '''Returns a array of book authors, unsorted'''
     authors = []
@@ -47,10 +40,19 @@ def getAuthors(data):
 
     return authorsTempData
 
-def sort(array):
+def sort(array, direction, type):
     '''Sorts whatever it gets'''
-    cat = sorted(array, key=lambda x:x.split(" ")[-1])
-    return cat
+    if type == "author" :
+        cat = sorted(array, key=lambda x:x.split(" ")[-1])
+    elif type == "book" :
+        cat = sorted(array)
+
+    if direction == "forwards" :
+        return cat
+    elif direction == "backwards" :
+        return cat[::-1]
+    else :
+        sys.exit("Please use either \"forwards\" or \"backwards\" to specify order")
 
 def search(array, key):
     '''Just here for temp testing purposes, ignore this'''
@@ -59,7 +61,6 @@ def search(array, key):
             return True
     return False
 
-
 def main():
 
     if len(sys.argv)<2:
@@ -67,25 +68,12 @@ def main():
     if len(sys.argv)<3:
         sys.exit("What direction do you want me to sort?")
 
-    csv = sys.argv[1]
-    data = scanner(csv)
+    data = scanner(sys.argv[1])
+
     if sys.argv[2] == "books":
-        print(sort(getBooks(data)))
-
+        print(sort(getBooks(data), sys.argv[3], "book"))
     if sys.argv[2] == "authors":
-        print(sort(getAuthors(data)))
-
-
-
-
-    # print(authorsTempData)
-    #print("BOOKS ")
-    #print(books)
-    #print(booksR)
-    #print("AUTHORS ")
-    #print(authors)
-    scanner(csv)
-
+        print(sort(getAuthors(data), sys.argv[3], "author"))
 
 if __name__=="__main__":
     main()
