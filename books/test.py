@@ -9,7 +9,6 @@ import books1
 class testBooks(unittest.TestCase):
 
 
-
     def setUp(self):
         self.data=books1.scanner('books.csv')
 
