@@ -19,12 +19,12 @@ def getBooks(data):
         books.append(row[0])
     return books
 
-def getBooksR(data):
-    '''Returns a array of book names, sorted backwards'''
-    booksR = []
-    for row in reversed(x):
-        booksR.append(row[x])
-    return booksR
+# def getBooksR(data):
+#     '''Returns a array of book names, sorted backwards'''
+#     booksR = []
+#     for row in reversed(x):
+#         booksR.append(row[x])
+#     return booksR
 
 def getAuthors(data):
     '''Returns a array of book authors, unsorted'''
@@ -41,14 +41,16 @@ def getAuthors(data):
         if len(authorsTemp) > 1:
             del authorsTemp[1]
             # does not account for three authors
-        authorsTempData.append(authorsTemp)
+        for item in authorsTemp:
+            authorsTempData.append(item)
         # Need to compare lists of two authors
 
     return authorsTempData
 
 def sort(array):
     '''Sorts whatever it gets'''
-    return []
+    cat = sorted(array, key=lambda x:x.split(" ")[-1])
+    return cat
 
 def search(array, key):
     '''Just here for temp testing purposes, ignore this'''
@@ -68,16 +70,10 @@ def main():
     csv = sys.argv[1]
     data = scanner(csv)
     if sys.argv[2] == "books":
-        if sys.argv[3] == "forwards" :
-            print(getBooks(data))
-        if sys.argv[3] == "backwards":
-            print(getBooksR(data))
+        print(sort(getBooks(data)))
 
     if sys.argv[2] == "authors":
-        if sys.argv[3] == "forwards":
-            print(getAuthors(data))
-        if sys.argv[3] == "backwards":
-            print(getAuthorsR(data))
+        print(sort(getAuthors(data)))
 
 
 
