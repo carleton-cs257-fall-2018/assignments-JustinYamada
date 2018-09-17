@@ -62,18 +62,18 @@ def main():
 
     if len(sys.argv)<2:
         sys.exit("What CSV file do you want me to use?")
+    if len(sys.argv)<3:
+        sys.exit("What direction do you want me to sort?")
 
     csv = sys.argv[1]
     data = scanner(csv)
     if sys.argv[2] == "books":
-        print(getBooks(data))
-        if sys.argv[3] == "forwards":
+        if sys.argv[3] == "forwards" :
             print(getBooks(data))
         if sys.argv[3] == "backwards":
             print(getBooksR(data))
-        
+
     if sys.argv[2] == "authors":
-        print(getAuthors(data))
         if sys.argv[3] == "forwards":
             print(getAuthors(data))
         if sys.argv[3] == "backwards":
