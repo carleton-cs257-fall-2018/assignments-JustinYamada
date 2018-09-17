@@ -37,7 +37,7 @@ def getAuthors(data):
         authorsTempData.append(authorsTemp)
         # Need to compare lists of two authors
 
-    return authors
+    return authorsTempData
     
 def sort(array):
     '''Sorts whatever it gets'''
@@ -58,8 +58,10 @@ def main():
 
     csv = sys.argv[1]
     data = scanner(csv)
-    getBooks(data)
-    getAuthors(data)
+    if sys.argv[2] == "books":
+        print(getBooks(data))
+    if sys.argv[2] == "authors":
+        print(getAuthors(data))
 
 
     # print(authorsTempData)
