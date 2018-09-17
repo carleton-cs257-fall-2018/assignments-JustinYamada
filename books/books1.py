@@ -2,11 +2,10 @@ import csv
 import sys
 import re
 
-def scanner(name):
+def scanner(file):
     '''parses the csv file and returns an array of csv rows'''
-
     booksData = []
-    with open(name, newline='') as f:
+    with open(file, newline='') as f:
         reader = csv.reader(f)
         for row in reader:
             booksData.append(row)
@@ -40,40 +39,43 @@ def getAuthors(data):
 
     return authorsTempData
 
-def sort(array, direction, type):
+def sort(array, type):
     '''Sorts whatever it gets'''
+    if len(sys.argv)<3:
+        return array
+
     if type == "author" :
         cat = sorted(array, key=lambda x:x.split(" ")[-1])
     elif type == "book" :
         cat = sorted(array)
 
-    if direction == "forwards" :
+    if sys.argv[3] == "forward" :
         return cat
-    elif direction == "backwards" :
+    elif sys.argv[3] == "reverse" :
         return cat[::-1]
     else :
-        sys.exit("Please use either \"forwards\" or \"backwards\" to specify order")
+        sys.exit("Please use either \"forward\" or \"reverse\" to specify order")
 
-def search(array, key):
-    '''Just here for temp testing purposes, ignore this'''
-    for item in array:
-        if item==key:
-            return True
-    return False
+def printer(array) :
+    for item in array :
+        print(item)
 
 def main():
 
     if len(sys.argv)<2:
         sys.exit("What CSV file do you want me to use?")
-    if len(sys.argv)<3:
-        sys.exit("What direction do you want me to sort?")
-
-    data = scanner(sys.argv[1])
-
     if sys.argv[2] == "books":
-        print(sort(getBooks(data), sys.argv[3], "book"))
-    if sys.argv[2] == "authors":
-        print(sort(getAuthors(data), sys.argv[3], "author"))
+        books = getBooks(scanner(sys.argv[1]))
+        sortedBooks = sort(books, "book")
+        printer(sortedBooks)
+
+    elif sys.argv[2] == "authors":
+        authors = getAuthors(scanner(sys.argv[1]))
+        sortedAuthors = sort(authors, "author")
+        printer(sortedAuthors)
+
+    else :
+        sys.exit("Please speficiy either \"books\" or \"authours\"" )
 
 if __name__=="__main__":
     main()

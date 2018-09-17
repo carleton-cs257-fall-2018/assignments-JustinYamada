@@ -19,6 +19,5 @@ class testBooks(unittest.TestCase):
         self.assertTrue(books1.search(books1.getBooks(self.data), "Omoo"))
 
     
-
 if __name__ == "__main__":
     unittest.main() # run all tests
