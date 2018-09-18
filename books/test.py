@@ -1,7 +1,7 @@
 # test.py
 # Written by Justin Hahn
 #
-# Meant to Test books1.py
+# Meant to Test books1.py, Not fully implemented yet
 #
 import unittest
 import books1
@@ -18,6 +18,6 @@ class testBooks(unittest.TestCase):
     def test_books(self):
         self.assertTrue(books1.search(books1.getBooks(self.data), "Omoo"))
 
-    
+
 if __name__ == "__main__":
     unittest.main() # run all tests

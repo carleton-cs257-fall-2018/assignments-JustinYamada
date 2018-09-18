@@ -1,3 +1,7 @@
+# books1.py
+# Written by Mash Ibtesum, Justin Hahn & Justin Yamada
+# Phase 1
+
 import csv
 import sys
 import re
@@ -36,25 +40,24 @@ def getAuthors(data):
             # does not account for three authors
         for item in authorsTemp:
             authorsTempData.append(item)
-        # Need to compare lists of two authors
+            # Need to compare lists of two authors
 
     return authorsTempData
 
 def sort(array, type):
-    print(len(sys.argv))
     '''Sorts array according to its type'''
-    if len(sys.argv) == 3:
+    if len(sys.argv)<4:
         return array
 
     if type == "author" :
-        cat = sorted(array, key=lambda x:x.split(" ")[-1])
+        sortedArray = sorted(array, key=lambda x:x.split(" ")[-1])
     elif type == "book" :
-        cat = sorted(array)
+        sortedArray = sorted(array)
 
     if sys.argv[3] == "forward" :
-        return cat
+        return sortedArray
     elif sys.argv[3] == "reverse" :
-        return cat[::-1]
+        return sortedArray[::-1]
     else :
         sys.exit("Please use either \"forward\" or \"reverse\" to specify order")
 
