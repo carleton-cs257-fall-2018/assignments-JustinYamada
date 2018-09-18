@@ -41,8 +41,9 @@ def getAuthors(data):
     return authorsTempData
 
 def sort(array, type):
+    print(len(sys.argv))
     '''Sorts array according to its type'''
-    if len(sys.argv)<3:
+    if len(sys.argv) == 3:
         return array
 
     if type == "author" :
