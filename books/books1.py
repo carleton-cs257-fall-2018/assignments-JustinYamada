@@ -33,7 +33,7 @@ def getAuthors(data):
     for row in data:
         authors.append(row[2])
 
-    # the authors are split using the re.split method which removes everything but the names
+    # the authors are split using the re.split method which allows us to split using multiple params
     for author in authors:
         authorsTemp = re.split(' \(|\) and ',author)
         authorsTemp.pop()
@@ -50,6 +50,7 @@ def sort(array, type):
         return array
 
     if type == "author" :
+        # Uses sorted to sort accordin to the last name
         sortedArray = sorted(array, key=lambda x:x.split(" ")[-1])
     elif type == "book" :
         sortedArray = sorted(array)
@@ -62,7 +63,7 @@ def sort(array, type):
         sys.exit("Please use either \"forward\" or \"reverse\" to specify order")
 
 def printer(array) :
-    '''Prints each element of the array NICLEY'''
+    '''Prints each element of the array NICELEY'''
     for item in array :
         print(item)
 
@@ -85,7 +86,7 @@ def main():
 
     # if wrong input stops program and asks for correct books and authors input
     else :
-        sys.exit("Please speficiy either \"books\" or \"authours\"" )
+        sys.exit("Please speficiy either \"books\" or \"authors\"" )
 
 if __name__=="__main__":
     main()
