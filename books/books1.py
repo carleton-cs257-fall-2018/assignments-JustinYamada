@@ -29,18 +29,18 @@ def getAuthors(data):
     authorsTempData = []
     authorsFinal = []
 
+    # inserts data from CSV file into list
     for row in data:
         authors.append(row[2])
 
+    # the authors are split using the re.split method which removes everything but the names
     for author in authors:
         authorsTemp = re.split(' \(|\) and ',author)
         authorsTemp.pop()
         if len(authorsTemp) > 1:
             del authorsTemp[1]
-            # does not account for three authors
         for item in authorsTemp:
             authorsTempData.append(item)
-            # Need to compare lists of two authors
 
     return authorsTempData
 
@@ -68,9 +68,11 @@ def printer(array) :
 
 def main():
 
+    # prompts user for CSV file input if none provided
     if len(sys.argv)<2:
         sys.exit("What CSV file do you want me to use?")
 
+    # reacts to authors or books input in order to know what to sort
     if sys.argv[2] == "books":
         books = getBooks(scanner(sys.argv[1]))
         sortedBooks = sort(books, "book")
@@ -81,6 +83,7 @@ def main():
         sortedAuthors = sort(authors, "author")
         printer(sortedAuthors)
 
+    # if wrong input stops program and asks for correct books and authors input
     else :
         sys.exit("Please speficiy either \"books\" or \"authours\"" )
 
