@@ -4,7 +4,7 @@
     Jeff Ondich, 18 September 2018
 
     For use in some assignments at the beginning of Carleton's
-    CS 257 Software Design class, Fall 2018. Wut up
+    CS 257 Software Design class, Fall 2018.
 '''
 
 class BooksDataSource:
