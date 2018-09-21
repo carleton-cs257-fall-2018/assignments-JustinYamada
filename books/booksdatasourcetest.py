@@ -21,7 +21,7 @@ class booksDataSourceTest(unittest.TestCase):
 
     def test_three(self):
         self.assertTrue(self.prime_checker.is_prime(97))
- 
+
     def test_composite(self):
         self.assertFalse(self.prime_checker.is_prime(96))
 
