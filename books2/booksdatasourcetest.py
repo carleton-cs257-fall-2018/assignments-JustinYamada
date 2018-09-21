@@ -29,7 +29,7 @@ class booksDataSourceTest(unittest.TestCase):
         self.assertEqual(booksdatasource.books_for_author(1),
         {'id': 1, 'title': Book One, 'publication year': 1001})
 
-    def test_books_for_author_for_single_book(self):
+    def test_books_for_author_for_multiple_book(self):
         self.assertEqual(booksdatasource.books_for_author(),
         {'id': 1, 'title': Book One, 'publication year': 1001}, {'id': 1, 'title': Book One, 'publication year': 1001})
 
