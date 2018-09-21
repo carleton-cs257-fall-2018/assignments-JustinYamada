@@ -4,7 +4,7 @@
     Jeff Ondich, 18 September 2018
 
     For use in some assignments at the beginning of Carleton's
-    CS 257 Software Design class, Fall 2018.
+    CS 257 Software Design class, Fall 2018. Wut up
 '''
 
 class BooksDataSource:
@@ -52,7 +52,7 @@ class BooksDataSource:
                 books: ID,title,publication-year
                   e.g. 6,Good Omens,1990
                        41,Middlemarch,1871
-                    
+
 
                 authors: ID,last-name,first-name,birth-year,death-year
                   e.g. 5,Gaiman,Neil,1960,NULL
@@ -63,7 +63,7 @@ class BooksDataSource:
                   e.g. 41,22
                        6,5
                        6,6
-                  
+
                   [that is, book 41 was written by author 22, while book 6
                     was written by both author 5 and author 6]
 
@@ -97,7 +97,7 @@ class BooksDataSource:
 
                 'year' -- sorts by publication_year, breaking ties with (case-insenstive) title
                 default -- sorts by (case-insensitive) title, breaking ties with publication_year
-                
+
             See the BooksDataSource comment for a description of how a book is represented.
         '''
         return []
@@ -129,7 +129,7 @@ class BooksDataSource:
                     then (case-insensitive) first_name
                 any other value - sorts by (case-insensitive) last_name, breaking ties with
                     (case-insensitive) first_name, then birth_year
-        
+
             See the BooksDataSource comment for a description of how an author is represented.
         '''
         return []
@@ -152,4 +152,3 @@ class BooksDataSource:
         ''' Returns a list of all the authors of the book with the specified book ID.
             See the BooksDataSource comment for a description of how an author is represented. '''
         return self.books(book_id=book_id)
-
