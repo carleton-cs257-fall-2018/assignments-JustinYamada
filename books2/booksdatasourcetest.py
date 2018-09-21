@@ -22,7 +22,6 @@ class booksDataSourceTest(unittest.TestCase):
     def test_authors_return_all_authors(self)
         self.assertEqual(booksdatasource.authors(), [Alpha Author One, Bravo Author Two, Charlie Author Three, Delta Author Four, Echo Author Five])
 
-
     def test_composite(self):
         self.assertFalse(self.prime_checker.is_prime(96))
 
