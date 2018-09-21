@@ -16,10 +16,13 @@ class booksDataSourceTest(unittest.TestCase):
     def test_book(self):
         self.assertEqual(booksdatasource.book(5), "Book Five")
 
+    def test_books(self):
+        self.assertEqual(booksdatasource.book(3), "Book Three")
+
     def test_author(self):
         self.assertEqual(booksdatasource.author(3), "Charlie Author Three")
 
-    def test_authors_return_all_authors(self)
+    def test_authors(self)
         self.assertEqual(booksdatasource.authors(), [Alpha Author One, Bravo Author Two, Charlie Author Three, Delta Author Four, Echo Author Five])
 
     def test_composite(self):
