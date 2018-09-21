@@ -8,7 +8,7 @@ import unittest
 
 class booksDataSourceTest(unittest.TestCase):
     def setUp(self):
-        self.booksDataSourceTest = primechecker.PrimeChecker(100)
+        self.booksDataSourceTest = booksdatasource.BooksDataSource('books.csv','authors.csv', 'books_authors_link.csv')
 
     def tearDown(self):
         pass
