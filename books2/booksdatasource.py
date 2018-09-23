@@ -46,6 +46,12 @@ class BooksDataSource:
     '''
 
     def __init__(self, books_filename, authors_filename, books_authors_link_filename):
+        
+        self.booksFile = books_filename
+        self.authorsFile = authors_filename
+        self.linkFile = books_authors_link_filename
+        
+        
         ''' Initializes this data source from the three specified  CSV files, whose
             CSV fields are:
 
