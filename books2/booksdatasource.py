@@ -61,6 +61,8 @@ class BooksDataSource:
         self.linkFile = scanner(books_authors_link_filename)
         self.authors = []
         self.books = []
+        self.bookLink =[]
+        self.authorLink = []
         
         dictionary = {}
         for row in self.booksFile:
@@ -72,8 +74,20 @@ class BooksDataSource:
             dictionary = {'id': row[0], 'last_name': row[1], 'first_name': row[2],
             'birth_year': row[3], 'death_year': row[4]}
             self.authors.append(dictionary)
+        i = 0
+        for row in self.linkFile:
+            if i == row[0]:
+                self.bookLink.append(row[1])
+                i++
+            else:
+                bookLink = bookLink.get(row[0]) + ", " + row[1]
+            self.authorLink.append("null")
             
-        
+        for row in self.linkFile:
+            if self.authorLink[row[1]] != "null":
+                self.authorLink[row[1]] = row[0]
+            else:
+                self.authorLink[row[1]] = self.authorLink[row[1]] + ", " + row[0]
         
         ''' Initializes this data source from the three specified  CSV files, whose
             CSV fields are:
