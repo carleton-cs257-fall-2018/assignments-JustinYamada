@@ -63,12 +63,12 @@ class BooksDataSource:
         self.books = []
         self.bookLink =[]
         self.authorLink = []
-        
+
         dictionary = {}
         for row in self.booksFile:
             dictionary = {'id': row[0], 'title': row[1], 'publication_year': row[3]}
             self.books.append(dictionary)
-            
+
         dictionary = {}
         for row in self.authorsFile:
             dictionary = {'id': row[0], 'last_name': row[1], 'first_name': row[2],
@@ -82,13 +82,13 @@ class BooksDataSource:
             else:
                 bookLink = bookLink.get(row[0]) + ", " + row[1]
             self.authorLink.append("null")
-            
+
         for row in self.linkFile:
             if self.authorLink[row[1]] != "null":
                 self.authorLink[row[1]] = row[0]
             else:
                 self.authorLink[row[1]] = self.authorLink[row[1]] + ", " + row[0]
-        
+
         ''' Initializes this data source from the three specified  CSV files, whose
             CSV fields are:
 
@@ -121,7 +121,22 @@ class BooksDataSource:
     def book(self, book_id):
         ''' Returns the book with the specified ID. (See the BooksDataSource comment
             for a description of how a book is represented.) '''
-        return {}
+
+        '''A book is represented as a dictionary with the keys 'id', 'title',
+        and 'publication_year'. For example, "Pride and Prejudice"
+        (assuming an ID of 132) would look like this:
+
+            {'id': 193, 'title': 'A Wild Sheep Chase', 'publication_year': 1982}
+
+        '''
+
+        booksCopy = self.books[book_id].copy()
+
+        id = booksCopy.pop('book_id')
+        title = booksCopy.pop('title')
+        pubY = booksCopy.pop('publication_year')
+
+        return {'id': id, 'title': title, 'publication_year': pubY}
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
         ''' Returns a list of all the books in this data source matching all of
@@ -145,10 +160,52 @@ class BooksDataSource:
         '''
         return []
 
+    def list_by_author_id(list):
+
+        return []
+
+    def list_by_search_text(list):
+
+        return []
+
+    def list_by_start_year(list):
+
+        return []
+
+    def list_by_end_year(list):
+
+        return []
+
+    def sort_by(list, string, number):
+        return []
+
     def author(self, author_id):
         ''' Returns the author with the specified ID. (See the BooksDataSource comment for a
-            description of how an author is represented.) '''
-        return {}
+            description of how an author is represented.)
+            An author is represented as a dictionary with the keys
+            'id', 'last_name', 'first_name', 'birth_year', and 'death_year'.
+            For example, Jane Austen would be represented like this
+            (assuming her database-internal ID number is 72):
+
+                {'id': 72, 'last_name': 'Austen', 'first_name': 'Jane',
+                 'birth_year': 1775, 'death_year': 1817}
+
+            For a living author, the death_year is represented in the author's
+            Python dictionary as None.
+
+                {'id': 77, 'last_name': 'Murakami', 'first_name': 'Haruki',
+                 'birth_year': 1949, 'death_year': None} '''
+
+
+        authorsCopy = self.authors[author_id].copy()
+
+        id = authorsCopy.pop('book_id')
+        last_name = authorsCopy.pop('last_name')
+        first_name = authorsCopy.pop('first_name')
+        birth_year = authorsCopy.pop('birth_year')
+        death_year = authorsCopy.pop('death_year')
+
+        return {'id': id, 'last_name': last_name, 'first_name': first_name, 'birth_year': birth_year, 'death_year': death_year}
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):
         ''' Returns a list of all the authors in this data source matching all of the
