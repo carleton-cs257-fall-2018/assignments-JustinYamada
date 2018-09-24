@@ -6,6 +6,15 @@
     For use in some assignments at the beginning of Carleton's
     CS 257 Software Design class, Fall 2018.
 '''
+def scanner(file):
+    '''parses the csv file and returns an array of csv rows'''
+    Data = []
+    with open(file, newline='') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            Data.append(row)
+    return Data
+
 
 class BooksDataSource:
     '''
@@ -46,10 +55,24 @@ class BooksDataSource:
     '''
 
     def __init__(self, books_filename, authors_filename, books_authors_link_filename):
+
+        self.booksFile = scanner(books_filename)
+        self.authorsFile = scanner(authors_filename)
+        self.linkFile = scanner(books_authors_link_filename)
+        self.authors = []
+        self.books = []
         
-        self.booksFile = books_filename
-        self.authorsFile = authors_filename
-        self.linkFile = books_authors_link_filename
+        dictionary = {}
+        for row in self.booksFile:
+            dictionary = {'id': row[0], 'title': row[1], 'publication_year': row[3]}
+            self.books.append(dictionary)
+            
+        dictionary = {}
+        for row in self.authorsFile:
+            dictionary = {'id': row[0], 'last_name': row[1], 'first_name': row[2],
+            'birth_year': row[3], 'death_year': row[4]}
+            self.authors.append(dictionary)
+            
         
         
         ''' Initializes this data source from the three specified  CSV files, whose
