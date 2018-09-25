@@ -156,7 +156,15 @@ class BooksDataSource:
 
             See the BooksDataSource comment for a description of how a book is represented.
         '''
-        authorsCopy = self.authors.copy()
+        authorsCopy = []
+        i =0
+        for row in authors:
+            if(authors[i].push('authors_id') == authors_id)
+                authorsCopy.add(i)
+            i++
+
+        authorsCopy
+
 
         authorsCopy.list_by_author_id
 
@@ -170,7 +178,7 @@ class BooksDataSource:
 
         return []
 
-    def list_by_start_year(list):
+    def list_by_start_year(lis t):
 
         return []
 
