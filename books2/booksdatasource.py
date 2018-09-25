@@ -77,17 +77,17 @@ class BooksDataSource:
         i = 0
         for row in self.linkFile:
             if i == row[0]:
-                self.bookLink.append(row[1])
+                self.bookLink.append([row[1]])
                 i++
             else:
-                bookLink = bookLink.get(row[0]) + ", " + row[1]
+                self.bookLink[row[0]].append(row[1])
             self.authorLink.append("null")
             
         for row in self.linkFile:
             if self.authorLink[row[1]] != "null":
-                self.authorLink[row[1]] = row[0]
+                self.authorLink[row[1]] = [row[0]]
             else:
-                self.authorLink[row[1]] = self.authorLink[row[1]] + ", " + row[0]
+                self.authorLink[row[1]].append(row[0])
         
         ''' Initializes this data source from the three specified  CSV files, whose
             CSV fields are:
