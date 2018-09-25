@@ -156,35 +156,57 @@ class BooksDataSource:
 
             See the BooksDataSource comment for a description of how a book is represented.
         '''
-        if(author_id != none):
-            books.author_id
+        books_matching_criteria = self.books
 
-        return []
+        if author_id != None:
+            books_matching_criteria = list_by_author_id(author_id)
+        if search_text != None:
+            books_matching_criteria = list_by_search_text(books_matching_criteria, sort_by)
+        if start_year != None or end_year != None:
+            books_matching_criteria = list_by_year(books_matching_criteria, start_year, end_year)
+        if sort_by == 'title' or
+            books_matching_criteria = sort_by_title(books_matching_criteria)
+        if sort_by == 'year'
+            books_matching_criteria = sort_by_year(books_matching_criteria)
 
-    def list_by_author_id(list):
 
-        return []
+        return books_matching_criteria
 
-    def list_by_search_text(list):
+    def list_by_author_id(author_id):
 
-        return []
+        booksReturn = []
+        for bookId in self.authorLink[author_id]:
+            booksReturn.append(self.books[bookId])
 
-    def list_by_start_year(list, start_year):
+        return booksReturn
+
+    def list_by_search_text(list, string):
         newList = []
+
         for x in list:
-            if x.get('start_year') >= start_year:
-                newList = list[i].add
+            if x.get('title').upper().count(string.upper()) > 0:
+                newList = x.add()
         return newList
 
-    def list_by_end_year(list, end_year):
+
+    def list_by_year(list, start_year, end_year):
         newList = []
+
         for x in list:
-            if x.get('end_year') =< end_year
-                newList = list[i].add
+            if (x.get('start_year') >= start_year or start_year == None) && (x.get('end_year') <= end_year or end_year == None):
+                newList = x.add()
         return newList
 
-    def sort_by(list, string, number):
-        return []
+    def sort_by_title(list):
+        newList = sorted(list, key=lambda k: k['title'])
+
+        return newList
+
+    def sort_by_year(list):
+`       newList = sorted(list, key=lambda k: k['year'])
+
+        return newList
+
 
     def author(self, author_id):
         ''' Returns the author with the specified ID. (See the BooksDataSource comment for a
