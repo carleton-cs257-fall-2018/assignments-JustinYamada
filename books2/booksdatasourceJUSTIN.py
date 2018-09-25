@@ -6,6 +6,15 @@
     For use in some assignments at the beginning of Carleton's
     CS 257 Software Design class, Fall 2018.
 '''
+def scanner(file):
+    '''parses the csv file and returns an array of csv rows'''
+    Data = []
+    with open(file, newline='') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            Data.append(row)
+    return Data
+
 
 class BooksDataSource:
     '''
@@ -46,6 +55,45 @@ class BooksDataSource:
     '''
 
     def __init__(self, books_filename, authors_filename, books_authors_link_filename):
+
+        self.booksFile = scanner(books_filename)
+        self.authorsFile = scanner(authors_filename)
+        self.linkFile = scanner(books_authors_link_filename)
+        self.authors = []
+        self.books = []
+        self.bookLink =[]
+        self.authorLink = []
+
+        dictionary = {}
+        for row in self.booksFile:
+            dictionary = {'id': row[0], 'title': row[1], 'publication_year': row[3]}
+            self.books.append(dictionary)
+
+        dictionary = {}
+        for row in self.authorsFile:
+            dictionary = {'id': row[0], 'last_name': row[1], 'first_name': row[2],
+            'birth_year': row[3], 'death_year': row[4]}
+            self.authors.append(dictionary)
+        i = 0
+        for row in self.linkFile:
+            if i == row[0]:
+                self.bookLink.append([row[1]])
+                i++
+            else:
+                self.bookLink[row[0]].append(row[1])
+            self.authorLink.append("null")
+
+        for row in self.linkFile:
+            if self.authorLink[row[1]] != "null":
+                self.authorLink[row[1]] = [row[0]]
+            else:
+<<<<<<< HEAD
+                self.authorLink[row[1]].append(row[0])
+
+=======
+                self.authorLink[row[1]] = self.authorLink[row[1]] + ", " + row[0]
+
+>>>>>>> b80cde402c8caa38e330256cd6e2564a90caaa1c
         ''' Initializes this data source from the three specified  CSV files, whose
             CSV fields are:
 
@@ -86,14 +134,7 @@ class BooksDataSource:
             {'id': 193, 'title': 'A Wild Sheep Chase', 'publication_year': 1982}
 
         '''
-
-        booksCopy = self.books[book_id].copy()
-
-        id = booksCopy.pop('book_id')
-        title = booksCopy.pop('title')
-        pubY = booksCopy.pop('publication_year')
-
-        return {'id': id, 'title': title, 'publication_year': pubY}
+        return self.books[book_id].copy()
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
         ''' Returns a list of all the books in this data source matching all of
@@ -115,6 +156,10 @@ class BooksDataSource:
 
             See the BooksDataSource comment for a description of how a book is represented.
         '''
+        authorsCopy = self.authors.copy()
+
+        authorsCopy.list_by_author_id
+
         return []
 
     def list_by_author_id(list):
@@ -136,7 +181,6 @@ class BooksDataSource:
     def sort_by(list, string, number):
         return []
 
-
     def author(self, author_id):
         ''' Returns the author with the specified ID. (See the BooksDataSource comment for a
             description of how an author is represented.)
@@ -154,16 +198,7 @@ class BooksDataSource:
                 {'id': 77, 'last_name': 'Murakami', 'first_name': 'Haruki',
                  'birth_year': 1949, 'death_year': None} '''
 
-
-        authorsCopy = self.authors[author_id].copy()
-
-        id = authorsCopy.pop('book_id')
-        last_name = authorsCopy.pop('last_name')
-        first_name = authorsCopy.pop('first_name')
-        birth_year = authorsCopy.pop('birth_year')
-        death_year = authorsCopy.pop('death_year')
-
-        return {'id': id, 'last_name': last_name, 'first_name': first_name, 'birth_year': birth_year, 'death_year': death_year}
+        return self.authors[author_id].copy()
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):
         ''' Returns a list of all the authors in this data source matching all of the
