@@ -89,7 +89,7 @@ class BooksDataSource:
             else:
 <<<<<<< HEAD
                 self.authorLink[row[1]].append(row[0])
-
+        
 =======
                 self.authorLink[row[1]] = self.authorLink[row[1]] + ", " + row[0]
 
@@ -134,9 +134,18 @@ class BooksDataSource:
             {'id': 193, 'title': 'A Wild Sheep Chase', 'publication_year': 1982}
 
         '''
-        return self.books[book_id].copy()
+
+        booksCopy = self.books[book_id].copy()
+
+        id = booksCopy.pop('book_id')
+        title = booksCopy.pop('title')
+        pubY = booksCopy.pop('publication_year')
+
+        return {'id': id, 'title': title, 'publication_year': pubY}
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
+        
+            
         ''' Returns a list of all the books in this data source matching all of
             the specified non-None criteria.
 
@@ -156,27 +165,23 @@ class BooksDataSource:
 
             See the BooksDataSource comment for a description of how a book is represented.
         '''
-        authorsCopy = self.authors.copy()
-
-        authorsCopy.list_by_author_id
-
         return []
 
-    def list_by_author_id(list):
+    def list_by_author_id(author_id)
 
-        return []
-
-    def list_by_search_text(list):
-
-        return []
-
-    def list_by_start_year(list):
-
-        return []
-
-    def list_by_end_year(list):
-
-        return []
+        booksReturn = []
+        for bookId in self.authorLink[author_id]:
+            booksReturn.append(self.books[bookId])
+        
+        return booksReturn
+    
+    def list_by_year(list, start_year, end_year):
+        newList = []
+        
+        for x in list:
+            if (x.get('start_year') >= start_year or start_year == None) && (x.get('end_year') <= end_year or end_year == None):
+                newList = list[i].add
+        return newList
 
     def sort_by(list, string, number):
         return []
@@ -198,7 +203,16 @@ class BooksDataSource:
                 {'id': 77, 'last_name': 'Murakami', 'first_name': 'Haruki',
                  'birth_year': 1949, 'death_year': None} '''
 
-        return self.authors[author_id].copy()
+
+        authorsCopy = self.authors[author_id].copy()
+
+        id = authorsCopy.pop('book_id')
+        last_name = authorsCopy.pop('last_name')
+        first_name = authorsCopy.pop('first_name')
+        birth_year = authorsCopy.pop('birth_year')
+        death_year = authorsCopy.pop('death_year')
+
+        return {'id': id, 'last_name': last_name, 'first_name': first_name, 'birth_year': birth_year, 'death_year': death_year}
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):
         ''' Returns a list of all the authors in this data source matching all of the
