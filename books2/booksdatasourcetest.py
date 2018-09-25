@@ -28,7 +28,7 @@ class booksDataSourceTest(unittest.TestCase):
         {'id': 7, 'title': 'Book Single One', 'publication_year': 1000},
         {'id': 8, 'title': 'Book Single Two', 'publication_year': 1000})
 
-    def test_books_only_id(self):
+    def test_books_only_id_3(self):
         self.assertEqual(booksdatasource.books(author_id=3),
         {'id': 3, 'title': 'Book Three', 'publication_year': 1003})
 
@@ -64,7 +64,7 @@ class booksDataSourceTest(unittest.TestCase):
         {'id': 7, 'last_name': 'Two', 'first_name': 'Double', 'birth_year': 950, 'death_year': 1000},
         {'id': 7, 'last_name': 'Only', 'first_name': 'Single', 'birth_year': 950, 'death_year': 1000})
 
-    def test_authors_only_id(self):
+    def test_authors_only_id_0(self):
         self.assertEqual(booksdatasource.authors(book_id=0),
         {'id': 0, 'last_name': 'Zero', 'first_name': 'Alpha', 'birth_year': 50, 'death_year': 1000})
 
