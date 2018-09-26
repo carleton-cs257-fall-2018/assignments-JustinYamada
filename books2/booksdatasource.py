@@ -181,30 +181,30 @@ class BooksDataSource:
 
         return booksReturn
 
-    def list_by_search_text(list, string):
+    def list_by_search_text(bookList, string):
         newList = []
 
-        for x in list:
+        for x in bookList:
             if x.get('title').upper().count(string.upper()) > 0:
                 newList = x.add()
         return newList
 
 
-    def list_by_year(list, start_year, end_year):
+    def list_by_year(bookList, start_year, end_year):
         newList = []
 
-        for x in list:
+        for x in bookList:
             if (x.get('start_year') >= start_year or start_year == None) and (x.get('end_year') <= end_year or end_year == None):
                 newList = x.add()
         return newList
 
-    def sort_by_title(list):
-        newList = sorted(list, key=lambda k: k['title'])
+    def sort_by_title(bookList):
+        newList = sorted(bookList, key=lambda k: k['title'])
 
         return newList
 
-    def sort_by_year(list):
-        newList = sorted(list, key=lambda k: k['year'])
+    def sort_by_year(bookList):
+        newList = sorted(bookList, key=lambda k: k['year'])
 
         return newList
 
