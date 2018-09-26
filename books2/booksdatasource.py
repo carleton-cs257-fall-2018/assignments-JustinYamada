@@ -15,7 +15,6 @@ def scanner(file):
     with open(file, newline='') as f:
         reader = csv.reader(f)
         for row in reader:
-            print(row)
             Data.append(row)
     return Data
 
@@ -70,13 +69,13 @@ class BooksDataSource:
 
         dictionary = {}
         for row in self.booksFile:
-            dictionary = {'id': row[0], 'title': row[1], 'publication_year': row[2]}
+            dictionary = {'id': int(row[0]), 'title': row[1], 'publication_year': int(row[2])}
             self.books.append(dictionary)
 
         dictionary = {}
         for row in self.authorsFile:
-            dictionary = {'id': row[0], 'last_name': row[1], 'first_name': row[2],
-            'birth_year': row[3], 'death_year': row[4]}
+            dictionary = {'id': int(row[0]), 'last_name': row[1], 'first_name': row[2],
+            'birth_year': int(row[3]), 'death_year': int(row[4])}
             self.authors.append(dictionary)
 
         i = 0
