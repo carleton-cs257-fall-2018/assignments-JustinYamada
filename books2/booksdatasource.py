@@ -163,7 +163,7 @@ class BooksDataSource:
         if author_id != None:
             books_matching_criteria = self.list_by_author_id(author_id)
         if search_text != None:
-            books_matching_criteria = self.list_by_search_text(books_matching_criteria, sort_by)
+            books_matching_criteria = self.list_by_search_text(books_matching_criteria, search_text)
         if start_year != None or end_year != None:
             books_matching_criteria = self.list_by_year(books_matching_criteria, start_year, end_year)
         if sort_by == 'title':
@@ -186,12 +186,9 @@ class BooksDataSource:
         newList = []
 
         for x in bookList:
-            print(x['title'])
+
             if (x['title'].upper()).find(string.upper()) > -1:
-
                 newList.append(x)
-
-        print(newList,'hi')
         return newList
 
 
@@ -266,7 +263,7 @@ class BooksDataSource:
         if author_id != None:
             authorsReturn = self.list_by_book_id(book_id)
         if search_text != None:
-            authorsReturn = self.list_by_search_text_author(authorsReturn, sort_by)
+            authorsReturn = self.list_by_search_text_author(authorsReturn, search_text)
         if start_year != None or end_year != None:
             authorsReturn = self.list_by_year(authorsReturn, start_year, end_year)
         if sort_by == 'birth_year':
@@ -286,14 +283,11 @@ class BooksDataSource:
         return authorsReturn
 
     def list_by_search_text_author(self, authorsList, string):
-
-        authorReturn = []
-        for author in authorsList:
-            if author.get('first_name').upper().count(string.upper()) > 0 or author.get('last_name').upper().count(string.upper()) > 0:
-                authorReturn.append(x)
-        print('hi')
-        print(authorReturn)
-        return authorReturn
+        newList = []
+        for x in bookList:
+            if (x['title'].upper()).find(string.upper()) > -1:
+                newList.append(x)
+        return newList
 
 
     def list_by_year(self, authorsList, start_year, end_year):
