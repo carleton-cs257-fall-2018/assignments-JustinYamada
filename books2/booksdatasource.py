@@ -86,7 +86,7 @@ class BooksDataSource:
             NOTE TO STUDENTS: I have not specified how you will store the books/authors
             data in a BooksDataSource object. That will be up to you, in Phase 3.
         '''
-        
+
         self.booksFile = scanner(books_filename)
         self.authorsFile = scanner(authors_filename)
         self.linkFile = scanner(books_authors_link_filename)
@@ -136,6 +136,8 @@ class BooksDataSource:
             {'id': 193, 'title': 'A Wild Sheep Chase', 'publication_year': 1982}
 
         '''
+
+        # returns the the specified book using the book_id
         return self.booksList[book_id].copy()
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
@@ -158,22 +160,30 @@ class BooksDataSource:
 
             See the BooksDataSource comment for a description of how a book is represented.
         '''
+
+        # creates new list to input the full book list into
         books_matching_criteria = self.booksList
 
+        # questions if author_id is inputted and returns books that match value
         if author_id != None:
             books_matching_criteria = self.list_by_author_id(author_id)
+        # questions if search_text is inputted and returns books that match value
         if search_text != None:
             books_matching_criteria = self.list_by_search_text(books_matching_criteria, search_text)
+        # questions if start_year is inputted and returns books that match value
         if start_year != None or end_year != None:
             books_matching_criteria = self.list_by_year(books_matching_criteria, start_year, end_year)
+        # sorts by year if the sort_by value is 'year'
         if sort_by == 'year':
             books_matching_criteria = self.sort_by_year(books_matching_criteria)
+        # sorts by title if the sort value is anything else
         else:
             books_matching_criteria = self.sort_by_title(books_matching_criteria)
 
-
+        # returns resulting book list sorted by terms
         return books_matching_criteria
 
+    # author_id is inputted and books that contain the same author_id are appended into a list
     def list_by_author_id(self, author_id):
 
         booksReturn = []
@@ -182,6 +192,7 @@ class BooksDataSource:
 
         return booksReturn
 
+    # returns books that contain search text in title
     def list_by_search_text(self, bookList, string):
         newList = []
 
@@ -191,7 +202,7 @@ class BooksDataSource:
                 newList.append(x)
         return newList
 
-
+    # returns books that were published between start and/or end year
     def list_by_year(self, bookList, start_year, end_year):
         newList = []
 
@@ -200,11 +211,13 @@ class BooksDataSource:
                 newList.append(x)
         return newList
 
+    # sorts the books titles alphabetically breaks ties by publication year
     def sort_by_title(self, bookList):
         bookList1 = sorted(bookList, key=lambda k: k['publication_year'])
         bookList2 = sorted(bookList1, key=lambda k: k['title'])
         return bookList2
 
+    # sorts the books by publication year and then sorts the titles alphabetically during ties
     def sort_by_year(self, bookList):
         bookList1 = sorted(bookList, key=lambda k: k['title'])
         bookList2 = sorted(bookList1, key=lambda k: k['publication_year'])
@@ -258,10 +271,10 @@ class BooksDataSource:
             See the BooksDataSource comment for a description of how an author is represented.
         '''
         authorsReturn = self.authorsList
-        
+
         # Checks to see which arguments are given and passes the list of authors
         # through each applicable function
-        
+
         if book_id != None:
             authorsReturn = self.list_by_book_id(book_id)
         if search_text != None:
@@ -283,7 +296,7 @@ class BooksDataSource:
             authorsReturn.append(self.authorsList[int(authorId)])
 
         return authorsReturn
-    
+
     # Returns a list of authors with a string in their first or last name
     # given a list to search through and a string to look for in the author's names
     def list_by_search_text_author(self, authorsList, string):
@@ -322,7 +335,7 @@ class BooksDataSource:
         authorsList2 = sorted(authorsList1, key=lambda k: k['first_name'])
         authorsList3 = sorted(authorsList2, key=lambda k: k['last_name'])
         return authorsList3
-    
+
     def books_for_author(self, author_id):
         ''' Returns a list of all the books written by the author with the specified author ID.
             See the BooksDataSource comment for a description of how an book is represented. '''

@@ -137,6 +137,8 @@ class BooksDataSource:
             {'id': 193, 'title': 'A Wild Sheep Chase', 'publication_year': 1982}
 
         '''
+
+        # returns the the specified book using the book_id
         return self.booksList[book_id].copy()
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
@@ -159,22 +161,30 @@ class BooksDataSource:
 
             See the BooksDataSource comment for a description of how a book is represented.
         '''
+
+        # creates new list to input the full book list into
         books_matching_criteria = self.booksList
 
+        # questions if author_id is inputted and returns books that match value
         if author_id != None:
             books_matching_criteria = self.list_by_author_id(author_id)
+        # questions if search_text is inputted and returns books that match value
         if search_text != None:
             books_matching_criteria = self.list_by_search_text(books_matching_criteria, search_text)
+        # questions if start_year is inputted and returns books that match value
         if start_year != None or end_year != None:
             books_matching_criteria = self.list_by_year(books_matching_criteria, start_year, end_year)
+        # sorts by year if the sort_by value is 'year'
         if sort_by == 'year':
             books_matching_criteria = self.sort_by_year(books_matching_criteria)
+        # sorts by title if the sort value is anything else
         else:
             books_matching_criteria = self.sort_by_title(books_matching_criteria)
 
-
+        # returns resulting book list sorted by terms
         return books_matching_criteria
 
+    # author_id is inputted and books that contain the same author_id are appended into a list
     def list_by_author_id(self, author_id):
 
         booksReturn = []
@@ -183,6 +193,7 @@ class BooksDataSource:
 
         return booksReturn
 
+    # returns books that contain search text in title
     def list_by_search_text(self, bookList, string):
         newList = []
 
@@ -192,7 +203,7 @@ class BooksDataSource:
                 newList.append(x)
         return newList
 
-
+    # returns books that were published between start and/or end year
     def list_by_year(self, bookList, start_year, end_year):
         newList = []
 
@@ -201,11 +212,13 @@ class BooksDataSource:
                 newList.append(x)
         return newList
 
+    # sorts the books titles alphabetically breaks ties by publication year
     def sort_by_title(self, bookList):
         bookList1 = sorted(bookList, key=lambda k: k['publication_year'])
         bookList2 = sorted(bookList1, key=lambda k: k['title'])
         return bookList2
 
+    # sorts the books by publication year and then sorts the titles alphabetically during ties
     def sort_by_year(self, bookList):
         bookList1 = sorted(bookList, key=lambda k: k['title'])
         bookList2 = sorted(bookList1, key=lambda k: k['publication_year'])
