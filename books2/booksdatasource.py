@@ -204,9 +204,6 @@ class BooksDataSource:
     def sort_by_title(self, bookList):
         bookList1 = sorted(bookList, key=lambda k: k['publication_year'])
         bookList2 = sorted(bookList1, key=lambda k: k['title'])
-        print(bookList2, 'yo whats up fam')
-        print()
-        print()
         return bookList2
 
     def sort_by_year(self, bookList):
@@ -255,7 +252,8 @@ class BooksDataSource:
 
                 'birth_year' - sorts by birth_year, breaking ties with (case-insenstive) last_name,
                     then (case-insensitive) first_name
-                any other value - sorts by (case-insensitive) last_name, breaking ties with
+                any other value - sorts by (case-insensitive)
+                last_name, breaking ties with
                     (case-insensitive) first_name, then birth_year
 
             See the BooksDataSource comment for a description of how an author is represented.
