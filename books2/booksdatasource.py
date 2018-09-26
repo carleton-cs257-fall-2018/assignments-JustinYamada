@@ -83,7 +83,7 @@ class BooksDataSource:
         for row in self.linkFile:
             if i == row[0]:
                 self.bookLink.append([row[1]])
-                i++
+                i += 1
 
             else:
                 self.bookLink[row[0]].append(row[1])
