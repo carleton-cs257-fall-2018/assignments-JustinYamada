@@ -8,6 +8,7 @@
 '''
 
 import csv
+from operator import itemgetter
 
 def scanner(file):
     '''parses the csv file and returns an array of csv rows'''
@@ -196,18 +197,22 @@ class BooksDataSource:
         newList = []
 
         for x in bookList:
-            if (x['start_year'] >= start_year or start_year == None) and (x['end_year'] <= end_year or end_year == None):
+            if (x['publication_year'] >= start_year or start_year == None) and (x['publication_year'] <= end_year or end_year == None):
                 newList.append(x)
         return newList
 
     def sort_by_title(self, bookList):
-        newList = sorted(bookList, key=lambda k: k['title'])
-        return newList
+        bookList1 = sorted(bookList, key=lambda k: k['publication_year'])
+        bookList2 = sorted(bookList1, key=lambda k: k['title'])
+        print(bookList2, 'yo whats up fam')
+        print()
+        print()
+        return bookList2
 
     def sort_by_year(self, bookList):
-        newList = sorted(bookList, key=lambda k: k['year'])
-
-        return newList
+        bookList1 = sorted(bookList, key=lambda k: k['title'])
+        bookList2 = sorted(bookList1, key=lambda k: k['publication_year'])
+        return bookList2
 
 
     def author(self, author_id):
@@ -227,7 +232,7 @@ class BooksDataSource:
                 {'id': 77, 'last_name': 'Murakami', 'first_name': 'Haruki',
                  'birth_year': 1949, 'death_year': None} '''
 
-        return self.authors[author_id].copy()
+        return self.authorsList[author_id].copy()
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):
 
@@ -297,19 +302,21 @@ class BooksDataSource:
         for x in authorsList:
             if (int((x['death_year']) >= int(start_year) or start_year == None) and (x['birth_year'] <= int(end_year) or end_year == None)):
                 newList.append(x)
-
-        print(newList, 'yo whats up hi')
         return newList
 
     def sort_by_birth_year(self, authorsList):
 
-        authorsList = sorted(authorsList, key=lambda k: k['birth_year'])
-        return authorsList
+        authorsList1 = sorted(authorsList, key=lambda k: k['first_name'])
+        authorsList2 = sorted(authorsList1, key=lambda k: k['last_name'])
+        authorsList3 = sorted(authorsList2, key=lambda k: k['birth_year'])
+        return authorsList3
 
     def sort_by_else(self, authorsList):
 
-        authorsList = sorted(authorsList, key=lambda k: k['last_name'])
-        return authorsList
+        authorsList1 = sorted(authorsList, key=lambda k: k['birth_year'])
+        authorsList2 = sorted(authorsList1, key=lambda k: k['first_name'])
+        authorsList3 = sorted(authorsList2, key=lambda k: k['last_name'])
+        return authorsList3
 
     def books_for_author(self, author_id):
         ''' Returns a list of all the books written by the author with the specified author ID.
