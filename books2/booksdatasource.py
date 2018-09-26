@@ -59,7 +59,34 @@ class BooksDataSource:
     '''
 
     def __init__(self, books_filename, authors_filename, books_authors_link_filename):
+        ''' Initializes this data source from the three specified  CSV files, whose
+            CSV fields are:
 
+                books: ID,title,publication-year
+                  e.g. 6,Good Omens,1990
+                       41,Middlemarch,1871
+
+
+                authors: ID,last-name,first-name,birth-year,death-year
+                  e.g. 5,Gaiman,Neil,1960,NULL
+                       6,Pratchett,Terry,1948,2015
+                       22,Eliot,George,1819,1880
+
+                link between books and authors: book_id,author_id
+                  e.g. 41,22
+                       6,5
+                       6,6
+
+                  [that is, book 41 was written by author 22, while book 6
+                    was written by both author 5 and author 6]
+
+            Note that NULL is used to represent a non-existent (or rather, future and
+            unknown) year in the cases of living authors.
+
+            NOTE TO STUDENTS: I have not specified how you will store the books/authors
+            data in a BooksDataSource object. That will be up to you, in Phase 3.
+        '''
+        
         self.booksFile = scanner(books_filename)
         self.authorsFile = scanner(authors_filename)
         self.linkFile = scanner(books_authors_link_filename)
@@ -96,34 +123,6 @@ class BooksDataSource:
 
                 self.authorLink[int(row[1])].append(int(row[0]))
 
-
-        ''' Initializes this data source from the three specified  CSV files, whose
-            CSV fields are:
-
-                books: ID,title,publication-year
-                  e.g. 6,Good Omens,1990
-                       41,Middlemarch,1871
-
-
-                authors: ID,last-name,first-name,birth-year,death-year
-                  e.g. 5,Gaiman,Neil,1960,NULL
-                       6,Pratchett,Terry,1948,2015
-                       22,Eliot,George,1819,1880
-
-                link between books and authors: book_id,author_id
-                  e.g. 41,22
-                       6,5
-                       6,6
-
-                  [that is, book 41 was written by author 22, while book 6
-                    was written by both author 5 and author 6]
-
-            Note that NULL is used to represent a non-existent (or rather, future and
-            unknown) year in the cases of living authors.
-
-            NOTE TO STUDENTS: I have not specified how you will store the books/authors
-            data in a BooksDataSource object. That will be up to you, in Phase 3.
-        '''
         pass
 
     def book(self, book_id):
