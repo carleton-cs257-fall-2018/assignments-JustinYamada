@@ -8,6 +8,7 @@
 '''
 
 import csv
+from operator import itemgetter
 
 def scanner(file):
     '''parses the csv file and returns an array of csv rows'''
@@ -62,21 +63,21 @@ class BooksDataSource:
         self.booksFile = scanner(books_filename)
         self.authorsFile = scanner(authors_filename)
         self.linkFile = scanner(books_authors_link_filename)
-        self.authors = []
-        self.books = []
+        self.authorsList = []
+        self.booksList = []
         self.bookLink =[]
         self.authorLink = []
 
         dictionary = {}
         for row in self.booksFile:
             dictionary = {'id': int(row[0]), 'title': row[1], 'publication_year': int(row[2])}
-            self.books.append(dictionary)
+            self.booksList.append(dictionary)
 
         dictionary = {}
         for row in self.authorsFile:
             dictionary = {'id': int(row[0]), 'last_name': row[1], 'first_name': row[2],
             'birth_year': int(row[3]), 'death_year': int(row[4])}
-            self.authors.append(dictionary)
+            self.authorsList.append(dictionary)
 
         i = 0
         for row in self.linkFile:
@@ -89,11 +90,12 @@ class BooksDataSource:
             self.authorLink.append("null")
 
         for row in self.linkFile:
-            if self.authorLink[int(row[1])] != "null":
+            if self.authorLink[int(row[1])] == "null":
                 self.authorLink[int(row[1])] = [int(row[0])]
             else:
 
-                self.authorLink[int(row[1])] = self.authorLink[int(row[1])] + ", " + row[0]
+                self.authorLink[int(row[1])].append(int(row[0]))
+
 
         ''' Initializes this data source from the three specified  CSV files, whose
             CSV fields are:
@@ -135,7 +137,7 @@ class BooksDataSource:
             {'id': 193, 'title': 'A Wild Sheep Chase', 'publication_year': 1982}
 
         '''
-        return self.books[book_id].copy()
+        return self.booksList[book_id].copy()
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
         ''' Returns a list of all the books in this data source matching all of
@@ -157,56 +159,57 @@ class BooksDataSource:
 
             See the BooksDataSource comment for a description of how a book is represented.
         '''
-        books_matching_criteria = self.books
+        books_matching_criteria = self.booksList
 
         if author_id != None:
-            books_matching_criteria = list_by_author_id(author_id)
+            books_matching_criteria = self.list_by_author_id(author_id)
         if search_text != None:
-            books_matching_criteria = list_by_search_text(books_matching_criteria, sort_by)
+            books_matching_criteria = self.list_by_search_text(books_matching_criteria, search_text)
         if start_year != None or end_year != None:
-            books_matching_criteria = list_by_year(books_matching_criteria, start_year, end_year)
-        if sort_by == 'title':
-            books_matching_criteria = sort_by_title(books_matching_criteria)
+            books_matching_criteria = self.list_by_year(books_matching_criteria, start_year, end_year)
         if sort_by == 'year':
-            books_matching_criteria = sort_by_year(books_matching_criteria)
+            books_matching_criteria = self.sort_by_year(books_matching_criteria)
+        else:
+            books_matching_criteria = self.sort_by_title(books_matching_criteria)
 
 
         return books_matching_criteria
 
-    def list_by_author_id(author_id):
+    def list_by_author_id(self, author_id):
 
         booksReturn = []
-        for bookId in self.authorLink[author_id]:
-            booksReturn.append(self.books[bookId])
+        for bookId in self.authorLink[int(author_id)]:
+            booksReturn.append(self.booksList[int(bookId)])
 
         return booksReturn
 
-    def list_by_search_text(list, string):
+    def list_by_search_text(self, bookList, string):
         newList = []
 
-        for x in list:
-            if x.get('title').upper().count(string.upper()) > 0:
-                newList = x.add()
+        for x in bookList:
+
+            if (x['title'].upper()).find(string.upper()) > -1:
+                newList.append(x)
         return newList
 
 
-    def list_by_year(list, start_year, end_year):
+    def list_by_year(self, bookList, start_year, end_year):
         newList = []
 
-        for x in list:
-            if (x.get('start_year') >= start_year or start_year == None) and (x.get('end_year') <= end_year or end_year == None):
-                newList = x.add()
+        for x in bookList:
+            if (x['publication_year'] >= start_year or start_year == None) and (x['publication_year'] <= end_year or end_year == None):
+                newList.append(x)
         return newList
 
-    def sort_by_title(list):
-        newList = sorted(list, key=lambda k: k['title'])
+    def sort_by_title(self, bookList):
+        bookList1 = sorted(bookList, key=lambda k: k['publication_year'])
+        bookList2 = sorted(bookList1, key=lambda k: k['title'])
+        return bookList2
 
-        return newList
-
-    def sort_by_year(list):
-        newList = sorted(list, key=lambda k: k['year'])
-
-        return newList
+    def sort_by_year(self, bookList):
+        bookList1 = sorted(bookList, key=lambda k: k['title'])
+        bookList2 = sorted(bookList1, key=lambda k: k['publication_year'])
+        return bookList2
 
 
     def author(self, author_id):
@@ -225,11 +228,11 @@ class BooksDataSource:
 
                 {'id': 77, 'last_name': 'Murakami', 'first_name': 'Haruki',
                  'birth_year': 1949, 'death_year': None} '''
-        if author_id < 0
-            return ValueError
-        return self.authors[author_id].copy()
+
+        return self.authorsList[author_id].copy()
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):
+
         ''' Returns a list of all the authors in this data source matching all of the
             specified non-None criteria.
 
@@ -249,21 +252,69 @@ class BooksDataSource:
 
                 'birth_year' - sorts by birth_year, breaking ties with (case-insenstive) last_name,
                     then (case-insensitive) first_name
-                any other value - sorts by (case-insensitive) last_name, breaking ties with
+                any other value - sorts by (case-insensitive)
+                last_name, breaking ties with
                     (case-insensitive) first_name, then birth_year
 
             See the BooksDataSource comment for a description of how an author is represented.
         '''
-        return []
+        authorsReturn = self.authorsList
+
+        if book_id != None:
+            authorsReturn = self.list_by_book_id(book_id)
+        if search_text != None:
+            authorsReturn = self.list_by_search_text_author(authorsReturn, search_text)
+        if start_year != None or end_year != None:
+            authorsReturn = self.list_by_year_author(authorsReturn, start_year, end_year)
+        if sort_by == 'birth_year':
+            authorsReturn = self.sort_by_birth_year(authorsReturn)
+        else:
+            authorsReturn = self.sort_by_else(authorsReturn)
+
+        return authorsReturn
 
 
-    # Note for my students: The following two methods provide no new functionality beyond
-    # what the books(...) and authors(...) methods already provide. But they do represent a
-    # category of methods known as "convenience methods". That is, they provide very simple
-    # interfaces for a couple very common operations.
-    #
-    # A question for you: do you think it's worth creating and then maintaining these
-    # particular convenience methods? Is books_for_author(17) better than books(author_id=17)?
+    def list_by_book_id(self, book_id):
+
+        authorsReturn = []
+        for authorId in self.bookLink[int(book_id)]:
+            authorsReturn.append(self.authorsList[int(authorId)])
+
+        return authorsReturn
+
+    def list_by_search_text_author(self, authorsList, string):
+        newList = []
+
+        for x in authorsList:
+
+            last = (x['last_name'].upper()).find(string.upper())
+            first = (x['first_name'].upper()).find(string.upper())
+            if last > -1 or first > -1:
+                newList.append(x)
+        return newList
+
+
+    def list_by_year_author(self, authorsList, start_year, end_year):
+
+        newList = []
+        for x in authorsList:
+            if (int((x['death_year']) >= int(start_year) or start_year == None) and (x['birth_year'] <= int(end_year) or end_year == None)):
+                newList.append(x)
+        return newList
+
+    def sort_by_birth_year(self, authorsList):
+
+        authorsList1 = sorted(authorsList, key=lambda k: k['first_name'])
+        authorsList2 = sorted(authorsList1, key=lambda k: k['last_name'])
+        authorsList3 = sorted(authorsList2, key=lambda k: k['birth_year'])
+        return authorsList3
+
+    def sort_by_else(self, authorsList):
+
+        authorsList1 = sorted(authorsList, key=lambda k: k['birth_year'])
+        authorsList2 = sorted(authorsList1, key=lambda k: k['first_name'])
+        authorsList3 = sorted(authorsList2, key=lambda k: k['last_name'])
+        return authorsList3
 
     def books_for_author(self, author_id):
         ''' Returns a list of all the books written by the author with the specified author ID.
@@ -273,4 +324,4 @@ class BooksDataSource:
     def authors_for_book(self, book_id):
         ''' Returns a list of all the authors of the book with the specified book ID.
             See the BooksDataSource comment for a description of how an author is represented. '''
-        return self.books(book_id=book_id)
+        return self.authors(book_id=book_id)
