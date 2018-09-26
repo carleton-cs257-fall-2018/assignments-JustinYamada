@@ -3,21 +3,21 @@
    Justin Hahn, Justin Yamada 20 September 2018
 '''
 
-
+from booksdatasource import BooksDataSource
 import unittest
 
 class booksDataSourceTest(unittest.TestCase):
     def setUp(self):
-        self.booksDataSourceTest = booksdatasource.BooksDataSource('bookstest.csv','authorstest.csv', 'books_authorstest.csv')
+        self.booksDataSourceTest = BooksDataSource('bookstest.csv','authorstest.csv', 'books_authorstest.csv')
 
     def tearDown(self):
         pass
 
     def test_book(self):
-        self.assertEqual(booksdatasource.book(5), {'id': 5, 'title': 'Book Five', 'publication_year': 1005})
+        self.assertEqual(booksDataSourceTest.book(5), {'id': 5, 'title': 'Book Five', 'publication_year': 1005})
 
     def test_books__show_all_books(self):
-        self.assertEqual(booksdatasource.books(),
+        self.assertEqual(booksDataSourceTest.books(),
         {'id': 0, 'title': 'Book Zero', 'publication_year': 1000},
         {'id': 1, 'title': 'Book One', 'publication_year': 1001},
         {'id': 2, 'title': 'Book Two', 'publication_year': 1002},
