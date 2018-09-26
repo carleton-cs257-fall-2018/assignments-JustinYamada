@@ -6,12 +6,16 @@
     For use in some assignments at the beginning of Carleton's
     CS 257 Software Design class, Fall 2018.
 '''
+
+import csv
+
 def scanner(file):
     '''parses the csv file and returns an array of csv rows'''
     Data = []
     with open(file, newline='') as f:
         reader = csv.reader(f)
         for row in reader:
+            print(row)
             Data.append(row)
     return Data
 
@@ -74,11 +78,13 @@ class BooksDataSource:
             dictionary = {'id': row[0], 'last_name': row[1], 'first_name': row[2],
             'birth_year': row[3], 'death_year': row[4]}
             self.authors.append(dictionary)
+
         i = 0
         for row in self.linkFile:
             if i == row[0]:
                 self.bookLink.append([row[1]])
                 i++
+
             else:
                 self.bookLink[row[0]].append(row[1])
             self.authorLink.append("null")
@@ -87,13 +93,9 @@ class BooksDataSource:
             if self.authorLink[row[1]] != "null":
                 self.authorLink[row[1]] = [row[0]]
             else:
-<<<<<<< HEAD
-                self.authorLink[row[1]].append(row[0])
 
-=======
                 self.authorLink[row[1]] = self.authorLink[row[1]] + ", " + row[0]
 
->>>>>>> b80cde402c8caa38e330256cd6e2564a90caaa1c
         ''' Initializes this data source from the three specified  CSV files, whose
             CSV fields are:
 
@@ -164,9 +166,9 @@ class BooksDataSource:
             books_matching_criteria = list_by_search_text(books_matching_criteria, sort_by)
         if start_year != None or end_year != None:
             books_matching_criteria = list_by_year(books_matching_criteria, start_year, end_year)
-        if sort_by == 'title' or
+        if sort_by == 'title':
             books_matching_criteria = sort_by_title(books_matching_criteria)
-        if sort_by == 'year'
+        if sort_by == 'year':
             books_matching_criteria = sort_by_year(books_matching_criteria)
 
 
@@ -193,7 +195,7 @@ class BooksDataSource:
         newList = []
 
         for x in list:
-            if (x.get('start_year') >= start_year or start_year == None) && (x.get('end_year') <= end_year or end_year == None):
+            if (x.get('start_year') >= start_year or start_year == None) and (x.get('end_year') <= end_year or end_year == None):
                 newList = x.add()
         return newList
 
@@ -203,7 +205,7 @@ class BooksDataSource:
         return newList
 
     def sort_by_year(list):
-`       newList = sorted(list, key=lambda k: k['year'])
+        newList = sorted(list, key=lambda k: k['year'])
 
         return newList
 
