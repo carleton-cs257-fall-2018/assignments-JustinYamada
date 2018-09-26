@@ -225,8 +225,10 @@ class BooksDataSource:
 
                 {'id': 77, 'last_name': 'Murakami', 'first_name': 'Haruki',
                  'birth_year': 1949, 'death_year': None} '''
+        if author_id < 0:
+            return ValueError
 
-        return self.authors[author_id].copy()
+        return self.authors[author_id].get()
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):
         ''' Returns a list of all the authors in this data source matching all of the

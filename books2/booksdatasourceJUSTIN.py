@@ -15,7 +15,6 @@ def scanner(file):
     with open(file, newline='') as f:
         reader = csv.reader(f)
         for row in reader:
-            print(row)
             Data.append(row)
     return Data
 
@@ -70,31 +69,31 @@ class BooksDataSource:
 
         dictionary = {}
         for row in self.booksFile:
-            dictionary = {'id': row[0], 'title': row[1], 'publication_year': row[3]}
+            dictionary = {'id': int(row[0]), 'title': row[1], 'publication_year': int(row[2])}
             self.books.append(dictionary)
 
         dictionary = {}
         for row in self.authorsFile:
-            dictionary = {'id': row[0], 'last_name': row[1], 'first_name': row[2],
-            'birth_year': row[3], 'death_year': row[4]}
+            dictionary = {'id': int(row[0]), 'last_name': row[1], 'first_name': row[2],
+            'birth_year': int(row[3]), 'death_year': int(row[4])}
             self.authors.append(dictionary)
 
         i = 0
         for row in self.linkFile:
-            if i == row[0]:
-                self.bookLink.append([row[1]])
-                i++
+            if i == int(row[0]):
+                self.bookLink.append([int(row[1])])
+                i += 1
 
             else:
-                self.bookLink[row[0]].append(row[1])
+                self.bookLink[int(row[0])].append(int(row[1]))
             self.authorLink.append("null")
 
         for row in self.linkFile:
-            if self.authorLink[row[1]] != "null":
-                self.authorLink[row[1]] = [row[0]]
+            if self.authorLink[int(row[1])] != "null":
+                self.authorLink[int(row[1])] = [int(row[0])]
             else:
 
-                self.authorLink[row[1]] = self.authorLink[row[1]] + ", " + row[0]
+                self.authorLink[int(row[1])] = self.authorLink[int(row[1])] + ", " + row[0]
 
         ''' Initializes this data source from the three specified  CSV files, whose
             CSV fields are:
@@ -226,7 +225,8 @@ class BooksDataSource:
 
                 {'id': 77, 'last_name': 'Murakami', 'first_name': 'Haruki',
                  'birth_year': 1949, 'death_year': None} '''
-
+        if author_id < 0
+            return ValueError
         return self.authors[author_id].copy()
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):

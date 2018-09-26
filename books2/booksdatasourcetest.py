@@ -29,7 +29,7 @@ class booksDataSourceTest(unittest.TestCase):
         {'id': 8, 'title': 'Book Single Two', 'publication_year': 1000})
 
     def test_books_only_id_3(self):
-        self.assertEqual(self.booksDataSourceTest.books(author_id=3),
+        self.assertEqual(self.booksDataSourceTest.books(author_id = 3),
         {'id': 3, 'title': 'Book Three', 'publication_year': 1003})
 
     def test_books_with_start_year_end_year_sorted_by_title(self):
@@ -116,7 +116,7 @@ class booksDataSourceTest(unittest.TestCase):
         {'id': 7, 'last_name': 'Two', 'first_name': 'Double', 'birth_year': 950, 'death_year': 1000})
 
     def test_wrong_author_id(self):
-        self.assertRaises(ValueError, self.data_source.books,author_id=-1)
+        self.assertRaises(ValueError, self.booksDataSourceTest.books(-1))
 
 if __name__ == '__main__':
     unittest.main()
