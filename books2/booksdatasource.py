@@ -14,7 +14,9 @@ def scanner(file):
     '''parses the csv file and returns an array of csv rows'''
     Data = []
     with open(file, newline='') as f:
+        # reader takes in the csv file
         reader = csv.reader(f)
+        # copies all the information from the csv file into a new list
         for row in reader:
             Data.append(row)
     return Data
