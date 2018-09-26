@@ -70,7 +70,7 @@ class BooksDataSource:
 
         dictionary = {}
         for row in self.booksFile:
-            dictionary = {'id': row[0], 'title': row[1], 'publication_year': row[3]}
+            dictionary = {'id': row[0], 'title': row[1], 'publication_year': row[2]}
             self.books.append(dictionary)
 
         dictionary = {}
@@ -81,20 +81,20 @@ class BooksDataSource:
 
         i = 0
         for row in self.linkFile:
-            if i == row[0]:
-                self.bookLink.append([row[1]])
+            if i == int(row[0]):
+                self.bookLink.append([int(row[1])])
                 i += 1
 
             else:
-                self.bookLink[row[0]].append(row[1])
+                self.bookLink[int(row[0])].append(int(row[1]))
             self.authorLink.append("null")
 
         for row in self.linkFile:
-            if self.authorLink[row[1]] != "null":
-                self.authorLink[row[1]] = [row[0]]
+            if self.authorLink[int(row[1])] != "null":
+                self.authorLink[int(row[1])] = [int(row[0])]
             else:
 
-                self.authorLink[row[1]] = self.authorLink[row[1]] + ", " + row[0]
+                self.authorLink[int(row[1])] = self.authorLink[int(row[1])] + ", " + row[0]
 
         ''' Initializes this data source from the three specified  CSV files, whose
             CSV fields are:
