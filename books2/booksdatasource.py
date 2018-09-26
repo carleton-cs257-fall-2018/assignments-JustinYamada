@@ -258,7 +258,10 @@ class BooksDataSource:
             See the BooksDataSource comment for a description of how an author is represented.
         '''
         authorsReturn = self.authorsList
-
+        
+        # Checks to see which arguments are given and passes the list of authors
+        # through each applicable function
+        
         if book_id != None:
             authorsReturn = self.list_by_book_id(book_id)
         if search_text != None:
@@ -272,7 +275,7 @@ class BooksDataSource:
 
         return authorsReturn
 
-
+    # Returns a list of authors that have written a specific book given a book id
     def list_by_book_id(self, book_id):
 
         authorsReturn = []
@@ -280,7 +283,9 @@ class BooksDataSource:
             authorsReturn.append(self.authorsList[int(authorId)])
 
         return authorsReturn
-
+    
+    # Returns a list of authors with a string in their first or last name
+    # given a list to search through and a string to look for in the author's names
     def list_by_search_text_author(self, authorsList, string):
         newList = []
 
@@ -292,7 +297,8 @@ class BooksDataSource:
                 newList.append(x)
         return newList
 
-
+    # Returns a list of authors that were alive during a time period given
+    # a start year and end year and list of authors
     def list_by_year_author(self, authorsList, start_year, end_year):
 
         newList = []
@@ -301,6 +307,7 @@ class BooksDataSource:
                 newList.append(x)
         return newList
 
+    # Sorts a list of authors by birthyear then last name then first name
     def sort_by_birth_year(self, authorsList):
 
         authorsList1 = sorted(authorsList, key=lambda k: k['first_name'])
@@ -308,13 +315,14 @@ class BooksDataSource:
         authorsList3 = sorted(authorsList2, key=lambda k: k['birth_year'])
         return authorsList3
 
+    # Sorts a list of authors by last name then first name then birth year
     def sort_by_else(self, authorsList):
 
         authorsList1 = sorted(authorsList, key=lambda k: k['birth_year'])
         authorsList2 = sorted(authorsList1, key=lambda k: k['first_name'])
         authorsList3 = sorted(authorsList2, key=lambda k: k['last_name'])
         return authorsList3
-
+    
     def books_for_author(self, author_id):
         ''' Returns a list of all the books written by the author with the specified author ID.
             See the BooksDataSource comment for a description of how an book is represented. '''
