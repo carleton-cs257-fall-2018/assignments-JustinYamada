@@ -166,10 +166,10 @@ class BooksDataSource:
             books_matching_criteria = self.list_by_search_text(books_matching_criteria, search_text)
         if start_year != None or end_year != None:
             books_matching_criteria = self.list_by_year(books_matching_criteria, start_year, end_year)
-        if sort_by == 'title':
-            books_matching_criteria = self.sort_by_title(books_matching_criteria)
         if sort_by == 'year':
             books_matching_criteria = self.sort_by_year(books_matching_criteria)
+        else:
+            books_matching_criteria = self.sort_by_title(books_matching_criteria)
 
 
         return books_matching_criteria
@@ -196,13 +196,12 @@ class BooksDataSource:
         newList = []
 
         for x in bookList:
-            if (x.get('start_year') >= start_year or start_year == None) and (x.get('end_year') <= end_year or end_year == None):
+            if (x['start_year'] >= start_year or start_year == None) and (x['end_year'] <= end_year or end_year == None):
                 newList.append(x)
         return newList
 
     def sort_by_title(self, bookList):
         newList = sorted(bookList, key=lambda k: k['title'])
-
         return newList
 
     def sort_by_year(self, bookList):
@@ -227,8 +226,6 @@ class BooksDataSource:
 
                 {'id': 77, 'last_name': 'Murakami', 'first_name': 'Haruki',
                  'birth_year': 1949, 'death_year': None} '''
-        if author_id < 0:
-            raise ValueError('Can not be under 0')
 
         return self.authors[author_id].copy()
 
@@ -260,12 +257,12 @@ class BooksDataSource:
         '''
         authorsReturn = self.authorsList
 
-        if author_id != None:
+        if book_id != None:
             authorsReturn = self.list_by_book_id(book_id)
         if search_text != None:
             authorsReturn = self.list_by_search_text_author(authorsReturn, search_text)
         if start_year != None or end_year != None:
-            authorsReturn = self.list_by_year(authorsReturn, start_year, end_year)
+            authorsReturn = self.list_by_year_author(authorsReturn, start_year, end_year)
         if sort_by == 'birth_year':
             authorsReturn = self.sort_by_birth_year(authorsReturn)
         else:
@@ -277,25 +274,31 @@ class BooksDataSource:
     def list_by_book_id(self, book_id):
 
         authorsReturn = []
-        for authorId in self.booksLink[int(book_id)]:
-            authorsReturn.append(self.authorslist[int(authorId)])
+        for authorId in self.bookLink[int(book_id)]:
+            authorsReturn.append(self.authorsList[int(authorId)])
 
         return authorsReturn
 
     def list_by_search_text_author(self, authorsList, string):
         newList = []
-        for x in bookList:
-            if (x['title'].upper()).find(string.upper()) > -1:
+
+        for x in authorsList:
+
+            last = (x['last_name'].upper()).find(string.upper())
+            first = (x['first_name'].upper()).find(string.upper())
+            if last > -1 or first > -1:
                 newList.append(x)
         return newList
 
 
-    def list_by_year(self, authorsList, start_year, end_year):
+    def list_by_year_author(self, authorsList, start_year, end_year):
 
         newList = []
         for x in authorsList:
-            if ((x.get('death_year') >= start_year or start_year == None) and (x.get('birth_year') <= end_year or end_year == None)):
+            if (int((x['death_year']) >= int(start_year) or start_year == None) and (x['birth_year'] <= int(end_year) or end_year == None)):
                 newList.append(x)
+
+        print(newList, 'yo whats up hi')
         return newList
 
     def sort_by_birth_year(self, authorsList):
