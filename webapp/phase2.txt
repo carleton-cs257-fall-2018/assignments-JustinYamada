@@ -1,1 +1,15 @@
-Justin Yamada
+Justin Hahn and Justin Yamada
+
+In data.gov searching "api Maryland crime" and finding a Crime dataset by the Montgomery County of Maryland (https://catalog.data.gov/dataset/crime). The dataset contains data about different types of crimes and where they occured in the Montgomery County of Maryland. The where is split into information like block address, zipcode, city, and the general location of the crime. The dataset also contains data about the offence code, Police Agency involved, number of victims, and the latitude longitude of the where the crime took place.
+
+As a house owner I would like to search up areas using zipcode and be shown how prevalent crime is in a table graph in order to understand which houses to buy and which neighborhoods are the safest.
+
+As a house owner I would like to compare two or more areas using zipcode and be shown a bar graph to see which area is more dangerous in order to understand which area is the safest.
+
+As a statistitian studying crime statistics I would like to be able to see statistics in a bar graph which depict the frequency of types of crimes. This bar graph would show me which types of crimes are the most frequent or most unusual and help me gather data.
+
+As a student viewing crime statistics I would like to know the rate of crime and which crimes occur at schools most frequenctly using a table graph because I want to know which crimes I should look out the most for.
+
+As a student entering into schools I would like to compare which schools (using zipcodes) have the most number of crimes in order to understand which school has the safest area.
+
+As a resident in the area, I would like to see which general location (grocery store, gas station, government building, school, parking lot, retail, residential, street, park, convinience store, bus terminals, and other) has the most frequent amount of crime using a table graph to learn which areas are the most dangerous to be in.
