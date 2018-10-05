@@ -2,6 +2,9 @@ Justin Hahn and Justin Yamada
 
 In data.gov searching "api Maryland crime" and finding a Crime dataset by the Montgomery County of Maryland (https://catalog.data.gov/dataset/crime). The dataset contains data about different types of crimes and where they occured in the Montgomery County of Maryland. The where is split into information like block address, zipcode, city, and the general location of the crime. The dataset also contains data about the offence code, Police Agency involved, number of victims, and the latitude longitude of the where the crime took place.
 
+
+
+
 As a house owner I would like to search up areas using zipcode and be shown how prevalent crime is in a table graph in order to understand which houses to buy and which neighborhoods are the safest.
 
 As a house owner I would like to compare two or more areas using zipcode and be shown a bar graph to see which area is more dangerous in order to understand which area is the safest.
