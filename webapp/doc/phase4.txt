@@ -18,3 +18,15 @@ EXAMPLE: http://whatever.com/books/authorname/Austen/
 [{'title':'Pride and Prejudice', 'publication_year':1813},
  {'title':'Sense and Sensibility', 'publication_year':1813},
  {'title':'Emma', 'publication_year':1815}]
+
+SYNOPSIS: Get a list of all the books written by the specified author.
+
+QUERY (GET): /books/authorname/<author_name>/
+
+RESPONSE: a list of dictionaries, each of which describes one book with keys 'title' and 'publication_year'
+
+EXAMPLE: http://whatever.com/books/authorname/Austen/
+
+[{'title':'Pride and Prejudice', 'publication_year':1813},
+ {'title':'Sense and Sensibility', 'publication_year':1813},
+ {'title':'Emma', 'publication_year':1815}]
