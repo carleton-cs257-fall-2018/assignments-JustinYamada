@@ -1,3 +1,7 @@
+Justin Hahn & Justin Yamada
+October 16, 2018
+
+
 CREATE TABLE crimes (
     id SERIAL,
     police_code INT,
