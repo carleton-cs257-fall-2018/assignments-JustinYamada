@@ -78,9 +78,7 @@ class CrimeTester(unittest.TestCase):
 
     def test_crime_frequency_page(self):
         self.assertEquals(self.CrimeTester.cFrequency(),
-        [
-
-        )
+        {1. 2305: LARCENY - FROM AUTO : 7 instances, 2. 3562: TRESPASSING : 2 instances, 3. 5404: DRIVING UNDER THE INFLUENCE LIQUOR : 1 instances})
 
 
 if __name__ == '__main__':
