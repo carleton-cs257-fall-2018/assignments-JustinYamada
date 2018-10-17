@@ -1,32 +1,75 @@
-CREATE TABLE authors (
+CREATE TABLE crimes (
     id SERIAL,
-    last_name TEXT,
-    first_name TEXT,
-    birth_year INT,
-    death_year INT
+    police_code INT,
+    zipCode INT,
+    type_place TEXT,
+    broad_crime TEXT,
+    specific_crime TEXT,
+    city TEXT,
 );
 
 
-SYNOPSIS: Get a list of all the books written by the specified author.
 
-QUERY (GET): /books/authorname/<author_name>/
+SYNOPSIS: Get a list of all the crimes that occured at the specified locations for each specified zip codes (returning up to three lists within a list)
 
-RESPONSE: a list of dictionaries, each of which describes one book with keys 'title' and 'publication_year'
 
-EXAMPLE: http://whatever.com/books/authorname/Austen/
+QUERY: /crimes
 
-[{'title':'Pride and Prejudice', 'publication_year':1813},
- {'title':'Sense and Sensibility', 'publication_year':1813},
- {'title':'Emma', 'publication_year':1815}]
+GET parameters
+zipCode - the initial zip code (an integer); restricts the returned crimes list to crimes occurring in the given zip code
+zipCode2 [optional in addition to zipCode] - a second zip code (an integer); returns a list of lists of dictionaries of crimes occurring in each zip code
+zipCode3 [optional in addition to zipCode2] - a third zip code (an integer); returns a list of lists of dictionaries of crimes occurring in each zip code
+	Air/Bus/Train/Metro Terminal [optional] - returns crimes from this location type
+Auto Repair [optional] -  returns crimes from this location type
+Bar/Night Club [optional] - returns crimes from this location type
+Church [optional] - returns crimes from this location type
+Convenience Store [optional] - returns crimes from this location type
+Government Building [optional] - returns crimes from this location type
+Grocery/Supermarket [optional] - returns crimes from this location type
+Hospital [optional] - returns crimes from this location type
+Jail [optional] - returns crimes from this location type
+Park [optional] - returns crimes from this location type
+Parking Garage [optional] - returns crimes from this location type
+Parking Lot [optional] - returns crimes from this location type
+Residential [optional] - returns crimes from this location type
+Retail [optional] - returns crimes from this location type
+School [optional] - returns crimes from this location type
+Other/Unkown [optional] - returns crimes from this location type
 
-SYNOPSIS: Get a list of all the books written by the specified author.
+EXAMPLE: http://whatever.com/crimes?zipCode=20707&zipCode2=20783&zipCode3=20814&loc=Residence&loc=Street
 
-QUERY (GET): /books/authorname/<author_name>/
+[[{‘id’:201088864, ‘police_code’:2305, ‘zipCode’:20707, ‘type_place’:‘Residence - Driveway’, ‘broad_crime’:‘Theft From Motor Vehicle’, ‘specific_crime’:‘LARCENY - FROM AUTO’, ‘city’:‘LAUREL’},
+{‘id’:201091844, ‘police_code’:3561, ‘zipCode’:20707, ‘type_place’:‘Street - In vehicle’, ‘broad_crime’:‘Drug/Narcotic Violations’, ‘specific_crime’:‘DRUGS - MARIJUANA - SMUGGLE’, ‘city’:‘LAUREL’},
+{‘id’:201091844, ‘police_code’:5212, ‘zipCode’:20707, ‘type_place’:‘Residence - Apartment/Condo’, ‘broad_crime’:‘Weapon Law Violations’, ‘specific_crime’:‘WEAPON - POSSESSION’, ‘city’:‘LAUREL’}],
+[‘id’:201183130, ‘police_code’:5404, ‘zipCode’:20783, ‘type_place’:‘Street - In vehicle’, ‘broad_crime’:‘Driving Under the Influence’, ‘specific_crime’:‘DRIVING UNDER THE INFLUENCE LIQUOR’, ‘city’:‘ADELPHI’}],
+[‘id’:201183130, ‘police_code’:9108, ‘zipCode’:20814, ‘type_place’:‘Street - Commercial’, ‘broad_crime’:‘All Other Offenses’, ‘specific_crime’:‘RECOVERED PROPERTY - MONT CO.’, ‘city’:‘BETHESDA’}]]
 
-RESPONSE: a list of dictionaries, each of which describes one book with keys 'title' and 'publication_year'
 
-EXAMPLE: http://whatever.com/books/authorname/Austen/
 
-[{'title':'Pride and Prejudice', 'publication_year':1813},
- {'title':'Sense and Sensibility', 'publication_year':1813},
- {'title':'Emma', 'publication_year':1815}]
+SYNOPSIS: Get a list of all the crimes for each crime code and how many instances of a crime code appears in the data set
+
+QUERY (GET): /crimes/frequency/
+
+RESPONSE: loads a prebuilt csv file with crime codes and the instances of a crime code.
+
+EXAMPLE: http://whatever.com/crimes/frequency/
+
+1.  2305: LARCENY - FROM AUTO : 23,000 instances
+2.  3562: DRUGS - MARIJUANA - POSSESS : 15,931 instances
+3.  2301: LARCENY - POCKET PICKING : 14,312 instances
+4.  2604: BURGLARY - FORCED ENTRY-RESIDENTIAL : 12,982 instances
+Etc.
+
+
+
+SYNOPSIS: Get the definition of the crime code selected
+
+QUERY (GET): /crimes/frequency/<crimecode>
+
+RESPONSE: A list of dictionaries that represent all the crimes that have the specified crime code
+
+EXAMPLE: http://whatever.com/crimes/frequency?code=2303
+
+[{‘id’:201200432, ‘police_code’:2303, ‘zipCode’:20841, ‘type_place’:‘Retail - Department/Discount Store’, ‘broad_crime’:‘Shoplifting’, ‘specific_crime’:‘LARCENY - SHOPLIFTING’, ‘city’:‘GERMANTOWN’},
+{‘id’:201125024, ‘police_code’:2303, ‘zipCode’:20910, ‘type_place’:‘Retail - Department/Discount Store’, ‘broad_crime’:‘Shoplifting’, ‘specific_crime’:‘LARCENY - SHOPLIFTING’, ‘city’:‘SILVER SPRING’},
+{‘id’:201124618, ‘police_code’:2303, ‘zipCode’:20902, ‘type_place’:‘Retail - Mall’, ‘broad_crime’:‘Shoplifting’, ‘specific_crime’:‘LARCENY - SHOPLIFTING’, ‘city’:‘SILVER SPRING’}]
