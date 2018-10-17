@@ -19,7 +19,7 @@ GET parameters
 zipCode - the initial zip code (an integer); restricts the returned crimes list to crimes occurring in the given zip code
 zipCode2 [optional in addition to zipCode] - a second zip code (an integer); returns a list of lists of dictionaries of crimes occurring in each zip code
 zipCode3 [optional in addition to zipCode2] - a third zip code (an integer); returns a list of lists of dictionaries of crimes occurring in each zip code
-	Air/Bus/Train/Metro Terminal [optional] - returns crimes from this location type
+Air/Bus/Train/Metro Terminal [optional] - returns crimes from this location type
 Auto Repair [optional] -  returns crimes from this location type
 Bar/Night Club [optional] - returns crimes from this location type
 Church [optional] - returns crimes from this location type
