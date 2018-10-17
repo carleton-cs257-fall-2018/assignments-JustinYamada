@@ -9,7 +9,7 @@ import unittest
 
 class PrimeCheckerTester(unittest.TestCase):
     def setUp(self):
-        self.prime_checker = primechecker.PrimeChecker(100)
+        self.CrimeDataSource = BooksDataSource('Crime.csv')
 
     def tearDown(self):
         pass
