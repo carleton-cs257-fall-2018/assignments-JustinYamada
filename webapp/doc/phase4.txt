@@ -12,7 +12,6 @@ CREATE TABLE crimes (
 
 SYNOPSIS: Get a list of all the crimes that occured at the specified locations for each specified zip codes (returning up to three lists within a list)
 
-
 QUERY: /crimes
 
 GET parameters
