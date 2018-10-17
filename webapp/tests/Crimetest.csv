@@ -1,0 +1,10 @@
+Incident ID,Offence Code,CR Number,Dispatch Date/Time,NIBRS Code,Victims,Crime Name1,Crime Name2,Crime Name3,Police District Name,Block_Address,City,State,Zip Code,Agency,Place,Sector,Beat,PRA,Address Number,Start Date/Time,End Date/Time,Latitude,Longitude,Police District Number,Location
+1,2305,N/A,N/A,N/A,N/A,N/A,Theft From Motor Vehicle,LARCENY - FROM AUTO,N/A,N/A,ONETON,MD,11111,N/A,Residence - Apartment/Condo,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+2,2305,N/A,N/A,N/A,N/A,N/A,Theft From Motor Vehicle,LARCENY - FROM AUTO,N/A,N/A,TWOTON,MD,22222,N/A,Residence - Apartment/Condo,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+3,2305,N/A,N/A,N/A,N/A,N/A,Theft From Motor Vehicle,LARCENY - FROM AUTO,N/A,N/A,TWOTON,MD,22222,N/A,Street - Bus Stop,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+4,2305,N/A,N/A,N/A,N/A,N/A,Theft From Motor Vehicle,LARCENY - FROM AUTO,N/A,N/A,THREETON,MD,33333,N/A,Residence - Apartment/Condo,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+5,5404,N/A,N/A,N/A,N/A,N/A,Driving Under the Influence,DRIVING UNDER THE INFLUENCE LIQUOR,N/A,N/A,THREETON,MD,33333,N/A,Street - Bus Stop,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+6,5707,N/A,N/A,N/A,N/A,N/A,Trespass of Real Property,TRESPASSING,N/A,N/A,THREETON,MD,33333,N/A,Retail - Department/Discount Store,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+7,2305,N/A,N/A,N/A,N/A,N/A,Theft From Motor Vehicle,LARCENY - FROM AUTO,N/A,N/A,FOURTON,MD,44444,N/A,Residence - Apartment/Condo,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+8,2305,N/A,N/A,N/A,N/A,N/A,Theft From Motor Vehicle,LARCENY - FROM AUTO,N/A,N/A,FOURTON,MD,44444,N/A,Street - Bus Stop,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+9,5707,N/A,N/A,N/A,N/A,N/A,Trespass of Real Property,TRESPASSING,N/A,N/A,FOURTON,MD,44444,N/A,Retail - Department/Discount Store,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
