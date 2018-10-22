@@ -43,15 +43,19 @@ movies = [
 
 @app.route('/crimes')
 def hello():
-    return 'Hello, Citizen of CS257.'
+    print("hello")
+    return 'Hello, Welcome to the Crime database.'
 
-@app.route('/crimes?')
+@app.route('/crimes/',methods=['GET'])
+    ast.literal_eval(request.args.get('zipcodes')),
+
 
 @app.route('/crimes/frequency/max_frequency')
-
+    return ''
 @app.route('/crimes/frequency/min_frequency')
-
+    return ''
 @app.route('/actor/<last_name>')
+
 def get_actor(last_name):
     ''' Returns the first matching actor, or an empty dictionary if there's no match. '''
     actor_dictionary = {}
