@@ -37,17 +37,22 @@ def load_from_crime_csv_file(csv_file_name):
     crimes = []
     type_place_broad = []
     type_place_specific = []
+    FirstRowSkip = True
     for row in reader:
+        if FirstRowSkip == True:
+            FirstRowSkip = False
+            continue
         assert len(row) == 26
     
-        type_place = row[15].split()
-        if !(type_place[0] in type_place_broad):
+        type_place = re.split(' - ', row[15])
+        print(type_place)
+        if  type_place[0] not in type_place_broad:
             type_place_broad.append(type_place[0])
             
-        if !(type_place[2] in type_place_specific):
-            type_place_specific.append(type_place[2])
+        if type_place[1] not in type_place_specific:
+            type_place_specific.append(type_place[1])
             
-        crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13], 'type_place_broad': type_place_broad.index(type_place[0]), 'type_place_specific' : type_place_specific.index(type_place[2]), 'crime_category' : row[7], 'specific_crime' : row[8], 'city' : row[11]}
+        crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13], 'type_place_broad': type_place_broad.index(type_place[0]), 'type_place_specific' : type_place_specific.index(type_place[1]), 'crime_category' : row[7], 'specific_crime' : row[8], 'city' : row[11]}
         crimes.append(crime)
 
     csv_file.close()
@@ -59,24 +64,24 @@ def save_crimes_table(crimes, csv_file_name):
     output_file = open(csv_file_name, 'w', encoding='utf-8')
     writer = csv.writer(output_file)
     for crimes in crimes:
-        crimes_row = [crimes['id'], crimes['police_code'], crimes['zipCode'], crimes['type_place'],
-         crimes['crime_category'], crimes['specific_crime'], crimes['city']]
+        crimes_row = [crimes['id'], crimes['police_code'], crimes['zipCode'], crimes['type_place_broad'],crimes['type_place_specific'],
+        crimes['crime_category'], crimes['specific_crime'], crimes['city']]
         writer.writerow(crimes_row)
     output_file.close()
 
-def save_type_place_table(type_places, csv_file_name):
+def save_type_place_table(type_place, csv_file_name):
     ''' Save the books in CSV form, with each row containing
         (id, last name, first name, birth year, death year), where
         death year can be NULL. '''
     output_file = open(csv_file_name, 'w', encoding='utf-8')
     writer = csv.writer(output_file)
-    for place in type_places:
+    for place in type_place:
         row = [type_place.index(place), place]
         writer.writerow(row)
     output_file.close()
 
 if __name__ == '__main__':
-    crimes, type_place_broad, type_place_specific = load_from_crimes_csv_file('Crimetest.csv')
+    crimes, type_place_broad, type_place_specific = load_from_crime_csv_file('Crimetest.csv')
 
     save_crimes_table(crimes, 'crimes.csv')
     save_type_place_table(type_place_broad, 'type_place_broad.csv')
