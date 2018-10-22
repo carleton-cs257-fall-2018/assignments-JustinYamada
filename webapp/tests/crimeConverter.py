@@ -48,7 +48,7 @@ def load_from_crime_csv_file(csv_file_name):
     broad_crime TEXT,
     specific_crime TEXT,
     city TEXT,
-    
+
         crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13], 'type_place': row[15], 'broad_crime' : row[]}
         books.append(book)
         for author in authors_from_authors_string(row[2]):
@@ -98,14 +98,15 @@ def authors_from_authors_string(authors_string):
 
     return authors
 
-def save_books_table(books, csv_file_name):
+def save_crimes_table(crimes, csv_file_name):
     ''' Save the books in CSV form, with each row containing
         (id, title, publication year). '''
     output_file = open(csv_file_name, 'w', encoding='utf-8')
     writer = csv.writer(output_file)
-    for book in books:
-        book_row = [book['id'], book['title'], book['publication_year']]
-        writer.writerow(book_row)
+    for crimes in crimes:
+        crimes_row = [crimes['id'], crimes['police_code'], crimes['zipCode'], crimes['type_place'],
+         crimes['crime_category'], crimes['specific_crime'], crimes['city']]
+        writer.writerow(crimes_row)
     output_file.close()
 
 def save_authors_table(authors, csv_file_name):
