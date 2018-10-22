@@ -10,6 +10,10 @@ import sys
 import flask
 import json
 
+
+
+
+
 app = flask.Flask(__name__)
 
 # Who needs a database when you can just hard-code some actors and movies?
@@ -37,9 +41,15 @@ movies = [
     {'title': 'Clueless', 'year': 1995, 'genre': 'comedy'}
 ]
 
-@app.route('/')
+@app.route('/crimes')
 def hello():
     return 'Hello, Citizen of CS257.'
+
+@app.route('/crimes?')
+
+@app.route('/crimes/frequency/max_frequency')
+
+@app.route('/crimes/frequency/min_frequency')
 
 @app.route('/actor/<last_name>')
 def get_actor(last_name):
@@ -50,7 +60,11 @@ def get_actor(last_name):
         if actor['last_name'].lower().startswith(lower_last_name):
             actor_dictionary = actor
             break
-    return json.dumps(actor_dictionary)
+    return json.dumps(actor_dictionary)\
+
+
+
+
 
 @app.route('/movies')
 def get_movies():
