@@ -47,7 +47,7 @@ def load_from_crime_csv_file(csv_file_name):
         if !(type_place[2] in type_place_specific):
             type_place_specific.append(type_place[2])
             
-        crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13], 'type_place_broad': type_place_broad.index(type_place[0]), 'type_place_specific' : type_place_specific.index(type_place[2]),'crime_category' : row[7], 'specific_crime' : row[8], 'city' : row[11]}
+        crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13], 'type_place_broad': type_place_broad.index(type_place[0]), 'type_place_specific' : type_place_specific.index(type_place[2]), 'crime_category' : row[7], 'specific_crime' : row[8], 'city' : row[11]}
         crimes.append(crime)
 
     csv_file.close()
@@ -64,34 +64,20 @@ def save_crimes_table(crimes, csv_file_name):
         writer.writerow(crimes_row)
     output_file.close()
 
-def save_authors_table(authors, csv_file_name):
+def save_type_place_table(type_places, csv_file_name):
     ''' Save the books in CSV form, with each row containing
         (id, last name, first name, birth year, death year), where
         death year can be NULL. '''
     output_file = open(csv_file_name, 'w', encoding='utf-8')
     writer = csv.writer(output_file)
-    for author in sorted(authors, key=authors.get):
-        (last_name, first_name, birth_year, death_year) = author
-        if death_year == '':
-            death_year = 'NULL'
-        author_id = authors[author]
-        author_row = [author_id, last_name, first_name, birth_year, death_year]
-        writer.writerow(author_row)
-    output_file.close()
-
-def save_linking_table(books_authors, csv_file_name):
-    ''' Save the books in CSV form, with each row containing
-        (book id, author id). '''
-    output_file = open(csv_file_name, 'w', encoding='utf-8')
-    writer = csv.writer(output_file)
-    for book_author in books_authors:
-        books_authors_row = [book_author['book_id'], book_author['author_id']]
-        writer.writerow(books_authors_row)
+    for place in type_places:
+        row = [type_place.index(place), place]
+        writer.writerow(row)
     output_file.close()
 
 if __name__ == '__main__':
-    books, authors, books_authors = load_from_books_csv_file('books-original.csv')
+    crimes, type_place_broad, type_place_specific = load_from_crimes_csv_file('Crimetest.csv')
 
-    save_books_table(books, 'books.csv')
-    save_authors_table(authors, 'authors.csv')
-    save_linking_table(books_authors, 'books_authors.csv')
+    save_crimes_table(crimes, 'crimes.csv')
+    save_type_place_table(type_place_broad, 'type_place_broad.csv')
+    save_type_place_table(type_place_specific, 'type_place_specific.csv')
