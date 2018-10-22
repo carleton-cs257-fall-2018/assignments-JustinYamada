@@ -3,14 +3,26 @@ October 16, 2018
 
 
 CREATE TABLE crimes (
-    id SERIAL,
+    id INT,
     police_code INT,
     zipCode INT,
-    type_place TEXT,
-    broad_crime TEXT,
+    type_place_broad INT,
+    type_place_specific INT,
+    crime_category INT,
     specific_crime TEXT,
     city TEXT,
 );
+
+CREATE TABLE type_place_broad (
+    id INT,
+    type_place_broad TEXT,
+);
+
+CREATE TABLE type_place_specific (
+    id INT,
+    type_place_specific TEXT,
+);
+
 
 
 
