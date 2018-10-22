@@ -16,31 +16,38 @@ import json
 
 app = flask.Flask(__name__)
 
-# Who needs a database when you can just hard-code some actors and movies?
-actors = [
-    {'last_name': 'Pickford', 'first_name': 'Mary'},
-    {'last_name': 'Rains', 'first_name': 'Claude'},
-    {'last_name': 'Lorre', 'first_name': 'Peter'},
-    {'last_name': 'Greenstreet', 'first_name': 'Sydney'},
-    {'last_name': 'Bergman', 'first_name': 'Ingrid'},
-    {'last_name': 'Grant', 'first_name': 'Cary'},
-    {'last_name': 'Colbert', 'first_name': 'Claudette'},
-    {'last_name': 'McDormand', 'first_name': 'Frances'},
-    {'last_name': 'Wiig', 'first_name': 'Kristen'},
-    {'last_name': 'Adams', 'first_name': 'Amy'}
-]
+def scanner(file):
+    '''parses the csv file and returns an array of csv rows'''
+    Data = []
+    with open(file, newline='') as f:
+        # reader takes in the csv file
+        reader = csv.reader(f)
+        # copies all the information from the csv file into a new list
+        for row in reader:
+            Data.append(row)
+    return Data
 
-movies = [
-    {'title': 'Casablanca', 'year': 1942, 'genre': 'drama'},
-    {'title': 'North By Northwest', 'year': 1959, 'genre': 'thriller'},
-    {'title': 'Alien', 'year': 1979, 'genre': 'scifi'},
-    {'title': 'Bridesmaids', 'year': 2011, 'genre': 'comedy'},
-    {'title': 'Arrival', 'year': 2016, 'genre': 'scifi'},
-    {'title': 'It Happened One Night', 'year': 1934, 'genre': 'comedy'},
-    {'title': 'Fargo', 'year': 1996, 'genre': 'thriller'},
-    {'title': 'Clueless', 'year': 1995, 'genre': 'comedy'}
-]
+crimesFile = scanner(crime_filename)
+crimeList = []
+dictionary = {}
+    for row in crimesFile:
+        dictionary = {'id': int(row[0]), 'police_code': int(row[1]), 'type_place_broad': int(row[2]), 'type_place_specific': int(row[3]), 'crime_category': row[4], 'specific_crime': row[5], 'city': row[6]}
+        crimeList.append(dictionary)
 
+placeBroadFile = scanner(placeBroad_filename)
+placeBroadList = []
+dictionary = {}
+    for row in crimesFile:
+        dictionary = {'id': int(row[0]), 'type_place_broad': row[1]}
+        placeBroadList.append(dictionary)
+
+placeSpecificFile = scanner(placeSpecific_filename)
+placeSpecificList = []
+dictionary = {}
+    for row in placeSpecificFile:
+        dictionary = {'id': int(row[0]), 'type_place_specific': row[1]}
+        placeSpecificList.append(dictionary)
+            
 @app.route('/crimes')
 def hello():
     print("hello")
