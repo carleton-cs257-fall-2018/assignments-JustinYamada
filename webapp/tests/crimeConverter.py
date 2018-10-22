@@ -19,7 +19,7 @@ import sys
 import re
 import csv
 
-def load_from_books_csv_file(csv_file_name):
+def load_from_crime_csv_file(csv_file_name):
     ''' Collect all the data from my sample books_and_authors.csv file,
         assembling it into a list of books, a dictionary of authors,
         and a list of book/author ID links. Rather than fully
@@ -35,12 +35,21 @@ def load_from_books_csv_file(csv_file_name):
     reader = csv.reader(csv_file)
 
     authors = {}
-    books = []
+    crimes = []
     books_authors = []
     for row in reader:
-        assert len(row) == 3
-        book_id = len(books)
-        book = {'id': book_id, 'title': row[0], 'publication_year': row[1]}
+        assert len(row) == 26
+##        crime_id = len(crimes)
+
+    id SERIAL,
+    police_code INT,
+    zipCode INT,
+    type_place TEXT,
+    broad_crime TEXT,
+    specific_crime TEXT,
+    city TEXT,
+    
+        crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13], 'type_place': row[15], 'broad_crime' : row[]}
         books.append(book)
         for author in authors_from_authors_string(row[2]):
             if author in authors:
