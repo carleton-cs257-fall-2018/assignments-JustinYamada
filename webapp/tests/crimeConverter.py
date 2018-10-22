@@ -33,70 +33,25 @@ def load_from_crime_csv_file(csv_file_name):
     '''
     csv_file = open(csv_file_name, encoding='utf-8')
     reader = csv.reader(csv_file)
-
-    authors = {}
+    
     crimes = []
-    books_authors = []
+    type_place_broad = []
+    type_place_specific = []
     for row in reader:
         assert len(row) == 26
-##        crime_id = len(crimes)
-
-    id SERIAL,
-    police_code INT,
-    zipCode INT,
-    type_place TEXT,
-    broad_crime TEXT,
-    specific_crime TEXT,
-    city TEXT,
-
-        crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13], 'type_place': row[15], 'broad_crime' : row[]}
-        books.append(book)
-        for author in authors_from_authors_string(row[2]):
-            if author in authors:
-                author_id = authors[author]
-            else:
-                author_id = len(authors)
-                authors[author] = author_id
-            books_authors.append({'book_id': book_id, 'author_id': author_id})
+    
+        type_place = row[15].split()
+        if !(type_place[0] in type_place_broad):
+            type_place_broad.append(type_place[0])
+            
+        if !(type_place[2] in type_place_specific):
+            type_place_specific.append(type_place[2])
+            
+        crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13], 'type_place_broad': type_place_broad.index(type_place[0]), 'type_place_specific' : type_place_specific.index(type_place[2]),'crime_category' : row[7], 'specific_crime' : row[8], 'city' : row[11]}
+        crimes.append(crime)
 
     csv_file.close()
-    return (books, authors, books_authors)
-
-def authors_from_authors_string(authors_string):
-    ''' Returns a list of authors based on an "authors string". Each author in
-        the returned list is represented as a 4-tuple:
-
-            (last_name, first_name, birth_year, death_year)
-
-        The "authors string" will have the form
-
-            FirstName LastName (BirthYear-DeathYear)
-
-        where DeathYear can be the empty string and FirstName can be multiple
-        names. The authors string can also have more than one author separated
-        by " and ":
-
-            FirstName LastName (BirthYear-DeathYear) and FirstName2 LastName2 (BirthYear2-DeathYear2)
-
-        Obviously, this is a hack job, and will break pathetically in all sorts
-        of situations (e.g. three authors using commas and only one " and ").
-        But it works for my toy example (which contains exactly one co-written book).
-    '''
-    authors = []
-    single_author_strings = authors_string.split(' and ')
-    for single_author_string in single_author_strings:
-        match = re.search(r'(.*) ([^ ]+) \(([0-9]+)-([0-9]*)\)', single_author_string)
-        if match:
-            first_name = match.group(1)
-            last_name = match.group(2)
-            birth_year = match.group(3)
-            death_year = match.group(4)
-            author = (last_name, first_name, birth_year, death_year)
-            authors.append(author)
-        else:
-            print('Badly formatted authors string: {0}'.format(authors_string), file=sys.stderr)
-
-    return authors
+    return (crimes, type_place_broad, type_place_specific)
 
 def save_crimes_table(crimes, csv_file_name):
     ''' Save the books in CSV form, with each row containing
