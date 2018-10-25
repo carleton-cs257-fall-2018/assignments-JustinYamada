@@ -1,106 +1,143 @@
-#!/usr/bin/env python3
-'''
-    example_flask_app.py
-    Jeff Ondich, 22 April 2016
-
-    A slightly more complicated Flask sample app than the
-    "hello world" app found at http://flask.pocoo.org/.
-'''
 import sys
+from flask import request
 import flask
 import json
+import config
+import psycopg2
+from config import password
+from config import database
+from config import user
+
+app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
 
-
-
-
-app = flask.Flask(__name__)
-
-def scanner(file):
-    '''parses the csv file and returns an array of csv rows'''
-    Data = []
-    with open(file, newline='') as f:
-        # reader takes in the csv file
-        reader = csv.reader(f)
-        # copies all the information from the csv file into a new list
-        for row in reader:
-            Data.append(row)
-    return Data
-
-crimesFile = scanner(crime_filename)
-crimeList = []
-dictionary = {}
-    for row in crimesFile:
-        dictionary = {'id': int(row[0]), 'police_code': int(row[1]), 'type_place_broad': int(row[2]), 'type_place_specific': int(row[3]), 'crime_category': row[4], 'specific_crime': row[5], 'city': row[6]}
-        crimeList.append(dictionary)
-
-placeBroadFile = scanner(placeBroad_filename)
-placeBroadList = []
-dictionary = {}
-    for row in crimesFile:
-        dictionary = {'id': int(row[0]), 'type_place_broad': row[1]}
-        placeBroadList.append(dictionary)
-
-placeSpecificFile = scanner(placeSpecific_filename)
-placeSpecificList = []
-dictionary = {}
-    for row in placeSpecificFile:
-        dictionary = {'id': int(row[0]), 'type_place_specific': row[1]}
-        placeSpecificList.append(dictionary)
-            
-@app.route('/crimes')
+@app.route('/')
 def hello():
-    print("hello")
+    print("Please enter a zipcode")
     return 'Hello, Welcome to the Crime database.'
 
-@app.route('/crimes/',methods=['GET'])
-    ast.literal_eval(request.args.get('zipcodes')),
+@app.route('/crimes/frequency/<word>')
+def frequency_crimes(word):
+    try:
+        frequencyDataMax = run.getFrequency(word)
+        return(json.dumps(frequencyDataMax))
+
+    except Exception as e:
+        print(e)
+    return("The frequency csv does not exist")
 
 
-@app.route('/crimes/frequency/max_frequency')
-    return ''
-@app.route('/crimes/frequency/min_frequency')
-    return ''
-@app.route('/actor/<last_name>')
+@app.route('/crimes/', methods=['GET'])
+def search_by_zipCode():
+    try:
 
-def get_actor(last_name):
-    ''' Returns the first matching actor, or an empty dictionary if there's no match. '''
-    actor_dictionary = {}
-    lower_last_name = last_name.lower()
-    for actor in actors:
-        if actor['last_name'].lower().startswith(lower_last_name):
-            actor_dictionary = actor
-            break
-    return json.dumps(actor_dictionary)\
+        crimeData = run.getCrimes(int(request.args.get('zipcode')))
+        crimeData += run.getCrimes(int(request.args.get('zipcode2')))
+        crimeData += run.getCrimes(int(request.args.get('zipcode3')))
+
+        crimeSorted = []
+        has_Been_Sorted = 0
+        if request.args.get('Residence') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 0:
+                    crimeSorted.append(crime)
+        if request.args.get('Street') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 1:
+                    crimeSorted.append(crime)
+        if request.args.get('Retail') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 2:
+                    crimeSorted.append(crime)
+        if has_Been_Sorted == 0:
+            return(json.dumps(crimeData))
+
+        return(json.dumps(crimeSorted))
+
+    except Exception as e:
+        print(e)
+    return("Incorrect url has been entered")
 
 
+class api:
 
+    def getConnection(self):
+        '''
+        Returns a connection to the database described
+        in the config module. Returns None if the
+        connection attempt fails.
+        '''
 
+        try:
+            self.connection = psycopg2.connect(database=config.database,
+                                          user=config.user,
+                                          password=config.password)
+        except Exception as e:
+            print(e, file=sys.stderr)
+            exit()
 
-@app.route('/movies')
-def get_movies():
-    ''' Returns the list of movies that match GET parameters:
-          start_year, int: reject any movie released earlier than this year
-          end_year, int: reject any movie released later than this year
-          genre: reject any movie whose genre does not match this genre exactly
-        If a GET parameter is absent, then any movie is treated as though
-        it meets the corresponding constraint. (That is, accept a movie unless
-        it is explicitly rejected by a GET parameter.)
-    '''
-    movie_list = []
-    genre = flask.request.args.get('genre')
-    start_year = flask.request.args.get('start_year', default=0, type=int)
-    end_year = flask.request.args.get('end_year', default=10000, type=int)
-    for movie in movies:
-        if genre is not None and genre != movie['genre']:
-            continue
-        if movie['year'] < start_year:
-            continue
-        if movie['year'] > end_year:
-            continue
-        movie_list.append(movie)
+    def get_select_query_results(connection, query, parameters=None):
+        '''
+        Executes the specified query with the specified tuple of
+        parameters. Returns a cursor for the query results.
+        Raises an exception if the query fails for any reason.
+        '''
+        cursor = connection.cursor()
+        if parameters is not None:
+            cursor.execute(query, parameters)
+        else:
+            cursor.execute(query)
+        return cursor
 
-    return json.dumps(movie_list)
+    def getCrimes(self, zipcode):
+        try:
+            cursor = self.connection.cursor()
+            query ='''
+            SELECT *
+            FROM crimes
+            WHERE zipcode = {}
+            '''.format(zipcode)
+
+            cursor.execute(query)
+
+            crimeData = []
+            for row in cursor:
+                crimeData.append(row)
+            return crimeData
+
+        except Exception as e:
+            print(e)
+            return None
+
+    def getFrequency(self, word):
+        try:
+            cursor = self.connection.cursor()
+            query ='''
+            SELECT *
+            FROM crimeFrequency
+            ORDER BY frequency
+            '''
+            if word == 'max':
+                query += 'DESC'
+            if word == 'min':
+                query += 'ASC'
+
+            cursor.execute(query)
+            frequencyData = []
+            for row in cursor:
+                frequencyData.append(row)
+
+            return frequencyData
+
+        except Exception as e:
+            print(e)
+            return ('The frequency code or word is not working')
+
+    def shutdown(self):
+        self.connection.close()
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
@@ -110,4 +147,7 @@ if __name__ == '__main__':
 
     host = sys.argv[1]
     port = int(sys.argv[2])
+    run = api()
+    run.getConnection()
     app.run(host=host, port=port, debug=True)
+    run.shutdown()
