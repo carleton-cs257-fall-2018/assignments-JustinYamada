@@ -35,7 +35,7 @@ def load_from_crime_csv_file(csv_file_name):
             continue
         #assert len(row) == 26
 
-        type_place = re.split(' - ', row[15])
+        type_place = re.split(' - | -', row[15])
         if  type_place[0] not in type_place_broad:
             type_place_broad.append(type_place[0])
 
