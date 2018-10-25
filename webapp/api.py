@@ -1,3 +1,12 @@
+'''
+    api.py
+    Justin Hahn, Justin Yamada 23 October 2018
+
+    API that takes in URL inputs and returns
+    crimes information dictionaries in response
+    to the searches.
+'''
+
 import sys
 from flask import request
 import flask
@@ -26,15 +35,15 @@ def frequency_crimes(word):
         print(e)
     return("The frequency csv does not exist")
 
-
 @app.route('/crimes/', methods=['GET'])
 def search_by_zipCode():
     try:
-
+        #request three zipcodes
         crimeData = run.getCrimes(int(request.args.get('zipcode')))
         crimeData += run.getCrimes(int(request.args.get('zipcode2')))
         crimeData += run.getCrimes(int(request.args.get('zipcode3')))
 
+        # sorts through all possibilities of location options
         crimeSorted = []
         has_Been_Sorted = 0
         if request.args.get('Residence') == 'true':
@@ -197,7 +206,7 @@ def search_by_zipCode():
             for crime in crimeData:
                 if int(crime[3]) == 31:
                     crimeSorted.append(crime)
-        if request.args.get('Pawn Shop') == 'true':
+        if request.args.get('Pawn_Shop') == 'true':
             has_Been_Sorted = 1
             for crime in crimeData:
                 if int(crime[3]) == 32:
@@ -243,6 +252,7 @@ def search_by_zipCode():
                 if int(crime[3]) == 40:
                     crimeSorted.append(crime)
 
+        # if none of the locations are selected all results from the zipcodes returned
         if has_Been_Sorted == 0:
             return(json.dumps(crimeData))
 
@@ -250,7 +260,7 @@ def search_by_zipCode():
 
     except Exception as e:
         print(e)
-    return("Incorrect url has been entered")
+    return("Incorrect url or location has been entered (Error, zipcode)")
 
 
 class api:
