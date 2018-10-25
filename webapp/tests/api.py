@@ -102,7 +102,6 @@ def search_by_zipCode():
             for crime in crimeData:
                 if int(crime[3]) == 12:
                     crimeSorted.append(crime)
-
         if request.args.get('Hotel_Motel_Etc.') == 'true':
             has_Been_Sorted = 1
             for crime in crimeData:
