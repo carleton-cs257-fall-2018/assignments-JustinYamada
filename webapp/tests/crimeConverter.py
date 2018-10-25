@@ -3,6 +3,7 @@
     books_and_authors_converter.py
     Jeff Ondich, 24 April 2017
     Updated 20 April 2018
+    Modified by Justin Hahn and Justin Yamada
 
     Sample code illustrating a simple conversion of the
     books & authors dataset represented as in books_and_authors.csv,
@@ -20,20 +21,10 @@ import re
 import csv
 
 def load_from_crime_csv_file(csv_file_name):
-    ''' Collect all the data from my sample books_and_authors.csv file,
-        assembling it into a list of books, a dictionary of authors,
-        and a list of book/author ID links. Rather than fully
-        documenting the data structures built in this function and
-        used in the later functions, I'm going to let you play around
-        with it. I recommend just sticking some print statements
-        in various places (or set some breakpoints if you use an IDE
-        for Python, like PyCharm). You might find it interesting to
-        figure out why I needed to use a dictionary for authors, but not
-        for books.
-    '''
+
     csv_file = open(csv_file_name, encoding='utf-8')
     reader = csv.reader(csv_file)
-    
+
     crimes = []
     type_place_broad = []
     type_place_specific = []
@@ -42,17 +33,25 @@ def load_from_crime_csv_file(csv_file_name):
         if FirstRowSkip == True:
             FirstRowSkip = False
             continue
-        assert len(row) == 26
-    
+        #assert len(row) == 26
+
         type_place = re.split(' - ', row[15])
-        print(type_place)
         if  type_place[0] not in type_place_broad:
             type_place_broad.append(type_place[0])
-            
-        if type_place[1] not in type_place_specific:
+
+        if len(type_place) == 2 and type_place[1] not in type_place_specific:
             type_place_specific.append(type_place[1])
-            
-        crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13], 'type_place_broad': type_place_broad.index(type_place[0]), 'type_place_specific' : type_place_specific.index(type_place[1]), 'crime_category' : row[7], 'specific_crime' : row[8], 'city' : row[11]}
+
+        if len(type_place) == 2:
+            crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13],
+                     'type_place_broad': type_place_broad.index(type_place[0]),
+                     'type_place_specific': type_place_specific.index(type_place[1]),
+                     'crime_category': row[7], 'specific_crime': row[8], 'city': row[11]}
+        else:
+            crime = {'id': row[0], 'police_code': row[1], 'zipCode': row[13],
+                     'type_place_broad': type_place_broad.index(type_place[0]),
+                     'type_place_specific': 'NULL',
+                     'crime_category': row[7], 'specific_crime': row[8], 'city': row[11]}
         crimes.append(crime)
 
     csv_file.close()
@@ -70,8 +69,8 @@ def save_crimes_table(crimes, csv_file_name):
     output_file.close()
 
 def save_type_place_table(type_place, csv_file_name):
-    ''' Save the books in CSV form, with each row containing
-        (id, last name, first name, birth year, death year), where
+    ''' Save the types of places in CSV form, with each row containing
+        (id, police code, zip code, type place broad, death year), where
         death year can be NULL. '''
     output_file = open(csv_file_name, 'w', encoding='utf-8')
     writer = csv.writer(output_file)
@@ -81,7 +80,7 @@ def save_type_place_table(type_place, csv_file_name):
     output_file.close()
 
 if __name__ == '__main__':
-    crimes, type_place_broad, type_place_specific = load_from_crime_csv_file('Crimetest.csv')
+    crimes, type_place_broad, type_place_specific = load_from_crime_csv_file('Crime.csv')
 
     save_crimes_table(crimes, 'crimes.csv')
     save_type_place_table(type_place_broad, 'type_place_broad.csv')
