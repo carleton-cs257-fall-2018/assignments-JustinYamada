@@ -42,16 +42,208 @@ def search_by_zipCode():
             for crime in crimeData:
                 if int(crime[3]) == 0:
                     crimeSorted.append(crime)
-        if request.args.get('Street') == 'true':
+        if request.args.get('Retail') == 'true':
             has_Been_Sorted = 1
             for crime in crimeData:
                 if int(crime[3]) == 1:
                     crimeSorted.append(crime)
-        if request.args.get('Retail') == 'true':
+        if request.args.get('Convenience_Store') == 'true':
             has_Been_Sorted = 1
             for crime in crimeData:
                 if int(crime[3]) == 2:
                     crimeSorted.append(crime)
+        if request.args.get('Parking_Lot') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 3:
+                    crimeSorted.append(crime)
+        if request.args.get('Street') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 4:
+                    crimeSorted.append(crime)
+        if request.args.get('Parking_Garage') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 5:
+                    crimeSorted.append(crime)
+        if request.args.get('Park') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 6:
+                    crimeSorted.append(crime)
+        if request.args.get('Government_Building') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 7:
+                    crimeSorted.append(crime)
+        if request.args.get('School_College') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 8:
+                    crimeSorted.append(crime)
+        if request.args.get('Other_Unknown') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 9:
+                    crimeSorted.append(crime)
+        if request.args.get('Hospital_Emerygency_Care_Center') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 10:
+                    crimeSorted.append(crime)
+        if request.args.get('Jail_Prison') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 11:
+                    crimeSorted.append(crime)
+        if request.args.get('Air_Bus_Train_Metro_Terminal') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 12:
+                    crimeSorted.append(crime)
+
+        if request.args.get('Hotel_Motel_Etc.') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 13:
+                    crimeSorted.append(crime)
+        if request.args.get('Lake_Waterway') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 14:
+                    crimeSorted.append(crime)
+        if request.args.get('Grocery_Supermaket') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 15:
+                    crimeSorted.append(crime)
+        if request.args.get('Liquor_Store') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 16:
+                    crimeSorted.append(crime)
+        if request.args.get('Bar_Night_Club') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 17:
+                    crimeSorted.append(crime)
+        if request.args.get('Bank') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 18:
+                    crimeSorted.append(crime)
+        if request.args.get('Resturant') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 19:
+                    crimeSorted.append(crime)
+        if request.args.get('Gas_Station') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 20:
+                    crimeSorted.append(crime)
+        if request.args.get('Auto_Repair') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 21:
+                    crimeSorted.append(crime)
+        if request.args.get('Theater') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 22:
+                    crimeSorted.append(crime)
+        if request.args.get('Construction_Site') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 23:
+                    crimeSorted.append(crime)
+        if request.args.get('Wooded_Area') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 24:
+                    crimeSorted.append(crime)
+        if request.args.get('Recreation_Center') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 25:
+                    crimeSorted.append(crime)
+        if request.args.get('Commercial') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 26:
+                    crimeSorted.append(crime)
+        if request.args.get('Bank_S&L_Credit_Union') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 27:
+                    crimeSorted.append(crime)
+        if request.args.get('Doctor_Dentist_Vet_Office') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 28:
+                    crimeSorted.append(crime)
+        if request.args.get('Laundromat') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 29:
+                    crimeSorted.append(crime)
+        if request.args.get('Auto_Dealership') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 30:
+                    crimeSorted.append(crime)
+        if request.args.get('Pool') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 31:
+                    crimeSorted.append(crime)
+        if request.args.get('Pawn Shop') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 32:
+                    crimeSorted.append(crime)
+        if request.args.get('Field_Open_Space') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 33:
+                    crimeSorted.append(crime)
+        if request.args.get('Check_Cashing_Est.') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 34:
+                    crimeSorted.append(crime)
+        if request.args.get('Rental_Storage_Facility') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 35:
+                    crimeSorted.append(crime)
+        if request.args.get('Library') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 36:
+                    crimeSorted.append(crime)
+        if request.args.get('Pedestrian_Tunnel') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 37:
+                    crimeSorted.append(crime)
+        if request.args.get('Church_Synagogue_Temple') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 38:
+                    crimeSorted.append(crime)
+        if request.args.get('Golf_Course') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 39:
+                    crimeSorted.append(crime)
+        if request.args.get('Nursery') == 'true':
+            has_Been_Sorted = 1
+            for crime in crimeData:
+                if int(crime[3]) == 40:
+                    crimeSorted.append(crime)
+
         if has_Been_Sorted == 0:
             return(json.dumps(crimeData))
 
