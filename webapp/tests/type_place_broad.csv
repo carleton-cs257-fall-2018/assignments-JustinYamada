@@ -1,3 +1,43 @@
-0,Residence
-1,Street
+0,Place
+1,Residence
 2,Retail
+3,Convenience Store
+4,Parking Lot
+5,Street
+6,Parking Garage
+7,Park
+8,Government Building
+9,School/College
+10,Other/Unknown
+11,Residence -Townhouse/Duplex
+12,Hospital/Emergency Care Center
+13,Jail/Prison
+14,Air/Bus/Train/Metro Terminal
+15,Hotel/Motel/Etc.
+16,Lake/Waterway
+17,Grocery/Supermarket
+18,Liquor Store
+19,Bar/Night Club
+20,Bank
+21,Restaurant
+22,Gas Station
+23,Auto Repair
+24,Theater
+25,Construction Site
+26,Wooded Area
+27,Recreation Center
+28,Commercial
+29,Bank/S&L/Credit Union
+30,Doctor/Dentist/Vet Office
+31,Laundromat
+32,Auto Dealership
+33,Pool
+34,Pawn Shop
+35,Field/ Open Space
+36,Check Cashing Est.
+37,Rental Storage Facility
+38,Library
+39,Pedestrian Tunnel
+40,Church/Synagogue/Temple
+41,Golf Course
+42,Nursery
