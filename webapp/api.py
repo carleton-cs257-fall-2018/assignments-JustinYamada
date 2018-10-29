@@ -19,7 +19,6 @@ from config import user
 
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
-
 @app.route('/')
 def hello():
     print("Please enter a zipcode")

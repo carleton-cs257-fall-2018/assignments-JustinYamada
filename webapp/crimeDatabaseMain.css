@@ -1,0 +1,79 @@
+.centerImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    max-width: 100%;
+    height:auto;
+}
+
+h1 {
+  color: #f;
+  font-weight: bold;
+}
+
+[btn-group] {
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+
+/* taken from https://codepen.io/Manitoba/pen/MyRwVy */
+[btn-group]:before {
+	content:attr(data-grouptype);
+	color:#999;
+	display:block;
+	font-size:1em;
+	width:30px;
+	height:30px;
+	padding:5px;
+	border-radius:50%;
+	background:#FFF;
+	position:absolute;
+	left:50.5%;
+	top:6px;
+	margin-left:-18px;
+	line-height:19px;
+}
+
+[btn-group] > a + a {
+	margin-left:5px;
+}
+
+[btn-group] > a {
+	display:inline-block;
+	padding:6px 14px;
+	background:#F2F2F2;
+	border-radius:3px;
+	font-size:1em;
+	color:#B9BCBC;
+	transition:background .3s ease, color .3s ease;
+	text-decoration:none;
+	transition:color .3s ease;
+	padding:12px 28px;
+	text-transform:uppercase;
+}
+
+[btn-group] > a:nth-of-type(1) {
+	background:#A1D36E;
+	color:#FFF;
+}
+
+[btn-group] > a:nth-of-type(1):hover {
+	background:#94CD5A;
+}
+
+[btn-group] > a:nth-of-type(2) {
+	background:#6AD1DD;
+	color:#FFF;
+}
+
+[btn-group] > a:nth-of-type(2):hover {
+	background:#55CBD8;
+}
