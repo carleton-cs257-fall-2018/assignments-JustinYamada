@@ -12,6 +12,7 @@ h1 {
   font-weight: bold;
 }
 
+/* taken from https://codepen.io/Manitoba/pen/MyRwVy */
 [btn-group] {
   position: relative;
   top: 0;
@@ -23,8 +24,6 @@ h1 {
   align-items: flex-end;
 }
 
-
-/* taken from https://codepen.io/Manitoba/pen/MyRwVy */
 [btn-group]:before {
 	content:attr(data-grouptype);
 	color:#999;
@@ -36,7 +35,7 @@ h1 {
 	border-radius:50%;
 	background:#FFF;
 	position:absolute;
-	left:50.5%;
+	left:51%;
 	top:6px;
 	margin-left:-18px;
 	line-height:19px;

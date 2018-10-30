@@ -19,10 +19,10 @@ from config import user
 
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
-@app.route('/')
-def hello():
-    print("Please enter a zipcode")
-    return 'Hello, Welcome to the Crime database.'
+@app.after_request
+def set_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 @app.route('/crimes/frequency/<word>')
 def frequency_crimes(word):

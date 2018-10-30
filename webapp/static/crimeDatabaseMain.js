@@ -1,20 +1,28 @@
 initialize();
 
 function initialize() {
+    console.log('HelloMy NAme');
     var element = document.getElementById('crimes_button');
+    console.log('HelloMy NAme2');
     if (element) {
+        console.log('HelloMy NAme3');
         element.onclick = onCrimesButtonClicked;
+        console.log('HelloMy NAme4');
     }
 }
 
+
 function getBaseURL() {
     var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
+    console.log(baseURL);
     return baseURL;
 }
 
-
 function onCrimesButtonClicked() {
-    var url = getBaseURL();
+    console.log('HelloMy NAme');
+
+    var url = getBaseURL() + '/crimes';
+    console.log(url);
 
     // Send the request to the Books API /authors/ endpoint
     fetch(url, {method: 'get'})
@@ -31,16 +39,16 @@ function onCrimesButtonClicked() {
         for (var k = 0; k < crimesList.length; k++) {
             tableBody += '<tr>';
 
-            tableBody += '<td><a onclick="getCrimes(' + crimesList[k]['id'] + ",'"
-                            + crimesList[k]['police_code'] + ' ' + crimesList[k]['zipCode'] + "')\">"
-                            + crimesList[k]['type_place_broad'] + ', '
-                            + crimesList[k]['first_name'] + '</a></td>';
+            tableBody += '<td>' + crimesList[k]['id'] + '</td>';
+            tableBody += '<td>' + crimesList[k]['police_code'] + '</td>';
+            tableBody += '<td>' + crimesList[k]['zipcode'] + '</td>';
+            tableBody += '<td>' + crimesList[k]['type_place_broad'] + '</td>';
+            tableBody += '<td>' + crimesList[k]['type_place_specific'] + '</td>';
+            tableBody += '<td>' + crimesList[k]['crime_category'] + '</td>';
+            tableBody += '<td>' + crimesList[k]['specific_crime'] + '</td>';
+            tableBody += '<td>' + crimesList[k]['city'] + '</td>';
 
-            tableBody += '<td>' + authorsList[k]['birth_year'] + '-';
-            if (crimesList[k]['death_year'] != 0) {
-                tableBody += authorsList[k]['death_year'];
-            }
-            tableBody += '</td>';
+
             tableBody += '</tr>';
         }
 
@@ -55,24 +63,4 @@ function onCrimesButtonClicked() {
     .catch(function(error) {
         console.log(error);
     });
-}
-
-
-
-// Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript
-$(document).ready(function () {
-    $('#advancedOptions').hide();
-    $('.advanced').click(function() {
-        if ($('#advancedOptions').is(':hidden')) {
-             $('#advancedOptions').slideDown();
-        } else {
-             $('#advancedOptions').slideUp();
-        }
-    });
-});
-
-
-
-$(document).ready(funciton()) {
-  $.ajax
 }

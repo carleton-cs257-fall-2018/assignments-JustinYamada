@@ -14,7 +14,7 @@ import flask
 
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
-@app.route('/') 
+@app.route('/crimes')
 def get_main_page():
     ''' This is the only route intended for human users '''
     global api_port
@@ -29,4 +29,3 @@ if __name__ == '__main__':
     port = sys.argv[2]
     api_port = sys.argv[3]
     app.run(host=host, port=port)
-

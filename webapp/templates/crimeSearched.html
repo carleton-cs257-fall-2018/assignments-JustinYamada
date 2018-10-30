@@ -9,7 +9,7 @@
         <title>Crime Database</title>
 
         <!-- Load CSS files -->
-        <link rel="stylesheet" type="text/css" href="crimeDatabaseMain.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='crimeDatabaseMain.css') }}">
         <link rel="stylesheet" type="text/css" href="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.css">
         <!-- Load icon library -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,19 +17,34 @@
         <!-- Load JQuery and Javascript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.js"></script>
-        <script src="crimeDatabaseMain.js"></script>
-
-
+        <script src="{{ url_for('static', filename='crimeDatabaseMain.js') }}"></script>
     </head>
+
     <body>
-        <h1>Crime Database of Montgomery County, Maryland</h1>
+        <h1>Crime Database of Montgomery County, Maryland WOOHOO</h1>
 
+        <form class="Enter Zipcodes" action="crimes">
+          <input type="text" placeholder="Search Zipcode" name="zipcode">
+          <input type="text" placeholder="Search Zipcode" name="zipcode2">
+          <input type="text" placeholder="Search Zipcode" name="zipcode3">
+          <button id="crime_button" type="submit"><i class="fa fa-search"></i></button>
 
-        <form class="Enter Zipcodes" action="crimes/">
-          <input type="text" placeholder="Search Zipcode" name="zipcode1">
-          <button type="submit"><i class="fa fa-search"></i></button>
           <button type="button" onclick="location.href='crimeDatabaseMain2.html'">Add a Zipcode</button>
           <br>
+
+          <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
+          <script type='text/javascript'>
+              $(document).ready(function () {
+                  $('#advancedOptions').hide();
+                  $('.advanced').click(function() {
+                      if ($('#advancedOptions').is(':hidden')) {
+                           $('#advancedOptions').slideDown();
+                      } else {
+                           $('#advancedOptions').slideUp();
+                      }
+                  });
+              });
+          </script>
 
           <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
           <a href='#advancedOptions' class='advanced'>Advanced Options</a>
@@ -78,21 +93,15 @@
         </form>
 
 
-        <img src="https://1.bp.blogspot.com/-dPh9i9qsvos/WkMmnJvSN8I/AAAAAAABDxY/y9VkTZwTqwk_2RquF4J-uVV1bEszyYyHwCLcBGAs/s1600/map01.jpg"
-          alt="Map of Montgomery County, Maryland" width="1311" height="783" class="centerImage">
-        <br>
+        <p><button id="crimes_button">Get authors</button></p>
 
-
-        <p><button id="crimes_button">Get crimes</button></p>
+        <p><table id="results_table"></table></p>
 
         <!-- Taken from https://codepen.io/Manitoba/pen/MyRwVy -->
         <div btn-group data-grouptype="OR">
-          <a href="frequency.html">Frequency</a>
-          <a href="crimeDatabaseMain.html">Zipcodes</a>
+          <a href="crimes/frequency/max">Frequency</a>
+          <a href="/">Zipcodes</a>
         </div>
-
-
-
 
 
 

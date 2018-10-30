@@ -7,27 +7,90 @@
 
     <head>
         <title>Crime Database</title>
+
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='crimeDatabaseMain.css') }}">
+        <script>var api_port = {{ api_port }};</script>
+        <script src="{{ url_for('static', filename='crimeDatabaseMain.js') }}"></script>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+
         <link rel="stylesheet" type="text/css" href="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.css">
-        <link rel="stylesheet" type="text/css" href="crimeDatabaseMain.css">
+
+
         <!-- Load icon library -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Load JQuery and Javascript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.js"></script>
-        <!-- <script src="js/range.js"></script> -->
-        <script src="crimeDatabaseMain.js"></script>
+
+
+
+
     </head>
     <body>
         <h1>Crime Database of Montgomery County, Maryland</h1>
 
+        <script type='text/javascript'>
+          $(document).ready(function () {
+              $('#zipcode2').hide();
+              $('.zipcode2').click(function() {
+                  if ($('#zipcode2').is(':hidden')) {
+                       $('#zipcode2').slideDown();
+                  } else {
+                       $('#zipcode2').slideUp();
+                  }
+              });
+          });
+        </script>
 
-        <form class="Enter Zipcodes" action="crime/">
+        <script type='text/javascript'>
+            $(document).ready(function () {
+                $('#zipcode3').hide();
+                $('.zipcode3').click(function() {
+                    if ($('#zipcode3').is(':hidden')) {
+                         $('#zipcode3').slideDown();
+                    } else {
+                         $('#zipcode3').slideUp();
+                    }
+                });
+            });
+        </script>
+
+        <form class="Enter Zipcodes" action="crimes">
+
+
           <input type="text" placeholder="Search Zipcode" name="zipcode">
-          <input type="text" placeholder="Search Zipcode" name="zipcode2">
+
+          <button type="button" href='#zipcode2' class='zipcode2'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            <div id='zipcode2'>
+              <input type="text"  placeholder="Search Zipcode" value="00000" name="zipcode2">
+            </div>
+
+          <button type="button" href='#zipcode3' class='zipcode3'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            <div id='zipcode3'>
+              <input type="text"  placeholder="Search Zipcode" value="00000" name="zipcode3">
+            </div>
+
+
           <button type="submit"><i class="fa fa-search"></i></button>
-          <button type="button" onclick="location.href='crimeDatabaseMain.html'">Remove a Zipcode</button>
-          <button type="button" onclick="location.href='crimeDatabaseMain3.html'">Add a Zipcode</button>
           <br>
 
+
+          <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
+          <script type='text/javascript'>
+              $(document).ready(function () {
+                  $('#advancedOptions').hide();
+                  $('.advanced').click(function() {
+                      if ($('#advancedOptions').is(':hidden')) {
+                           $('#advancedOptions').slideDown();
+                      } else {
+                           $('#advancedOptions').slideUp();
+                      }
+                  });
+              });
+          </script>
+
+          <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
           <a href='#advancedOptions' class='advanced'>Advanced Options</a>
           <div id='advancedOptions'>
             <input type="checkbox" name="Air_Bus_Train_Metro_Terminal" value="true"> Air/Bus/Train/Metro Terminal
@@ -73,28 +136,24 @@
           </div>
         </form>
 
-        <script type='text/javascript'>
-            $(document).ready(function () {
-                $('#advancedOptions').hide();
-                $('.advanced').click(function() {
-                    if ($('#advancedOptions').is(':hidden')) {
-                         $('#advancedOptions').slideDown();
-                    } else {
-                         $('#advancedOptions').slideUp();
-                    }
-                });
-            });
-        </script>
+
+
+        <p><button id='crimes_button'>Get crimes</button></p>
+
+        <p><table id='results_table'></table></p>
 
 
 
+        <!-- Taken from https://codepen.io/Manitoba/pen/MyRwVy -->
         <div btn-group data-grouptype="OR">
-          <a href="frequency.html">Frequency</a>
-          <a href="crimeDatabaseMain.html">Zipcodes</a>
+          <a href="crimes/frequency/max">Frequency</a>
+          <a href="crimes">Zipcodes</a>
         </div>
-
+        <br>
         <img src="https://1.bp.blogspot.com/-dPh9i9qsvos/WkMmnJvSN8I/AAAAAAABDxY/y9VkTZwTqwk_2RquF4J-uVV1bEszyYyHwCLcBGAs/s1600/map01.jpg"
-          alt="Map of Montgomery County, Maryland" width="1311" height="783">
+          alt="Map of Montgomery County, Maryland" width="1311" height="783" class="centerImage">
+
+
 
 
 
