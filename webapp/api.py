@@ -39,8 +39,8 @@ def search_by_zipCode():
     try:
         #request three zipcodes
         crimeData = run.getCrimes(int(request.args.get('zipcode')))
-        crimeData += run.getCrimes(int(request.args.get('zipcode2')))
-        crimeData += run.getCrimes(int(request.args.get('zipcode3')))
+        # crimeData += run.getCrimes(int(request.args.get('zipcode2')))
+        # crimeData += run.getCrimes(int(request.args.get('zipcode3')))
 
         # sorts through all possibilities of location options
         crimeSorted = []

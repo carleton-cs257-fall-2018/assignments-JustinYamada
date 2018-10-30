@@ -21,6 +21,11 @@ function getBaseURL() {
 function onCrimesButtonClicked() {
     console.log('HelloMy NAme6');
     var url = getBaseURL() + '/crimes';
+    var zipcodeElement = document.getElementById('zipcode');
+    if (zipcodeElement) {
+      url += '?zipcode=' + zipcodeElement.value;
+    }
+
     // console.log(url);
 
     // Send the request to the Books API /authors/ endpoint
@@ -38,17 +43,18 @@ function onCrimesButtonClicked() {
     // an HTML table displaying the author names and lifespan.
     .then(function(crimesList) {
         // Build the table body.
-        var tableBody = '';
+        var tableBody = '<tr><th>' + zipcodeElement.value + '</th></tr>';
         for (var k = 0; k < crimesList.length; k++) {
+            console.log(crimesList[k] );
             tableBody += '<tr>';
-            tableBody += '<td>' + crimesList[k]['id'] + '</td>';
-            tableBody += '<td>' + crimesList[k]['police_code'] + '</td>';
-            tableBody += '<td>' + crimesList[k]['zipcode'] + '</td>';
-            tableBody += '<td>' + crimesList[k]['type_place_broad'] + '</td>';
-            tableBody += '<td>' + crimesList[k]['type_place_specific'] + '</td>';
-            tableBody += '<td>' + crimesList[k]['crime_category'] + '</td>';
-            tableBody += '<td>' + crimesList[k]['specific_crime'] + '</td>';
-            tableBody += '<td>' + crimesList[k]['city'] + '</td>';
+            tableBody += '<td>' + crimesList[k][0] + '</td>';
+            tableBody += '<td>' + crimesList[k][1] + '</td>';
+            tableBody += '<td>' + crimesList[k][2] + '</td>';
+            tableBody += '<td>' + crimesList[k][3] + '</td>';
+            tableBody += '<td>' + crimesList[k][4] + '</td>';
+            tableBody += '<td>' + crimesList[k][5] + '</td>';
+            tableBody += '<td>' + crimesList[k][6] + '</td>';
+            tableBody += '<td>' + crimesList[k][7] + '</td>';
             tableBody += '</tr>';
         }
 

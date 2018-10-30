@@ -18,30 +18,31 @@
     </head>
     <body>
         <h1>Crime Database of Montgomery County, Maryland</h1>
-        <p><button id="crimes_button">Get crimes</button></p>
-
-        <p><table id="results_table"></table></p>
-
-        <form class="Enter Zipcodes" action="crimes">
 
 
-          <input type="text" placeholder="Search Zipcode" name="zipcode">
+        <!-- <form class="Enter Zipcodes" action="crimes"> -->
+
+
+          <input type="text" id="zipcode" placeholder="Search Zipcode" name="zipcode">
+
+          <p><table id="results_table"></table></p>
+
 
           <button type="button" href='#zipcode2' class='zipcode2'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
             <div id='zipcode2'>
               <input type="text"  placeholder="Search Zipcode" value="00000" name="zipcode2">
             </div>
 
-          <button type="button" href='#zipcode3' class='zipcode3'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+          <button type="button" href='#zipcode3'  class='zipcode3'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
             <div id='zipcode3'>
               <input type="text"  placeholder="Search Zipcode" value="00000" name="zipcode3">
             </div>
 
 
-          <button type="submit"><i class="fa fa-search"></i></button>
+          <button id='crimes_button' type="button">Get Crimes</button>
           <br>
 
-
+          <!-- <i class="fa fa-search"></i> -->
 
 
           <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
@@ -88,7 +89,7 @@
             <input type="checkbox" name="Wooded_Area" value="true"> Wooded Area
             <input type="checkbox" name="Other_Unknown" value="true"> Other Unknown <br>
           </div>
-        </form>
+        <!-- </form> -->
 
 
 
