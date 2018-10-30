@@ -24,19 +24,21 @@ function onCrimesButtonClicked() {
     // console.log(url);
 
     // Send the request to the Books API /authors/ endpoint
+    console.log(fetch(url, {method: 'GET'}))
     fetch(url, {method: 'get'})
     // When the results come back, transform them from JSON string into
     // a Javascript object (in this case, a list of author dictionaries).
 
     .then((response) => response.json())
     // .then(response => response.text())          // convert to plain text
+    // console.log(response)
     // .then(text => console.log(text))
 
     // Once you have your list of author dictionaries, use it to build
     // an HTML table displaying the author names and lifespan.
     .then(function(crimesList) {
         // Build the table body.
-        var tableBody = '<tr><th>' + crimes + '</th></tr>';
+        var tableBody = '';
         for (var k = 0; k < crimesList.length; k++) {
             tableBody += '<tr>';
             tableBody += '<td>' + crimesList[k]['id'] + '</td>';
