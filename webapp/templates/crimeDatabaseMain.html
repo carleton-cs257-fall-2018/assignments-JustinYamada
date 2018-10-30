@@ -4,7 +4,6 @@
 <html>
 
 
-
     <head>
         <title>Crime Database</title>
 
@@ -17,44 +16,13 @@
         <link rel="stylesheet" type="text/css" href="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.css">
 
 
-        <!-- Load icon library -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- Load JQuery and Javascript -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.js"></script>
-
-
-
 
     </head>
     <body>
         <h1>Crime Database of Montgomery County, Maryland</h1>
+        <p><button id="crimes_button">Get crimes</button></p>
 
-        <script type='text/javascript'>
-          $(document).ready(function () {
-              $('#zipcode2').hide();
-              $('.zipcode2').click(function() {
-                  if ($('#zipcode2').is(':hidden')) {
-                       $('#zipcode2').slideDown();
-                  } else {
-                       $('#zipcode2').slideUp();
-                  }
-              });
-          });
-        </script>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-                $('#zipcode3').hide();
-                $('.zipcode3').click(function() {
-                    if ($('#zipcode3').is(':hidden')) {
-                         $('#zipcode3').slideDown();
-                    } else {
-                         $('#zipcode3').slideUp();
-                    }
-                });
-            });
-        </script>
+        <p><table id="results_table"></table></p>
 
         <form class="Enter Zipcodes" action="crimes">
 
@@ -76,19 +44,7 @@
           <br>
 
 
-          <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
-          <script type='text/javascript'>
-              $(document).ready(function () {
-                  $('#advancedOptions').hide();
-                  $('.advanced').click(function() {
-                      if ($('#advancedOptions').is(':hidden')) {
-                           $('#advancedOptions').slideDown();
-                      } else {
-                           $('#advancedOptions').slideUp();
-                      }
-                  });
-              });
-          </script>
+
 
           <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
           <a href='#advancedOptions' class='advanced'>Advanced Options</a>
@@ -138,9 +94,7 @@
 
 
 
-        <p><button id='crimes_button'>Get crimes</button></p>
 
-        <p><table id='results_table'></table></p>
 
 
 
@@ -159,7 +113,52 @@
 
 
 
+        <!-- Load icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Load JQuery and Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.js"></script>
 
+        <script type='text/javascript'>
+          $(document).ready(function () {
+              $('#zipcode2').hide();
+              $('.zipcode2').click(function() {
+                  if ($('#zipcode2').is(':hidden')) {
+                       $('#zipcode2').slideDown();
+                  } else {
+                       $('#zipcode2').slideUp();
+                  }
+              });
+          });
+        </script>
 
+        <script type='text/javascript'>
+            $(document).ready(function () {
+                $('#zipcode3').hide();
+                $('.zipcode3').click(function() {
+                    if ($('#zipcode3').is(':hidden')) {
+                         $('#zipcode3').slideDown();
+                    } else {
+                         $('#zipcode3').slideUp();
+                    }
+                });
+            });
+        </script>
+
+        <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
+        <script type='text/javascript'>
+            $(document).ready(function () {
+                $('#advancedOptions').hide();
+                $('.advanced').click(function() {
+                    if ($('#advancedOptions').is(':hidden')) {
+                         $('#advancedOptions').slideDown();
+                    } else {
+                         $('#advancedOptions').slideUp();
+                    }
+                });
+            });
+        </script>
+
+        
     </body>
 </html>
