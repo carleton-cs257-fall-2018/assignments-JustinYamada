@@ -9,8 +9,6 @@
 
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='crimeDatabaseMain.css') }}">
-        <script>var api_port = {{ api_port }};</script>
-        <script src="{{ url_for('static', filename='crimeDatabaseMain.js') }}"></script>
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 
         <link rel="stylesheet" type="text/css" href="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.css">
@@ -118,6 +116,8 @@
         <!-- Load JQuery and Javascript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.js"></script>
+        <script>var api_port = {{ api_port }};</script>
+        <script src="{{ url_for('static', filename='crimeDatabaseMain.js') }}"></script>
 
         <script type='text/javascript'>
           $(document).ready(function () {
@@ -159,6 +159,6 @@
             });
         </script>
 
-        
+
     </body>
 </html>

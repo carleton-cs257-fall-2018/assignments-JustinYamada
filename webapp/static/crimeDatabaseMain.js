@@ -19,26 +19,26 @@ function getBaseURL() {
 }
 
 function onCrimesButtonClicked() {
-    console.log('HelloMy NAme');
-
+    console.log('HelloMy NAme6');
     var url = getBaseURL() + '/crimes';
-    console.log(url);
+    // console.log(url);
 
     // Send the request to the Books API /authors/ endpoint
     fetch(url, {method: 'get'})
-
     // When the results come back, transform them from JSON string into
     // a Javascript object (in this case, a list of author dictionaries).
+
     .then((response) => response.json())
+    // .then(response => response.text())          // convert to plain text
+    // .then(text => console.log(text))
 
     // Once you have your list of author dictionaries, use it to build
     // an HTML table displaying the author names and lifespan.
     .then(function(crimesList) {
         // Build the table body.
-        var tableBody = '';
+        var tableBody = '<tr><th>' + crimes + '</th></tr>';
         for (var k = 0; k < crimesList.length; k++) {
             tableBody += '<tr>';
-
             tableBody += '<td>' + crimesList[k]['id'] + '</td>';
             tableBody += '<td>' + crimesList[k]['police_code'] + '</td>';
             tableBody += '<td>' + crimesList[k]['zipcode'] + '</td>';
@@ -47,8 +47,6 @@ function onCrimesButtonClicked() {
             tableBody += '<td>' + crimesList[k]['crime_category'] + '</td>';
             tableBody += '<td>' + crimesList[k]['specific_crime'] + '</td>';
             tableBody += '<td>' + crimesList[k]['city'] + '</td>';
-
-
             tableBody += '</tr>';
         }
 

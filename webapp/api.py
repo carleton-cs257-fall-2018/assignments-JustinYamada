@@ -34,7 +34,7 @@ def frequency_crimes(word):
         print(e)
     return("The frequency csv does not exist")
 
-@app.route('/crimes/', methods=['GET'])
+@app.route('/crimes', methods=['GET'])
 def search_by_zipCode():
     try:
         #request three zipcodes
