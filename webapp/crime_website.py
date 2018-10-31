@@ -17,8 +17,15 @@ app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 @app.route('/crimes')
 def get_main_page():
     ''' This is the only route intended for human users '''
+    pageid = page_id
     global api_port
     return flask.render_template('crimeDatabaseMain.html', api_port=api_port)
+
+@app.route('/crimes/frequency/max')
+def get_frequency_max_page():
+    ''' This is the only route intended for human users '''
+    global api_port
+    return flask.render_template('frequency.html', api_port=api_port)
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:

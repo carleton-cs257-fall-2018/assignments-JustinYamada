@@ -10,9 +10,9 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='crimeDatabaseMain.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
-
         <link rel="stylesheet" type="text/css" href="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.css">
-
+        <!-- Load icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     </head>
@@ -39,10 +39,10 @@
             </div>
 
 
-          <button id='crimes_button' type="button">Get Crimes</button>
+          <button id='crimes_button' type="button"><i class="fa fa-search"></i></button>
           <br>
 
-          <!-- <i class="fa fa-search"></i> -->
+
 
 
           <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
@@ -108,12 +108,6 @@
 
 
 
-
-
-
-
-        <!-- Load icon library -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Load JQuery and Javascript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.js"></script>

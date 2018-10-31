@@ -22,8 +22,16 @@ function onCrimesButtonClicked() {
     console.log('HelloMy NAme6');
     var url = getBaseURL() + '/crimes';
     var zipcodeElement = document.getElementById('zipcode');
+    var zipcodeElement2 = document.getElementById('zipcode2');
+    var zipcodeElement3 = document.getElementById('zipcode3');
     if (zipcodeElement) {
       url += '?zipcode=' + zipcodeElement.value;
+    }
+    if (zipcodeElement2) {
+      url += '&zipcode2=' + zipcodeElement2.value;
+    }
+    if (zipcodeElement3) {
+      url += '&zipcode3=' + zipcodeElement3.value;
     }
 
     // console.log(url);
