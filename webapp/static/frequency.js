@@ -3,11 +3,11 @@ initialize();
 function initialize() {
     var maxElement = document.getElementById('max_button');
     if (maxElement) {
-        element.onclick = onMostButtonClicked;
+        element.onclick = onButtonClicked("max");
     }
     var minElement = document.getElementById('min_button');
     if (minElement) {
-        element.onclick = onLeastButtonClicked;
+        element.onclick = onButtonClicked("min");
     }
 }
 
@@ -18,8 +18,8 @@ function getBaseURL() {
     return baseURL;
 }
 
-function onMostButtonClick() {
-    var url = getBaseURL() + '/frequency/max';
+function onButtonClick(word) {
+    var url = getBaseURL() + '/frequency/' + word;
     // console.log(url);
 
     // Send the request to the Books API /authors/ endpoint
@@ -60,6 +60,7 @@ function onMostButtonClick() {
     });
 
 }
+
           
 function getCrime_code(buffer, police_code, buffer2) {
     // Very similar pattern to onAuthorsButtonClicked, so I'm not
