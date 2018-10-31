@@ -34,6 +34,14 @@ def frequency_crimes(word):
         print(e)
     return("The frequency csv does not exist")
 
+def return_crimes_by_crime_code(crime_code):
+    try:
+        crimes = run.getCrime_code(word)
+        return(json.dumps(crimes))
+    except Exception as e:
+        print(e)
+    return("The crime code return function does not work")
+
 @app.route('/crimes', methods=['GET'])
 def search_by_zipCode():
     try:
@@ -311,6 +319,26 @@ class api:
         except Exception as e:
             print(e)
             return None
+
+def getCrime_Code(self, crime_code):
+    try:
+        cursor = self.connection.cursor()
+        query ='''
+        SELECT *
+        FROM crimes
+        WHERE crime_code = {}
+        '''.format(crime_code)
+
+        cursor.execute(query)
+        crime_codeData = []
+        for row in cursor:
+            crime_codeData.append(row)
+
+        return crime_codeData
+
+    except Exception as e:
+        print(e)
+        return ('The crime_code code or word is not working')
 
     def getFrequency(self, word):
         try:
