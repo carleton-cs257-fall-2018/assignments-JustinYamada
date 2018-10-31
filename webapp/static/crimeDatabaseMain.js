@@ -3,11 +3,8 @@ initialize();
 function initialize() {
 
     var element = document.getElementById('crimes_button');
-
     if (element) {
-
         element.onclick = onCrimesButtonClicked;
-
     }
 }
 
@@ -76,7 +73,8 @@ function onCrimesButtonClicked() {
         }
     })
 
-    var canvas = document.get
+    // var canvas = document.getElementById('myCanvas');
+
 
     // Log the error if anything went wrong during the fetch.
     .catch(function(error) {

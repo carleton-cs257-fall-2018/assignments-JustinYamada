@@ -24,21 +24,22 @@ def set_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-@app.route('/crimes/frequency/<word>', methods=['FREQUENCY'])
+@app.route('/crimes/frequency/<word>')
 def frequency_crimes(word):
     try:
-        frequencyDataMax = run.getFrequency(word)
-        return(json.dumps(frequencyDataMax))
+        frequencyData = run.getFrequency(word)
+        return(json.dumps(frequencyData))
 
     except Exception as e:
         print(e)
     return("The frequency csv does not exist")
 
-@app.route('/crimes/frequency/<word>', methods=['CRIMECODE'])
-def return_crimes_by_crime_code():
+@app.route('/crimes/frequency/max/<code>')
+def return_crimes_by_crime_code(code):
     try:
-        crime_code_crimes = run.getCrime_code(int(request.args.get('crimecode')))
-        return(json.dumps(crimes))
+        crime_code_crimes = run.getCrimeCode(int(code))
+        return(json.dumps(crime_code_crimes))
+
     except Exception as e:
         print(e)
     return("The crime code return function does not work")
@@ -48,8 +49,8 @@ def search_by_zipCode():
     try:
         #request three zipcodes
         crimeData = run.getCrimes(int(request.args.get('zipcode')))
-        # crimeData += run.getCrimes(int(request.args.get('zipcode2')))
-        # crimeData += run.getCrimes(int(request.args.get('zipcode3')))
+        crimeData += run.getCrimes(int(request.args.get('zipcode2')))
+        crimeData += run.getCrimes(int(request.args.get('zipcode3')))
 
         # sorts through all possibilities of location options
         crimeSorted = []
@@ -311,7 +312,6 @@ class api:
             '''.format(zipcode)
 
             cursor.execute(query)
-
             crimeData = []
             for row in cursor:
                 crimeData.append(row)
@@ -321,32 +321,31 @@ class api:
             print(e)
             return None
 
-def getCrime_Code(self, crime_code):
-    try:
-        cursor = self.connection.cursor()
-        query ='''
-        SELECT *
-        FROM crimes
-        WHERE crime_code = {}
-        '''.format(crime_code)
+    def getCrimeCode(self, code):
+        try:
+            cursor = self.connection.cursor()
+            query ='''
+            SELECT *
+            FROM crimes
+            WHERE police_code = {}
+            '''.format(code)
 
-        cursor.execute(query)
-        crime_codeData = []
-        for row in cursor:
-            crime_codeData.append(row)
+            cursor.execute(query)
+            crimeCodeData = []
+            for row in cursor:
+                crimeCodeData.append(row)
+            return crimeCodeData
 
-        return crime_codeData
-
-    except Exception as e:
-        print(e)
-        return ('The crime_code code or word is not working')
+        except Exception as e:
+            print(e)
+            return ('The crime_code code or word is not working')
 
     def getFrequency(self, word):
         try:
             cursor = self.connection.cursor()
             query ='''
             SELECT *
-            FROM crimeFrequency
+            FROM crimefrequency
             ORDER BY frequency
             '''
             if word == 'max':
@@ -356,6 +355,7 @@ def getCrime_Code(self, crime_code):
 
             cursor.execute(query)
             frequencyData = []
+
             for row in cursor:
                 frequencyData.append(row)
 

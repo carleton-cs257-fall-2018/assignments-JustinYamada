@@ -3,28 +3,26 @@ initialize();
 function initialize() {
     var maxElement = document.getElementById('max_button');
     if (maxElement) {
-        element.onclick = onButtonClicked("max");
+        maxElement.onclick = onButtonClick("max");
     }
-    var minElement = document.getElementById('min_button');
-    if (minElement) {
-        element.onclick = onButtonClicked("min");
-    }
+    // var minElement = document.getElementById('min_button');
+    // if (minElement) {
+    //     minElement.onclick = onButtonClick("min");
+    // }
 }
 
 
 function getBaseURL() {
     var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
-    console.log(baseURL);
     return baseURL;
 }
 
 function onButtonClick(word) {
-    var url = getBaseURL() + '/frequency/' + word;
+    var url = getBaseURL() + '/crimes/frequency/' + word;
     // console.log(url);
 
     // Send the request to the Books API /authors/ endpoint
-    console.log(fetch(url, {method: 'FREQUENCY'}))
-    fetch(url, {method: 'FREQUENCY'})
+    fetch(url, {method: 'get'})
     // When the results come back, transform them from JSON string into
     // a Javascript object (in this case, a list of author dictionaries).
 
@@ -37,22 +35,25 @@ function onButtonClick(word) {
     // an HTML table displaying the author names and lifespan.
     .then(function(frequencyList) {
         // Build the table body.
-        var tableBody = '<tr><th>' + zipcodeElement.value + '</th></tr>';
-        for (var k = 0; k < crimesList.length; k++) {
-            tableBody += '<td><a onclick="getCrime_code('
-            + frequencyList[k][0]
-            + ": code, " + frequencyList[k][1]
-            + ",': occured " + frequencyList[k][2] + " times"
-            + "')\">" 
-            + '</a></td>';
+        var tableBody = '';
+        for (var k = 0; k < frequencyList.length; k++) {
 
+            tableBody += '<td><a onclick="getCrimeCode('
+            + frequencyList[k][1]
+            + ")\">"
+            + frequencyList[k][0] + ': code '
+            + frequencyList[k][1] + ': '
+            + frequencyList[k][2] + ' occurences' +
+            '</a></td>';
+        }
 
         // Put the table body we just built inside the table that's already on the page.
         var resultsTableElement = document.getElementById('frequency_table');
         if (resultsTableElement) {
             resultsTableElement.innerHTML = tableBody;
         }
-    })
+
+      })
 
     // Log the error if anything went wrong during the fetch.
     .catch(function(error) {
@@ -61,20 +62,20 @@ function onButtonClick(word) {
 
 }
 
-          
-function getCrime_code(buffer, police_code, buffer2) {
+
+function getCrimeCode(police_code) {
     // Very similar pattern to onAuthorsButtonClicked, so I'm not
     // repeating those comments here. Read through this code
     // and see if it makes sense to you.
-    var url = getBaseURL() + '/frequency/max/' + police_code;
+    var url = getBaseURL() + '/crimes/frequency/max/' + police_code;
 
-    fetch(url, {method: 'CRIMECODE'})
+    fetch(url, {method: 'get'})
 
     .then((response) => response.json())
 
-    .then(function(booksList) {
-        var tableBody = '<tr><th>' + authorName + '</th></tr>';
-        for (var k = 0; k < booksList.length; k++) {
+    .then(function(crimesList) {
+        var tableBody = '';
+        for (var k = 0; k < crimesList.length; k++) {
             tableBody += '<tr>';
             tableBody += '<td>' + crimesList[k][0] + '</td>';
             tableBody += '<td>' + crimesList[k][1] + '</td>';
@@ -95,7 +96,4 @@ function getCrime_code(buffer, police_code, buffer2) {
     .catch(function(error) {
         console.log(error);
     });
-}
-
-
 }
