@@ -1,29 +1,29 @@
 initialize();
 
 function initialize() {
-    console.log('HelloMy NAme');
+
     var element = document.getElementById('crimes_button');
-    console.log('HelloMy NAme2');
+
     if (element) {
-        console.log('HelloMy NAme3');
+
         element.onclick = onCrimesButtonClicked;
-        console.log('HelloMy NAme4');
+
     }
 }
 
 
 function getBaseURL() {
     var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
-    console.log(baseURL);
     return baseURL;
 }
 
 function onCrimesButtonClicked() {
-    console.log('HelloMy NAme6');
+
     var url = getBaseURL() + '/crimes';
     var zipcodeElement = document.getElementById('zipcode');
     var zipcodeElement2 = document.getElementById('zipcode2');
     var zipcodeElement3 = document.getElementById('zipcode3');
+
     if (zipcodeElement) {
       url += '?zipcode=' + zipcodeElement.value;
     }
@@ -34,26 +34,29 @@ function onCrimesButtonClicked() {
       url += '&zipcode3=' + zipcodeElement3.value;
     }
 
-    // console.log(url);
+    for(k=1; k < 41; k++) {
+      console.log('place'+k);
+
+      var place = document.getElementById('place'+k);
+      if (document.getElementById('place'+k).checked) {
+        url += '&'+place.name+'='+place.value;
+      }
+    }
+
 
     // Send the request to the Books API /authors/ endpoint
-    console.log(fetch(url, {method: 'GET'}))
     fetch(url, {method: 'get'})
     // When the results come back, transform them from JSON string into
     // a Javascript object (in this case, a list of author dictionaries).
 
     .then((response) => response.json())
-    // .then(response => response.text())          // convert to plain text
-    // console.log(response)
-    // .then(text => console.log(text))
 
     // Once you have your list of author dictionaries, use it to build
     // an HTML table displaying the author names and lifespan.
     .then(function(crimesList) {
         // Build the table body.
-        var tableBody = '<tr><th>' + zipcodeElement.value + '</th></tr>';
+        var tableBody = '';
         for (var k = 0; k < crimesList.length; k++) {
-            console.log(crimesList[k] );
             tableBody += '<tr>';
             tableBody += '<td>' + crimesList[k][0] + '</td>';
             tableBody += '<td>' + crimesList[k][1] + '</td>';
@@ -72,6 +75,8 @@ function onCrimesButtonClicked() {
             resultsTableElement.innerHTML = tableBody;
         }
     })
+
+    var canvas = document.get
 
     // Log the error if anything went wrong during the fetch.
     .catch(function(error) {

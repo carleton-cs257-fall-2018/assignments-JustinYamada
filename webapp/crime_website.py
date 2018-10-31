@@ -17,7 +17,6 @@ app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 @app.route('/crimes')
 def get_main_page():
     ''' This is the only route intended for human users '''
-    pageid = page_id
     global api_port
     return flask.render_template('crimeDatabaseMain.html', api_port=api_port)
 

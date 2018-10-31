@@ -25,21 +25,18 @@
 
           <input type="text" id="zipcode" placeholder="Search Zipcode" name="zipcode">
 
-          <p><table id="results_table"></table></p>
+          <p><table id="results_table" border=1 frame=hsides rules=all></table></p>
 
 
-          <button type="button" href='#zipcode2' class='zipcode2'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-            <div id='zipcode2'>
-              <input type="text"  placeholder="Search Zipcode" value="00000" name="zipcode2">
+          <button type="button" href='#zipcodeSlide2' class='zipcodeSlide2'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            <div id='zipcodeSlide2'>
+              <input type="text" id="zipcode2" placeholder="Search Zipcode" value="99999" name="zipcode2">
             </div>
 
-          <button type="button" href='#zipcode3'  class='zipcode3'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-            <div id='zipcode3'>
-              <input type="text"  placeholder="Search Zipcode" value="00000" name="zipcode3">
+          <button type="button" href='#zipcodeSlide3'  class='zipcodeSlide3'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            <div id='zipcodeSlide3'>
+              <input type="text" id="zipcode3"  placeholder="Search Zipcode" value="99999" name="zipcode3">
             </div>
-
-
-          <button id='crimes_button' type="button"><i class="fa fa-search"></i></button>
           <br>
 
 
@@ -48,48 +45,51 @@
           <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
           <a href='#advancedOptions' class='advanced'>Advanced Options</a>
           <div id='advancedOptions'>
-            <input type="checkbox" name="Air_Bus_Train_Metro_Terminal" value="true"> Air/Bus/Train/Metro Terminal
-            <input type="checkbox" name="Auto_Dealership" value="true"> Auto Dealership
-            <input type="checkbox" name="Auto_Repair" value="true"> Auto Repair
-            <input type="checkbox" name="Bank" value="true"> Bank
-            <input type="checkbox" name="Bank_S&L_Credit_Union" value="true"> Bank/S&L/Credit_Union <br>
-            <input type="checkbox" name="Bar_Night_Club" value="true"> Bar/Night Club
-            <input type="checkbox" name="Check_Cashing_Est" value="true"> Check Cashing Est.
-            <input type="checkbox" name="Church_Synagogue_Temple" value="true"> Church/Synagogue/Temple
-            <input type="checkbox" name="Commercial" value="true"> Commercial
-            <input type="checkbox" name="Construction_Site" value="true"> Construction Site <br>
-            <input type="checkbox" name="Convenience_Store" value="true"> Convenience Store
-            <input type="checkbox" name="Doctor_Dentist_Vet_Office" value="true"> Doctor/Dentist/Vet Office
-            <input type="checkbox" name="Field_Open_Space" value="true"> Field/Open Space
-            <input type="checkbox" name="Gas_Station" value="true"> Gas Station
-            <input type="checkbox" name="Golf_Course" value="true"> Golf Course <br>
-            <input type="checkbox" name="Government_Building" value="true"> Government Building
-            <input type="checkbox" name="Grocery_Supermaket" value="true"> Grocery/Supermaket
-            <input type="checkbox" name="Hospital_Emerygency_Care_Center" value="true"> Hospital/Emerygency Care Center
-            <input type="checkbox" name="Hotel_Motel_Etc" value="true"> Hotel/Motel Etc.
-            <input type="checkbox" name="Jail_Prison" value="true"> Jail Prison <br>
-            <input type="checkbox" name="Lake_Waterway" value="true"> Lake/Waterway
-            <input type="checkbox" name="Laundromat" value="true"> Landromat
-            <input type="checkbox" name="Library" value="true"> Library
-            <input type="checkbox" name="Liquor_Store" value="true"> Liquor Store
-            <input type="checkbox" name="Nursery" value="true"> Nursery <br>
-            <input type="checkbox" name="Park" value="true"> Park
-            <input type="checkbox" name="Parking_Garage" value="true"> Parking Garage
-            <input type="checkbox" name="Parking_Lot" value="true"> Parking Lot
-            <input type="checkbox" name="Pawn_Shop" value="true"> Pawn Shop
-            <input type="checkbox" name="Pedestrian_Tunnel" value="true"> Pedestrian Tunnel <br>
-            <input type="checkbox" name="Pool" value="true"> Pool
-            <input type="checkbox" name="Recreation_Center" value="true"> Recreation Center
-            <input type="checkbox" name="Rental_Storage_Facility" value="true"> Rental Storage Facility
-            <input type="checkbox" name="Residence" value="true"> Residence
-            <input type="checkbox" name="Retail" value="true"> Retail <br>
-            <input type="checkbox" name="School_College" value="true"> School/College
-            <input type="checkbox" name="Street" value="true"> Street
-            <input type="checkbox" name="Theater" value="true"> Theater
-            <input type="checkbox" name="Wooded_Area" value="true"> Wooded Area
-            <input type="checkbox" name="Other_Unknown" value="true"> Other Unknown <br>
+            <input type="checkbox" id='place1' name="Air_Bus_Train_Metro_Terminal" value="true"> Air/Bus/Train/Metro Terminal
+            <input type="checkbox" id='place2' name="Auto_Dealership" value="true"> Auto Dealership
+            <input type="checkbox" id='place3' name="Auto_Repair" value="true"> Auto Repair
+            <input type="checkbox" id='place4' name="Bank" value="true"> Bank
+            <input type="checkbox" id='place5' name="Bank_S&L_Credit_Union" value="true"> Bank/S&L/Credit_Union <br>
+            <input type="checkbox" id='place6' name="Bar_Night_Club" value="true"> Bar/Night Club
+            <input type="checkbox" id='place7' name="Check_Cashing_Est" value="true"> Check Cashing Est.
+            <input type="checkbox" id='place8' name="Church_Synagogue_Temple" value="true"> Church/Synagogue/Temple
+            <input type="checkbox" id='place9' name="Commercial" value="true"> Commercial
+            <input type="checkbox" id='place10' name="Construction_Site" value="true"> Construction Site <br>
+            <input type="checkbox" id='place11' name="Convenience_Store" value="true"> Convenience Store
+            <input type="checkbox" id='place12' name="Doctor_Dentist_Vet_Office" value="true"> Doctor/Dentist/Vet Office
+            <input type="checkbox" id='place13' name="Field_Open_Space" value="true"> Field/Open Space
+            <input type="checkbox" id='place14' name="Gas_Station" value="true"> Gas Station
+            <input type="checkbox" id='place15' name="Golf_Course" value="true"> Golf Course <br>
+            <input type="checkbox" id='place16' name="Government_Building" value="true"> Government Building
+            <input type="checkbox" id='place17' name="Grocery_Supermaket" value="true"> Grocery/Supermaket
+            <input type="checkbox" id='place18' name="Hospital_Emerygency_Care_Center" value="true"> Hospital/Emerygency Care Center
+            <input type="checkbox" id='place19' name="Hotel_Motel_Etc" value="true"> Hotel/Motel Etc.
+            <input type="checkbox" id='place20' name="Jail_Prison" value="true"> Jail Prison <br>
+            <input type="checkbox" id='place21' name="Lake_Waterway" value="true"> Lake/Waterway
+            <input type="checkbox" id='place22' name="Laundromat" value="true"> Landromat
+            <input type="checkbox" id='place23' name="Library" value="true"> Library
+            <input type="checkbox" id='place24' name="Liquor_Store" value="true"> Liquor Store
+            <input type="checkbox" id='place25' name="Nursery" value="true"> Nursery <br>
+            <input type="checkbox" id='place26' name="Park" value="true"> Park
+            <input type="checkbox" id='place27' name="Parking_Garage" value="true"> Parking Garage
+            <input type="checkbox" id='place28' name="Parking_Lot" value="true"> Parking Lot
+            <input type="checkbox" id='place29' name="Pawn_Shop" value="true"> Pawn Shop
+            <input type="checkbox" id='place30' name="Pedestrian_Tunnel" value="true"> Pedestrian Tunnel <br>
+            <input type="checkbox" id='place31' name="Pool" value="true"> Pool
+            <input type="checkbox" id='place32' name="Recreation_Center" value="true"> Recreation Center
+            <input type="checkbox" id='place33' name="Rental_Storage_Facility" value="true"> Rental Storage Facility
+            <input type="checkbox" id='place34' name="Residence" value="true"> Residence
+            <input type="checkbox" id='place35' name="Retail" value="true"> Retail <br>
+            <input type="checkbox" id='place36' name="School_College" value="true"> School/College
+            <input type="checkbox" id='place37' name="Street" value="true"> Street
+            <input type="checkbox" id='place38' name="Theater" value="true"> Theater
+            <input type="checkbox" id='place39'name="Wooded_Area" value="true"> Wooded Area
+            <input type="checkbox" id='place40'name="Other_Unknown" value="true"> Other Unknown <br>
           </div>
         <!-- </form> -->
+          <button id='crimes_button' type="button"><i class="fa fa-search"></i></button>
+          <canvas id="myCanvas" width="900" height="500" style="border:1px solid #c3c3c3;">
+          </canvas>
 
 
 
@@ -116,12 +116,12 @@
 
         <script type='text/javascript'>
           $(document).ready(function () {
-              $('#zipcode2').hide();
-              $('.zipcode2').click(function() {
-                  if ($('#zipcode2').is(':hidden')) {
-                       $('#zipcode2').slideDown();
+              $('#zipcodeSlide2').hide();
+              $('.zipcodeSlide2').click(function() {
+                  if ($('#zipcodeSlide2').is(':hidden')) {
+                       $('#zipcodeSlide2').slideDown();
                   } else {
-                       $('#zipcode2').slideUp();
+                       $('#zipcodeSlide2').slideUp();
                   }
               });
           });
@@ -129,12 +129,12 @@
 
         <script type='text/javascript'>
             $(document).ready(function () {
-                $('#zipcode3').hide();
-                $('.zipcode3').click(function() {
-                    if ($('#zipcode3').is(':hidden')) {
-                         $('#zipcode3').slideDown();
+                $('#zipcodeSlide3').hide();
+                $('.zipcodeSlide3').click(function() {
+                    if ($('#zipcodeSlide3').is(':hidden')) {
+                         $('#zipcodeSlide3').slideDown();
                     } else {
-                         $('#zipcode3').slideUp();
+                         $('#zipcodeSlide3').slideUp();
                     }
                 });
             });

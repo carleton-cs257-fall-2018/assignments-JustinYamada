@@ -7,6 +7,19 @@
     height:auto;
 }
 
+table, td, th {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    height: 50px;
+}
+
 h1 {
   color: #f;
   font-weight: bold;
@@ -92,7 +105,7 @@ html, body, .Container
         float: left;
     }
 
-.Header 
+.Header
 {
     width: 100%;
     background-image: url("https://livability.com/sites/default/files/annapolis.jpg");
@@ -105,7 +118,7 @@ html, body, .Container
     margin-bottom: 20px;
 }
 
-.topleft 
+.topleft
 {
     position: absolute;
     top: 90px;
@@ -150,6 +163,6 @@ html, body, .Container
     float: right;
     overflow: auto;
     margin-left: 20px;
-    margin-right: 50px; 
+    margin-right: 50px;
     margin-bottom: 50px;
 }
