@@ -24,7 +24,13 @@ def get_main_page():
 def get_frequency_max_page():
     ''' This is the only route intended for human users '''
     global api_port
-    return flask.render_template('frequency.html', api_port=api_port)
+    return flask.render_template('frequencyMax.html', api_port=api_port)
+
+@app.route('/crimes/frequency/min')
+def get_frequency_min_page():
+    ''' This is the only route intended for human users '''
+    global api_port
+    return flask.render_template('frequencyMin.html', api_port=api_port)
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:

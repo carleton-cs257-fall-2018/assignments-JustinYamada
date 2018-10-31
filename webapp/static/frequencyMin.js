@@ -5,10 +5,11 @@ function initialize() {
     if (maxElement) {
         maxElement.onclick = onButtonClick("max");
     }
-    // var minElement = document.getElementById('min_button');
-    // if (minElement) {
-    //     minElement.onclick = onButtonClick("min");
-    // }
+
+    var minElement = document.getElementById('min_button');
+    if (minElement) {
+        minElement.onclick = onButtonClick("min");
+    }
 }
 
 
@@ -38,13 +39,13 @@ function onButtonClick(word) {
         var tableBody = '';
         for (var k = 0; k < frequencyList.length; k++) {
 
-            tableBody += '<td><a onclick="getCrimeCode('
+            tableBody += '<p><a onclick="getCrimeCode('
             + frequencyList[k][1]
             + ")\">"
             + frequencyList[k][0] + ': code '
             + frequencyList[k][1] + ': '
             + frequencyList[k][2] + ' occurences' +
-            '</a></td>';
+            '</a></p>';
         }
 
         // Put the table body we just built inside the table that's already on the page.

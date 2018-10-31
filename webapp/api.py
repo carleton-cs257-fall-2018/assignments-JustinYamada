@@ -23,7 +23,7 @@ app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 def set_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
-
+    
 @app.route('/crimes/frequency/<word>')
 def frequency_crimes(word):
     try:
