@@ -24,7 +24,7 @@ def set_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-@app.route('/crimes/frequency/<word>')
+@app.route('/crimes/frequency/<word>', methods=['FREQUENCY'])
 def frequency_crimes(word):
     try:
         frequencyDataMax = run.getFrequency(word)
@@ -34,9 +34,10 @@ def frequency_crimes(word):
         print(e)
     return("The frequency csv does not exist")
 
-def return_crimes_by_crime_code(crime_code):
+@app.route('/crimes/frequency/<word>', methods=['CRIMECODE'])
+def return_crimes_by_crime_code():
     try:
-        crimes = run.getCrime_code(word)
+        crime_code_crimes = run.getCrime_code(int(request.args.get('crimecode')))
         return(json.dumps(crimes))
     except Exception as e:
         print(e)
@@ -47,8 +48,8 @@ def search_by_zipCode():
     try:
         #request three zipcodes
         crimeData = run.getCrimes(int(request.args.get('zipcode')))
-        crimeData += run.getCrimes(int(request.args.get('zipcode2')))
-        crimeData += run.getCrimes(int(request.args.get('zipcode3')))
+        # crimeData += run.getCrimes(int(request.args.get('zipcode2')))
+        # crimeData += run.getCrimes(int(request.args.get('zipcode3')))
 
         # sorts through all possibilities of location options
         crimeSorted = []
