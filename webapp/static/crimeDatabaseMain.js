@@ -24,11 +24,19 @@ function onCrimesButtonClicked() {
     if (zipcodeElement) {
       url += '?zipcode=' + zipcodeElement.value;
     }
+    
     if (zipcodeElement2) {
       url += '&zipcode2=' + zipcodeElement2.value;
     }
+    else {
+      url += '?zipcode2=' + '99999';
+    }
+    
     if (zipcodeElement3) {
       url += '&zipcode3=' + zipcodeElement3.value;
+    }
+    else {
+      url += '?zipcode3=' + '99999';
     }
 
     for(k=1; k < 41; k++) {
