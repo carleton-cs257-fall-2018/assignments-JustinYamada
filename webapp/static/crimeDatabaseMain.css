@@ -126,6 +126,14 @@ html, body, .Container
     font-size: 18px;
 }
 
+.topright
+{
+    position: absolute;
+    top: 90px;
+    right: 16px;
+    font-size: 18px;
+}
+
 .Content
 {
     position: relative;

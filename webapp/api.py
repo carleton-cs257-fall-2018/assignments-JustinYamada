@@ -23,7 +23,7 @@ app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 def set_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
-    
+
 @app.route('/crimes/frequency/<word>')
 def frequency_crimes(word):
     try:
@@ -35,14 +35,25 @@ def frequency_crimes(word):
     return("The frequency csv does not exist")
 
 @app.route('/crimes/frequency/max/<code>')
-def return_crimes_by_crime_code(code):
+def return_crimes_by_crime_code_max(code):
     try:
         crime_code_crimes = run.getCrimeCode(int(code))
         return(json.dumps(crime_code_crimes))
 
     except Exception as e:
         print(e)
-    return("The crime code return function does not work")
+    return("The crime code max return function does not work")
+
+@app.route('/crimes/frequency/min/<code>')
+def return_crimes_by_crime_code_min(code):
+    try:
+        crime_code_crimes = run.getCrimeCode(int(code))
+        return(json.dumps(crime_code_crimes))
+
+    except Exception as e:
+        print(e)
+    return("The crime code min return function does not work")
+
 
 @app.route('/crimes', methods=['GET'])
 def search_by_zipCode():
