@@ -7,4 +7,4 @@
 '''
 database = 'yamadaj'
 user = 'yamadaj'
-password = '!@#Creed17'
+password = ''
