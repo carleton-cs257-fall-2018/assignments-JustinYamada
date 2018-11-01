@@ -1,10 +1,7 @@
 initialize();
 
 function initialize() {
-    var minElement = document.getElementById('min_button');
-    if (minElement) {
-        minElement.onclick = onButtonClick("min");
-    }
+    
 
     var maxElement = document.getElementById('max_button');
     if (maxElement) {
