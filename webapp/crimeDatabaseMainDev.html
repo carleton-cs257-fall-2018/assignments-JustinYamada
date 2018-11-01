@@ -26,17 +26,16 @@
             <font size = 40; style="margin-bottom: 0px;padding-top: 100px;">Crime Database</font>
             <h2 style="margin-top: 0px;"> in Montgomery County, Maryland </h2>
         </div>
-          <input type="text" style="margin-left: 50px" id="zipcode" placeholder="Search Zipcode" name="zipcode">
+            <button type="button" style="margin-left: 50px" href='#zipcodeSlide2' class='zipcodeSlide2'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            <button type="button" href='#zipcodeSlide3'  class='zipcodeSlide3'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            <input type="text" id="zipcode" placeholder="Search Zipcode" name="zipcode">
 
-
-          <button type="button" href='#zipcodeSlide2' class='zipcodeSlide2'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
             <div id='zipcodeSlide2'>
-              <input type="text" style="margin-left: 50px" id="zipcode2" placeholder="Search Zipcode" name="zipcode2">
+              <input type="text" style="margin-left: 87px" id="zipcode2" placeholder="Search Zipcode" name="zipcode2">
             </div>
 
-          <button type="button" href='#zipcodeSlide3'  class='zipcodeSlide3'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
             <div id='zipcodeSlide3'>
-              <input type="text" style="margin-left: 50px" id="zipcode3"  placeholder="Search Zipcode" name="zipcode3">
+              <input type="text" style="margin-left: 87px" id="zipcode3"  placeholder="Search Zipcode" name="zipcode3">
             </div>
              <div class="topleft">
                 <div btn-group data-grouptype>
@@ -44,10 +43,10 @@
                   <a href="/crimes/">REFRESH</a>
                 </div>
             </div>
-    <button id='crimes_button' type="button"><i class="fa fa-search"></i></button>
-    <br>
+        <br>
+        <button id='crimes_button' style="margin-left: 50px" type="button"><i class="fa fa-search"></i></button>
           <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
-          <button type="button" style="margin-left: 50px" href='#advancedOptions' class='advanced'>Advanced Options</button>
+          <button type="button" href='#advancedOptions' class='advanced'>Advanced Options</button>
           <div style="margin-left: 50px" id='advancedOptions'>
             <input type="checkbox" id='place1' name="Air_Bus_Train_Metro_Terminal" value="true"> Air/Bus/Train/Metro Terminal
             <input type="checkbox" id='place2' name="Auto_Dealership" value="true"> Auto Dealership
