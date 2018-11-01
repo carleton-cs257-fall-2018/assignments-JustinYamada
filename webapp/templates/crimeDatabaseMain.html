@@ -17,32 +17,33 @@
 
     </head>
     <body>
-        <h1>Crime Database of Montgomery County, Maryland</h1>
+        <div class="Header">
+            <font size = 40; style="margin-bottom: 0px;padding-top: 100px;">Crime Database</font>
+            <h2 style="margin-top: 0px;"> in Montgomery County, Maryland </h2>
+        </div>
+          <input type="text" style="margin-left: 50px" id="zipcode" placeholder="Search Zipcode" name="zipcode">
 
 
-        <!-- <form class="Enter Zipcodes" action="crimes"> -->
-
-
-          <input type="text" id="zipcode" placeholder="Search Zipcode" name="zipcode">
-
-          <p><table id="results_table" border=1 frame=hsides rules=all></table></p>
           <button type="button" href='#zipcodeSlide2' class='zipcodeSlide2'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
             <div id='zipcodeSlide2'>
-              <input type="text" id="zipcode2" placeholder="Search Zipcode" value="99999" name="zipcode2">
+              <input type="text" style="margin-left: 50px" id="zipcode2" placeholder="Search Zipcode" name="zipcode2">
             </div>
 
           <button type="button" href='#zipcodeSlide3'  class='zipcodeSlide3'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
             <div id='zipcodeSlide3'>
-              <input type="text" id="zipcode3"  placeholder="Search Zipcode" value="99999" name="zipcode3">
+              <input type="text" style="margin-left: 50px" id="zipcode3"  placeholder="Search Zipcode" name="zipcode3">
             </div>
-          <br>
-
-
-
-
+             <div class="topleft">
+                <div btn-group data-grouptype>
+                  <a href="/crimes/frequency/max">TO FREQUENCY</a>
+                  <a href="/crimes/">REFRESH</a>
+                </div>
+            </div>
+    <button id='crimes_button' type="button"><i class="fa fa-search"></i></button>
+    <br>
           <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
-          <a href='#advancedOptions' class='advanced'>Advanced Options</a>
-          <div id='advancedOptions'>
+          <button type="button" style="margin-left: 50px" href='#advancedOptions' class='advanced'>Advanced Options</button>
+          <div style="margin-left: 50px" id='advancedOptions'>
             <input type="checkbox" id='place1' name="Air_Bus_Train_Metro_Terminal" value="true"> Air/Bus/Train/Metro Terminal
             <input type="checkbox" id='place2' name="Auto_Dealership" value="true"> Auto Dealership
             <input type="checkbox" id='place3' name="Auto_Repair" value="true"> Auto Repair
@@ -85,24 +86,11 @@
             <input type="checkbox" id='place40'name="Other_Unknown" value="true"> Other Unknown <br>
           </div>
         <!-- </form> -->
-          <button id='crimes_button' type="button"><i class="fa fa-search"></i></button>
-          <!-- <canvas id="myCanvas" width="900" height="500" style="border:1px solid #c3c3c3;">
-          </canvas> -->
+        <br>
 
-
-
-
-
-
-
+          <p><table id="results_table" border=1 frame=hsides rules=all></table></p>
         <!-- Taken from https://codepen.io/Manitoba/pen/MyRwVy -->
-        <div class="topright">
-          <div btn-group data-grouptype="OR">
-            <a href="crimes/frequency/max">TO Frequency</a>
-            <a href="crimes">RESET</a>
-          </div>
-        </div>
-
+        <br>
         <img src="https://1.bp.blogspot.com/-dPh9i9qsvos/WkMmnJvSN8I/AAAAAAABDxY/y9VkTZwTqwk_2RquF4J-uVV1bEszyYyHwCLcBGAs/s1600/map01.jpg"
           alt="Map of Montgomery County, Maryland" width="1311" height="783" class="centerImage">
 
