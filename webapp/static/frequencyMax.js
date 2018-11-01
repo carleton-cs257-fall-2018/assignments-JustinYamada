@@ -70,14 +70,29 @@ function getCrimeCode(police_code) {
     // and see if it makes sense to you.
     var url = getBaseURL() + '/crimes/frequency/max/' + police_code;
 
-    fetch(url, {
-            method: 'get'
-        })
+    fetch(url, {method: 'get'})
 
         .then((response) => response.json())
 
         .then(function(crimesList) {
             var tableBody = '';
+            var tableBody = '';
+            var tableHeader = '';
+
+
+            tableHeader += '<tr>';
+            tableHeader += '<td><b> ID </b></td>';
+            tableHeader += '<td><b> Police Code </b></td>';
+            tableHeader += '<td><b> Zip Code </b></td>';
+            tableHeader += '<td><b> Type of Place - Broad </b></td>';
+            tableHeader += '<td><b> Type of Place - Specific </b></td>';
+            tableHeader += '<td><b> Crime - Broad </b></td>';
+            tableHeader += '<td><b> Crime - Specific </b></td>';
+            tableHeader += '<td><b> City </td>';
+            tableHeader += '</tr>';
+
+            tableBody += tableHeader;
+
             for (var k = 0; k < crimesList.length; k++) {
                 tableBody += '<tr>';
                 tableBody += '<td>' + crimesList[k][0] + '</td>';

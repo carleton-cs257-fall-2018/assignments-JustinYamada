@@ -320,6 +320,7 @@ class api:
             SELECT *
             FROM crimes
             WHERE zipcode = {}
+            ORDER BY type_place_broad
             '''.format(zipcode)
 
             cursor.execute(query)

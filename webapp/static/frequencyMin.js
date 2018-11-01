@@ -72,6 +72,22 @@ function getCrimeCode(police_code) {
 
     .then(function(crimesList) {
         var tableBody = '';
+        var tableHeader = '';
+
+
+        tableHeader += '<tr>';
+        tableHeader += '<td><b> ID </b></td>';
+        tableHeader += '<td><b> Police Code </b></td>';
+        tableHeader += '<td><b> Zip Code </b></td>';
+        tableHeader += '<td><b> Type of Place - Broad </b></td>';
+        tableHeader += '<td><b> Type of Place - Specific </b></td>';
+        tableHeader += '<td><b> Crime - Broad </b></td>';
+        tableHeader += '<td><b> Crime - Specific </b></td>';
+        tableHeader += '<td><b> City </td>';
+        tableHeader += '</tr>';
+
+        tableBody += tableHeader;
+        
         for (var k = 0; k < crimesList.length; k++) {
             tableBody += '<tr>';
             tableBody += '<td>' + crimesList[k][0] + '</td>';

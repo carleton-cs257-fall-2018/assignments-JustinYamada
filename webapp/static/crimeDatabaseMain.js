@@ -18,13 +18,14 @@ function onCrimesButtonClicked() {
 
     var url = getBaseURL() + '/crimes';
     var zipcodeElement = document.getElementById('zipcode');
+    var zipcodeElement2
+    var zipcodeElement3
 
     if (zipcodeElement) {
       url += '?zipcode=' + zipcodeElement.value;
     }
 
-    var zipcodeElement2
-    console.log(document.getElementById('zipcode2').value)
+
     if(document.getElementById('zipcode2').value != '') {
       zipcodeElement2 = document.getElementById('zipcode2');
       url += '&zipcode2=' + zipcodeElement2.value;
@@ -33,9 +34,9 @@ function onCrimesButtonClicked() {
       url += '&zipcode2=' + '99999';
     }
 
-    var zipcodeElement3
+
     if(document.getElementById('zipcode3').value != '') {
-      zipcodeElement2 = document.getElementById('zipcode3');
+      zipcodeElement3= document.getElementById('zipcode3');
       url += '&zipcode3=' + zipcodeElement3.value;
     }
 
@@ -44,8 +45,6 @@ function onCrimesButtonClicked() {
     }
 
     for(k=1; k < 41; k++) {
-      console.log('place'+k);
-
       var place = document.getElementById('place'+k);
       if (document.getElementById('place'+k).checked) {
         url += '&'+place.name+'='+place.value;
@@ -65,23 +64,38 @@ function onCrimesButtonClicked() {
     .then(function(crimesList) {
         // Build the table body.
         var tableBody = '';
+        var tableHeader = '';
+        zipcodeHolder = zipcodeElement.value;
+        placeHolder = '';
         run = true;
-        run2 = true;
-        run3 = true;
+
+        tableHeader += '<tr>';
+        tableHeader += '<td><b> ID </b></td>';
+        tableHeader += '<td><b> Police Code </b></td>';
+        tableHeader += '<td><b> Zip Code </b></td>';
+        tableHeader += '<td><b> Type of Place - Broad </b></td>';
+        tableHeader += '<td><b> Type of Place - Specific </b></td>';
+        tableHeader += '<td><b> Crime - Broad </b></td>';
+        tableHeader += '<td><b> Crime - Specific </b></td>';
+        tableHeader += '<td><b> City </td>';
+        tableHeader += '</tr>';
+
         for (var k = 0; k < crimesList.length; k++) {
             if (crimesList[k][2] == zipcodeElement.value && run) {
-                tableBody += '<td>' + 'Zipcode 1 is: ' + zipcodeElement.value + '</td>';
+                tableBody += '<td height="35"><b><font size= "5">' + 'Zipcode: ' + zipcodeElement.value + '</font></b></td>';
+                tableBody += tableHeader;
                 run = false;
+                placeHolder = crimesList[k][3];
             }
 
-            if (document.getElementById('zipcode2').value != '' && crimesList[k][2] == zipcodeElement2.value && run2) {
-                tableBody += '<td>' + 'Zipcode 2 is: ' + zipcodeElement2.value + '</td>';
-                run2 = false;
+            if (crimesList[k][2] != '99999' && (crimesList[k][2] != zipcodeHolder || placeHolder != crimesList[k][3])) {
+                tableBody += '<td height="35"><b><font size= "5">' + 'Zipcode: ' + crimesList[k][2] + '</font></b></td>';
+                tableBody += tableHeader;
+                zipcodeHolder = crimesList[k][2];
+                placeHolder = crimesList[k][3]
             }
-            if (document.getElementById('zipcode3').value != '' && crimesList[k][2] == zipcodeElement3.value && run3) {
-                tableBody += '<td>' + 'Zipcode 3 is: ' + zipcodeElement3.value + '</td>';
-                run3 = false;
-            }
+
+
             tableBody += '<tr>';
             tableBody += '<td>' + crimesList[k][0] + '</td>';
             tableBody += '<td>' + crimesList[k][1] + '</td>';
