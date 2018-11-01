@@ -61,7 +61,22 @@ function onCrimesButtonClicked() {
     .then(function(crimesList) {
         // Build the table body.
         var tableBody = '';
+        run = true;
+        run2 = true;
+        run3 = true;
         for (var k = 0; k < crimesList.length; k++) {
+            if (crimesList[k][2].equals(zipcodeElement.value) && run) {
+                tableBody += '<p>' + zipcodeElement.value + '</p>';
+                run = false;
+            }
+            if (crimesList[k][2].equals(zipcodeElement.value) && run2) {
+                tableBody += '<p>' + zipcodeElement2.value + '</p>';
+                run2 = false;
+            }
+            if (crimesList[k][2].equals(zipcodeElement.value) && run3) {
+                tableBody += '<p>' + zipcodeElement3.value + '</p>';
+                run3 = false;
+            }
             tableBody += '<tr>';
             tableBody += '<td>' + crimesList[k][0] + '</td>';
             tableBody += '<td>' + crimesList[k][1] + '</td>';
