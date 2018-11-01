@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+
+<html>
+
+
+    <head>
+        <title>Crime Database</title>
+
+<!--        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />-->
+<!--        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='crimeDatabaseMain.css') }}">-->
+        <link rel="stylesheet" type="text/css" href="crimeDatabaseMain.css">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.css">
+        <!-- Load icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    </head>
+    <body>
+
+
+        <!-- <form class="Enter Zipcodes" action="crimes"> -->
+
+        <div class="Header">
+            <font size = 40; style="margin-bottom: 0px;padding-top: 100px;">Crime Database</font>
+            <h2 style="margin-top: 0px;"> in Montgomery County, Maryland </h2>
+        </div>
+          <input type="text" style="margin-left: 50px" id="zipcode" placeholder="Search Zipcode" name="zipcode">
+
+
+          <button type="button" href='#zipcodeSlide2' class='zipcodeSlide2'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            <div id='zipcodeSlide2'>
+              <input type="text" style="margin-left: 50px" id="zipcode2" placeholder="Search Zipcode" name="zipcode2">
+            </div>
+
+          <button type="button" href='#zipcodeSlide3'  class='zipcodeSlide3'><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            <div id='zipcodeSlide3'>
+              <input type="text" style="margin-left: 50px" id="zipcode3"  placeholder="Search Zipcode" name="zipcode3">
+            </div>
+             <div class="topleft">
+                <div btn-group data-grouptype>
+                  <a href="/crimes/frequency/max">TO FREQUENCY</a>
+                  <a href="/crimes/">REFRESH</a>
+                </div>
+            </div>
+    <button id='crimes_button' type="button"><i class="fa fa-search"></i></button>
+    <br>
+          <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
+          <button type="button" style="margin-left: 50px" href='#advancedOptions' class='advanced'>Advanced Options</button>
+          <div style="margin-left: 50px" id='advancedOptions'>
+            <input type="checkbox" id='place1' name="Air_Bus_Train_Metro_Terminal" value="true"> Air/Bus/Train/Metro Terminal
+            <input type="checkbox" id='place2' name="Auto_Dealership" value="true"> Auto Dealership
+            <input type="checkbox" id='place3' name="Auto_Repair" value="true"> Auto Repair
+            <input type="checkbox" id='place4' name="Bank" value="true"> Bank
+            <input type="checkbox" id='place5' name="Bank_S&L_Credit_Union" value="true"> Bank/S&L/Credit_Union <br>
+            <input type="checkbox" id='place6' name="Bar_Night_Club" value="true"> Bar/Night Club
+            <input type="checkbox" id='place7' name="Check_Cashing_Est" value="true"> Check Cashing Est.
+            <input type="checkbox" id='place8' name="Church_Synagogue_Temple" value="true"> Church/Synagogue/Temple
+            <input type="checkbox" id='place9' name="Commercial" value="true"> Commercial
+            <input type="checkbox" id='place10' name="Construction_Site" value="true"> Construction Site <br>
+            <input type="checkbox" id='place11' name="Convenience_Store" value="true"> Convenience Store
+            <input type="checkbox" id='place12' name="Doctor_Dentist_Vet_Office" value="true"> Doctor/Dentist/Vet Office
+            <input type="checkbox" id='place13' name="Field_Open_Space" value="true"> Field/Open Space
+            <input type="checkbox" id='place14' name="Gas_Station" value="true"> Gas Station
+            <input type="checkbox" id='place15' name="Golf_Course" value="true"> Golf Course <br>
+            <input type="checkbox" id='place16' name="Government_Building" value="true"> Government Building
+            <input type="checkbox" id='place17' name="Grocery_Supermaket" value="true"> Grocery/Supermaket
+            <input type="checkbox" id='place18' name="Hospital_Emerygency_Care_Center" value="true"> Hospital/Emerygency Care Center
+            <input type="checkbox" id='place19' name="Hotel_Motel_Etc" value="true"> Hotel/Motel Etc.
+            <input type="checkbox" id='place20' name="Jail_Prison" value="true"> Jail Prison <br>
+            <input type="checkbox" id='place21' name="Lake_Waterway" value="true"> Lake/Waterway
+            <input type="checkbox" id='place22' name="Laundromat" value="true"> Landromat
+            <input type="checkbox" id='place23' name="Library" value="true"> Library
+            <input type="checkbox" id='place24' name="Liquor_Store" value="true"> Liquor Store
+            <input type="checkbox" id='place25' name="Nursery" value="true"> Nursery <br>
+            <input type="checkbox" id='place26' name="Park" value="true"> Park
+            <input type="checkbox" id='place27' name="Parking_Garage" value="true"> Parking Garage
+            <input type="checkbox" id='place28' name="Parking_Lot" value="true"> Parking Lot
+            <input type="checkbox" id='place29' name="Pawn_Shop" value="true"> Pawn Shop
+            <input type="checkbox" id='place30' name="Pedestrian_Tunnel" value="true"> Pedestrian Tunnel <br>
+            <input type="checkbox" id='place31' name="Pool" value="true"> Pool
+            <input type="checkbox" id='place32' name="Recreation_Center" value="true"> Recreation Center
+            <input type="checkbox" id='place33' name="Rental_Storage_Facility" value="true"> Rental Storage Facility
+            <input type="checkbox" id='place34' name="Residence" value="true"> Residence
+            <input type="checkbox" id='place35' name="Retail" value="true"> Retail <br>
+            <input type="checkbox" id='place36' name="School_College" value="true"> School/College
+            <input type="checkbox" id='place37' name="Street" value="true"> Street
+            <input type="checkbox" id='place38' name="Theater" value="true"> Theater
+            <input type="checkbox" id='place39'name="Wooded_Area" value="true"> Wooded Area
+            <input type="checkbox" id='place40'name="Other_Unknown" value="true"> Other Unknown <br>
+          </div>
+        <!-- </form> -->
+        <br>
+
+          <p><table id="results_table" border=1 frame=hsides rules=all></table></p>
+        <!-- Taken from https://codepen.io/Manitoba/pen/MyRwVy -->
+        <br>
+        <img src="https://1.bp.blogspot.com/-dPh9i9qsvos/WkMmnJvSN8I/AAAAAAABDxY/y9VkTZwTqwk_2RquF4J-uVV1bEszyYyHwCLcBGAs/s1600/map01.jpg"
+          alt="Map of Montgomery County, Maryland" width="1311" height="783" class="centerImage">
+
+
+        <!-- Load JQuery and Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://rawgit.com/gdaunton/Semantic-UI/range-slider-build/dist/semantic.js"></script>
+        <script>var api_port = {{ api_port }};</script>
+        <script src="{{ url_for('static', filename='crimeDatabaseMain.js') }}"></script>
+
+        <script type='text/javascript'>
+          $(document).ready(function () {
+              $('#zipcodeSlide2').hide();
+              $('.zipcodeSlide2').click(function() {
+                  if ($('#zipcodeSlide2').is(':hidden')) {
+                       $('#zipcodeSlide2').slideDown();
+                  } else {
+                       $('#zipcodeSlide2').slideUp();
+                  }
+              });
+          });
+        </script>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+                $('#zipcodeSlide3').hide();
+                $('.zipcodeSlide3').click(function() {
+                    if ($('#zipcodeSlide3').is(':hidden')) {
+                         $('#zipcodeSlide3').slideDown();
+                    } else {
+                         $('#zipcodeSlide3').slideUp();
+                    }
+                });
+            });
+        </script>
+
+        <!-- Taken from https://stackoverflow.com/questions/16779244/hide-show-advanced-option-using-javascript -->
+        <script type='text/javascript'>
+            $(document).ready(function () {
+                $('#advancedOptions').hide();
+                $('.advanced').click(function() {
+                    if ($('#advancedOptions').is(':hidden')) {
+                         $('#advancedOptions').slideDown();
+                    } else {
+                         $('#advancedOptions').slideUp();
+                    }
+                });
+            });
+        </script>
+
+
+    </body>
+</html>
