@@ -38,6 +38,7 @@ function onCrimesButtonClicked() {
       zipcodeElement2 = document.getElementById('zipcode3');
       url += '&zipcode3=' + zipcodeElement3.value;
     }
+
     else {
       url += '&zipcode3=' + '99999';
     }
@@ -68,16 +69,17 @@ function onCrimesButtonClicked() {
         run2 = true;
         run3 = true;
         for (var k = 0; k < crimesList.length; k++) {
-            if (crimesList[k][2].equals(zipcodeElement.value) && run) {
-                tableBody += '<p>' + zipcodeElement.value + '</p>';
+            if (crimesList[k][2] == zipcodeElement.value && run) {
+                tableBody += '<td>' + 'Zipcode 1 is: ' + zipcodeElement.value + '</td>';
                 run = false;
             }
-            if (crimesList[k][2].equals(zipcodeElement.value) && run2) {
-                tableBody += '<p>' + zipcodeElement2.value + '</p>';
+
+            if (document.getElementById('zipcode2').value != '' && crimesList[k][2] == zipcodeElement2.value && run2) {
+                tableBody += '<td>' + 'Zipcode 2 is: ' + zipcodeElement2.value + '</td>';
                 run2 = false;
             }
-            if (crimesList[k][2].equals(zipcodeElement.value) && run3) {
-                tableBody += '<p>' + zipcodeElement3.value + '</p>';
+            if (document.getElementById('zipcode3').value != '' && crimesList[k][2] == zipcodeElement3.value && run3) {
+                tableBody += '<td>' + 'Zipcode 3 is: ' + zipcodeElement3.value + '</td>';
                 run3 = false;
             }
             tableBody += '<tr>';
