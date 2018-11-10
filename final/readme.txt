@@ -12,4 +12,4 @@ Model Core Classes:
 3)Main: launches the game
 4)SurvivalPongModel: contains the mechanics for the interaction of the ball with the blocks and the walls of the view
 5)SurvivalPongView: creates the view that the player interfaces with. Includes playing grid as well as title, control, settings, and description area
-6)Controller: Handles player input and updates the view 
+6)Controller: Handles player input and updates the view
