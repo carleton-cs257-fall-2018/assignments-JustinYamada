@@ -8,5 +8,8 @@ The MVC model is necessary to both support both the internal structure and ease 
 
 Model Core Classes:
 1)Ball: Gets and sets the velocity of how the ball moves.
-2)Block: Has code on how blocks interact with ball (i.e. ball bounces off block)
-
+2)Block: Has code on how blocks interact with ball (i.e. when and how the ball bounces off block)
+3)Main: launches the game
+4)SurvivalPongModel: contains the mechanics for the interaction of the ball with the blocks and the walls of the view
+5)SurvivalPongView: creates the view that the player interfaces with. Includes playing grid as well as title, control, settings, and description area
+6)Controller: Handles player input and updates the view 
