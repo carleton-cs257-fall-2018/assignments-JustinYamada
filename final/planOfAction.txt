@@ -1,0 +1,18 @@
+Plan of Action:
+1.Analyze Jeff’s pong code 
+2.Can we get game to start with the view we want (i.e ball starts at center, correct layout of score and controls visuals) 
+3.Can we get the ball to move 
+	a.Can we get the ball to move in a random direction 
+4.Game has a game over if ball touches the bottom of the screen 
+	a.Game has restart button on game over (that actually restarts the game) 
+5.Implement blocks so that they are placed in game at start. 
+6.Implement blocks so that they can be placed by player input 
+	a.Make blocks movable with WASD/arrow key before the ball starts moving 
+	b.Spawn a new block when a player finalizes the location of the previous block by hitting the enter key 
+3.Could additionally make blocks breakable and make blocks have different shapes 
+7.Draw the arrow in the correct direction 
+	a.Arrow shows direction of balls (randomly generated) initial velocity 
+8.Make sure timer and score works 
+9.Allow player to change difficulty (number of blocks available to place) 
+10.Change the models of ball and blocks to look more appealing 
+	a.Effects when ball hits blocks(?) 
