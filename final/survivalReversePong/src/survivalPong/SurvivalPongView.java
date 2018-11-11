@@ -1,74 +1,77 @@
 package survivalPong;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class DaleksView extends Group {
-    public final static double CELL_WIDTH = 20.0;
 
-    @FXML private int rowCount;
-    @FXML private int columnCount;
-    private Rectangle[][] cellViews;
+  public void initialize() {
+      this.startTimer();
+  }
 
-    public DaleksView() {
-    }
+  private void startTimer() {
+      this.timer = new java.util.Timer();
+      TimerTask timerTask = new TimerTask() {
+          public void run() {
+              Platform.runLater(new Runnable() {
+                  public void run() {
+                      updateAnimation();
+                  }
+              });
+          }
+      };
 
-    public int getRowCount() {
-        return this.rowCount;
-    }
+      long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
+      this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+  }
 
-    public void setRowCount(int rowCount) {
-        this.rowCount = rowCount;
-        this.initializeGrid();
-    }
+  private void updateAnimation() {
+      double ballCenterX = this.ball.getCenterX() + this.ball.getLayoutX();
+      double ballCenterY = this.ball.getCenterY() + this.ball.getLayoutY();
+      double ballRadius = this.ball.getRadius();
+      double paddleTop = this.paddle.getY() + this.paddle.getLayoutY();
+      double paddleLeft = this.paddle.getX() + this.paddle.getLayoutX();
+      double paddleRight = paddleLeft + this.paddle.getWidth();
 
-    public int getColumnCount() {
-        return this.columnCount;
-    }
+      // Bounce off paddle. NOTE: THIS IS A BAD BOUNCING ALGORITHM. The ball can badly
+      // overshoot the paddle and still "bounce" off it. See if you can come up with
+      // something better.
+      if (ballCenterX >= paddleLeft && ballCenterX < paddleRight && this.ball.getVelocityY() > 0) {
+          double ballBottom = ballCenterY + ballRadius;
+          if (ballBottom >= paddleTop) {
+              this.ball.setVelocityY(-this.ball.getVelocityY());
+              this.score++;
+              this.scoreLabel.setText(String.format("Bounces: %d", this.score));
+          }
+      }
 
-    public void setColumnCount(int columnCount) {
-        this.columnCount = columnCount;
-        this.initializeGrid();
-    }
+      // Bounce off walls
+      double ballVelocityX = this.ball.getVelocityX();
+      double ballVelocityY = this.ball.getVelocityY();
+      if (ballCenterX + ballRadius >= this.gameBoard.getWidth() && ballVelocityX > 0) {
+          this.ball.setVelocityX(-ballVelocityX);
+      } else if (ballCenterX - ballRadius < 0 && ballVelocityX < 0) {
+          this.ball.setVelocityX(-ballVelocityX);
+      } else if (ballCenterY + ballRadius >= this.gameBoard.getHeight() && ballVelocityY > 0) {
+          this.ball.setVelocityY(-ballVelocityY);
+      } else if (ballCenterY - ballRadius < 0 && ballVelocityY < 0) {
+          this.ball.setVelocityY(-ballVelocityY);
+      }
 
-    private void initializeGrid() {
-        if (this.rowCount > 0 && this.columnCount > 0) {
-            this.cellViews = new Rectangle[this.rowCount][this.columnCount];
-            for (int row = 0; row < this.rowCount; row++) {
-                for (int column = 0; column < this.columnCount; column++) {
-                    Rectangle rectangle = new Rectangle();
-                    rectangle.setX((double)column * CELL_WIDTH);
-                    rectangle.setY((double)row * CELL_WIDTH);
-                    rectangle.setWidth(CELL_WIDTH);
-                    rectangle.setHeight(CELL_WIDTH);
-                    this.cellViews[row][column] = rectangle;
-                    this.getChildren().add(rectangle);
-                }
-            }
-        }
-    }
+      // Move the sprite.
+      this.ball.step();
+  }
 
-    public void update(DaleksModel model) {
-        assert model.getRowCount() == this.rowCount && model.getColumnCount() == this.columnCount;
-        for (int row = 0; row < this.rowCount; row++) {
-            for (int column = 0; column < this.columnCount; column++) {
-                DaleksModel.CellValue cellValue = model.getCellValue(row, column);
-                if (cellValue == DaleksModel.CellValue.DALEK) {
-                    this.cellViews[row][column].setFill(Color.BLUE);
-                } else if (cellValue == DaleksModel.CellValue.SCRAPHEAP) {
-                    this.cellViews[row][column].setFill(Color.BLACK);
-                } else if (cellValue == DaleksModel.CellValue.RUNNER) {
-                    this.cellViews[row][column].setFill(Color.GREEN);
-                } else {
-                    this.cellViews[row][column].setFill(Color.WHITE);
-                }
-            }
-        }
-    }
+
 }
