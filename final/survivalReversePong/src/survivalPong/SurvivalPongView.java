@@ -15,7 +15,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class DaleksView extends Group {
-
+  final private double FRAMES_PER_SECOND = 20.0;
+  
   public void initialize() {
       this.startTimer();
   }
