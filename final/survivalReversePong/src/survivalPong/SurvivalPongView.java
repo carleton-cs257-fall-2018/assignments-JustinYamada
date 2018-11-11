@@ -1,4 +1,4 @@
-package edu.carleton.jondich.daleks;
+package survivalPong;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
