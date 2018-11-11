@@ -1,4 +1,4 @@
-package edu.carleton.jondich.daleks;
+package survivalPong;
 
 import java.util.Random;
 
