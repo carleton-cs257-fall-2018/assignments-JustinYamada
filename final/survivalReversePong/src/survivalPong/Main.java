@@ -31,7 +31,7 @@ public class Main extends Application {
             }
         });
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("surivalPong.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("survivalPong.fxml"));
         Parent root = (Parent)loader.load();
         Controller controller = loader.getController();
 

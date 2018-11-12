@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.Group;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,11 +18,23 @@ import java.util.TimerTask;
 public class SurvivalPongView extends Group {
   final private double FRAMES_PER_SECOND = 20.0;
 
+  @FXML private Ball ball;
+  @FXML private Rectangle paddle;
+  @FXML private Label scoreLabel;
+  @FXML private AnchorPane gameBoard;
+
+  private int score;
+  private Timer timer;
+
+  public SurvivalPongView() {
+
+  }
+
   public void initialize() {
       this.startTimer();
   }
 
-  private void startTimer() {
+  public void startTimer() {
       this.timer = new java.util.Timer();
       TimerTask timerTask = new TimerTask() {
           public void run() {
@@ -39,7 +52,7 @@ public class SurvivalPongView extends Group {
 
 
   //updates animation of ball and blocks walls
-  private void updateAnimation() {
+  public void updateAnimation() {
       double ballCenterX = this.ball.getCenterX() + this.ball.getLayoutX();
       double ballCenterY = this.ball.getCenterY() + this.ball.getLayoutY();
       double ballRadius = this.ball.getRadius();

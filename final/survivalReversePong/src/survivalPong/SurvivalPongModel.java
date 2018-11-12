@@ -2,20 +2,21 @@ package survivalPong;
 
 import java.util.Random;
 
-public class survivalPongModel {
+public class SurvivalPongModel {
 
     private boolean gameOver;
     private int score;
     private int difficulty;
 
-    public survivalPongModel(int difficulty) {
+    public SurvivalPongModel(int difficulty) {
         this.startNewGameWithDifficulty(difficulty);
     }
 
     /**
-    * @param difficulty the user chosen hardness of the game with directly
-    * correlates with the number of blocks
-    */
+     * @param difficulty the user chosen hardness of the game with directly
+     *                   correlates with the number of blocks
+     */
+
     public void startNewGameWithDifficulty(int difficulty) {
         this.gameOver = false;
         this.score = 0;
@@ -30,7 +31,7 @@ public class survivalPongModel {
     private void initializeLevel() {
     }
 
-    private int setDifficulty(){
+    private int setDifficulty() {
         return this.difficulty;
     }
 
@@ -58,5 +59,7 @@ public class survivalPongModel {
     public void bounceBallOffBlock() {
     }
 
-    public void bounceBallOffWall(){
+    public void bounceBallOffWall() {
     }
+
+}
