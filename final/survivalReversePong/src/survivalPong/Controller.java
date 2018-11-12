@@ -1,4 +1,4 @@
-package sample;
+package survivalPongs;
 
 public class Controller {
 
