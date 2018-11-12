@@ -8,11 +8,11 @@ public class survivalPongModel {
     private int score;
     private int difficulty;
 
-
     public survivalPongModel(int difficulty) {
         this.startNewGameWithDifficulty(difficulty);
     }
 
+    //begins the game 
     public void startNewGameWithDifficulty(int difficulty) {
         this.gameOver = false;
         this.score = 0;

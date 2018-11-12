@@ -16,7 +16,7 @@ import java.util.TimerTask;
 
 public class DaleksView extends Group {
   final private double FRAMES_PER_SECOND = 20.0;
-  
+
   public void initialize() {
       this.startTimer();
   }
@@ -37,6 +37,8 @@ public class DaleksView extends Group {
       this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
   }
 
+
+  //updates animation of ball and blocks walls
   private void updateAnimation() {
       double ballCenterX = this.ball.getCenterX() + this.ball.getLayoutX();
       double ballCenterY = this.ball.getCenterY() + this.ball.getLayoutY();
