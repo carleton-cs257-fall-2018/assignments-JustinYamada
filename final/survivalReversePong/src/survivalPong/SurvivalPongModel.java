@@ -1,12 +1,20 @@
 package survivalPong;
 
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class SurvivalPongModel {
 
     private boolean gameOver;
     private int score;
     private int difficulty;
+    public Timer timer;
+    final private double FRAMES_PER_SECOND = 20.0;
 
     public SurvivalPongModel(int difficulty) {
         this.startNewGameWithDifficulty(difficulty);
@@ -21,14 +29,29 @@ public class SurvivalPongModel {
         this.gameOver = false;
         this.score = 0;
         this.difficulty = difficulty;
-        this.initializeLevel();
+        this.startTimer();
     }
+
+
+    public void startTimer() {
+        this.timer = new java.util.Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        updateAnimation();
+                    }
+                });
+            }
+        };
+
+        long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
+        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+    }
+
 
     public boolean isGameOver() {
         return this.gameOver;
-    }
-
-    private void initializeLevel() {
     }
 
     private int setDifficulty() {

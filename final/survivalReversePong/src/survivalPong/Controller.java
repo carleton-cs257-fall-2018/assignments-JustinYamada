@@ -36,6 +36,7 @@ public class Controller implements EventHandler<KeyEvent> {
 
     public void initialize() {
         this.survivalPongModel = new SurvivalPongModel(3);
+        this.survivalPongView = new SurvivalPongView();
     }
 
     public void updateScore() {
@@ -46,8 +47,13 @@ public class Controller implements EventHandler<KeyEvent> {
         KeyCode code = keyEvent.getCode();
         double paddlePositionX = this.paddle.getLayoutX();
         double paddlePositionY = this.paddle.getLayoutY();
-        double stepSize = 15.0;
-        string word = "paddle";
+        double stepSize = 10.0;
+//        string word = "paddle";
+
+        if (code == KeyCode.ENTER) {
+
+        }
+
 
         if (code == KeyCode.LEFT || code == KeyCode.A) {
             // move paddle left
