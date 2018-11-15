@@ -18,20 +18,16 @@ public class Controller implements EventHandler<KeyEvent> {
 
     final private double FRAMES_PER_SECOND = 20.0;
 
-    @FXML
-    private Button pauseButton;
-    @FXML
-    private Label scoreLabel;
-    @FXML
-    private AnchorPane gameBoard;
-    @FXML
-    private Rectangle paddle;
-    @FXML
-    private Ball ball;
+    @FXML private Button pauseButton;
+    @FXML private Label scoreLabel;
+    @FXML private AnchorPane gameBoard;
+    @FXML private Rectangle paddle;
+    @FXML private Ball ball;
+    @FXML private SurvivalPongView survivalPongView;
+    private SurvivalPongModel survivalPongModel;
 
     private int score;
     private boolean paused;
-    private Timer timer;
 
     public Controller() {
         this.paused = false;
@@ -39,24 +35,8 @@ public class Controller implements EventHandler<KeyEvent> {
     }
 
     public void initialize() {
-
+        this.survivalPongModel = new SurvivalPongModel(3);
     }
-
-//  private void startTimer() {
-//      this.timer = new java.util.Timer();
-//      TimerTask timerTask = new TimerTask() {
-//          public void run() {
-//              Platform.runLater(new Runnable() {
-//                  public void run() {
-//                      updateAnimation();
-//                  }
-//              });
-//          }
-//      };
-//
-//      long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
-//      this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
-//  }
 
     public void updateScore() {
     }
@@ -64,11 +44,14 @@ public class Controller implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
-        double paddlePosition = this.paddle.getLayoutX();
+        double paddlePositionX = this.paddle.getLayoutX();
+        double paddlePositionY = this.paddle.getLayoutY();
         double stepSize = 15.0;
+        string word = "paddle";
+
         if (code == KeyCode.LEFT || code == KeyCode.A) {
             // move paddle left
-            if (paddlePosition > stepSize) {
+            if (paddlePositionX > stepSize) {
                 this.paddle.setLayoutX(this.paddle.getLayoutX() - stepSize);
             } else {
                 this.paddle.setLayoutX(0);
@@ -76,24 +59,41 @@ public class Controller implements EventHandler<KeyEvent> {
             keyEvent.consume();
         } else if (code == KeyCode.RIGHT || code == KeyCode.D) {
             // move paddle right
-            if (paddlePosition + this.paddle.getWidth() + stepSize < this.gameBoard.getWidth()) {
+            if (paddlePositionX + this.paddle.getWidth() + stepSize < this.gameBoard.getWidth()) {
                 this.paddle.setLayoutX(this.paddle.getLayoutX() + stepSize);
             } else {
                 this.paddle.setLayoutX(this.gameBoard.getWidth() - this.paddle.getWidth());
             }
             keyEvent.consume();
+        } else if (code == KeyCode.DOWN || code == KeyCode.S) {
+            // move paddle up
+            if (paddlePositionY + this.paddle.getHeight() + stepSize < this.gameBoard.getHeight()) {
+                this.paddle.setLayoutY(this.paddle.getLayoutY() + stepSize);
+            } else {
+                this.paddle.setLayoutY(this.gameBoard.getHeight() - this.paddle.getHeight());
+            }
+            keyEvent.consume();
+        } else if (code == KeyCode.UP || code == KeyCode.W) {
+            // move paddle Down
+            if (paddlePositionY > stepSize) {
+                this.paddle.setLayoutY(this.paddle.getLayoutY() - stepSize);
+            } else {
+                this.paddle.setLayoutY(0);
+            }
+            keyEvent.consume();
         }
+
     }
 
     public void onPauseButton(ActionEvent actionEvent) {
-//      if (this.paused) {
-//          this.pauseButton.setText("Pause");
-//          SurvivalPongView.startTimer();
-//      } else {
-//          this.pauseButton.setText("Continue");
-//          this.timer.cancel();
-//      }
-//      this.paused = !this.paused;
-//  }
-    }
+      if (this.paused) {
+          this.pauseButton.setText("Pause");
+          survivalPongView.startTimer();
+      } else {
+          this.pauseButton.setText("Continue");
+          this.survivalPongView.timer.cancel();
+      }
+      this.paused = !this.paused;
+  }
 }
+

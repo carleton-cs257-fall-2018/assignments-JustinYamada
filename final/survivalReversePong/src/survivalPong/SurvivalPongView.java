@@ -24,11 +24,9 @@ public class SurvivalPongView extends Group {
   @FXML private AnchorPane gameBoard;
 
   private int score;
-  private Timer timer;
+  public Timer timer;
 
-  public SurvivalPongView() {
-
-  }
+  public SurvivalPongView() { initialize(); }
 
   public void initialize() {
       this.startTimer();
@@ -60,6 +58,9 @@ public class SurvivalPongView extends Group {
       double paddleLeft = this.paddle.getX() + this.paddle.getLayoutX();
       double paddleRight = paddleLeft + this.paddle.getWidth();
 
+      this.score++;
+      this.scoreLabel.setText(String.format("Timer: %d", this.timer));
+
       // Bounce off paddle. NOTE: THIS IS A BAD BOUNCING ALGORITHM. The ball can badly
       // overshoot the paddle and still "bounce" off it. See if you can come up with
       // something better.
@@ -67,8 +68,7 @@ public class SurvivalPongView extends Group {
           double ballBottom = ballCenterY + ballRadius;
           if (ballBottom >= paddleTop) {
               this.ball.setVelocityY(-this.ball.getVelocityY());
-              this.score++;
-              this.scoreLabel.setText(String.format("Bounces: %d", this.score));
+
           }
       }
 
