@@ -9,14 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Circle;
-import javafx.scene.image.*;
 
-import java.awt.*;
+
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 import java.lang.Math;
 
 public class Controller implements EventHandler<KeyEvent> {
@@ -29,7 +25,7 @@ public class Controller implements EventHandler<KeyEvent> {
     private int score;
     private boolean paused;
     private Timer timer;
-    private int enterPressed = 0;
+    private int shiftPressed = 0;
     private Controller controller;
 
     //This is part of the view
@@ -43,8 +39,6 @@ public class Controller implements EventHandler<KeyEvent> {
     @FXML private Block block2;
     @FXML private Block block3;
     @FXML private Block block4;
-    @FXML private Block block5;
-    @FXML private Block block6;
 
 
 
@@ -93,7 +87,7 @@ public class Controller implements EventHandler<KeyEvent> {
         this.scoreLabel.setText(String.format(""));
         this.paused = true;
         this.score = 0;
-        this.enterPressed = 0;
+        this.shiftPressed = 0;
     }
 
     public void resetBall(){
@@ -127,17 +121,6 @@ public class Controller implements EventHandler<KeyEvent> {
         this.block4.setLayoutY(400);
         this.block4.setX(0);
         this.block4.setY(0);
-
-        this.block5.setLayoutX(400);
-        this.block5.setLayoutY(400);
-        this.block5.setX(0);
-        this.block5.setY(0);
-
-
-        this.block6.setLayoutX(500);
-        this.block6.setLayoutY(400);
-        this.block6.setX(0);
-        this.block6.setY(0);
 
 
     }
@@ -226,13 +209,13 @@ public class Controller implements EventHandler<KeyEvent> {
         double ballRadius = this.ball.getRadius();
 
 
-        if(checkBounce(block) == 1 || checkBounce(block2) == 1 || checkBounce(block3) == 1 || checkBounce(block4) == 1 || checkBounce(block5) == 1 || checkBounce(block6) == 1) {
+        if(checkBounce(block) == 1 || checkBounce(block2) == 1 || checkBounce(block3) == 1 || checkBounce(block4) == 1) {
             this.ball.setVelocityY(-this.ball.getVelocityY());
             this.score++;
             this.scoreLabel.setText(String.format("Bounces: %d", this.score));
         }
 
-        if(checkBounce(block) == 2 || checkBounce(block2) == 2 || checkBounce(block3) == 2 || checkBounce(block4) == 2 || checkBounce(block5) == 2 || checkBounce(block6) == 2) {
+        if(checkBounce(block) == 2 || checkBounce(block2) == 2 || checkBounce(block3) == 2 || checkBounce(block4) == 2) {
             this.ball.setVelocityX(-this.ball.getVelocityX());
             this.score++;
             this.scoreLabel.setText(String.format("Bounces: %d", this.score));
@@ -302,26 +285,20 @@ public class Controller implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         if(code == KeyCode.SHIFT) {
-            enterPressed++;
+            shiftPressed++;
             keyEvent.consume();
         }
-        if(enterPressed == 0){
+        if(shiftPressed == 0){
             moveBlock(block, code, keyEvent);
         }
-        if(enterPressed == 1) {
+        if(shiftPressed == 1) {
             moveBlock(block2, code, keyEvent);
         }
-        if(enterPressed == 2) {
+        if(shiftPressed == 2) {
             moveBlock(block3, code, keyEvent);
         }
-        if(enterPressed == 3) {
+        if(shiftPressed == 3) {
             moveBlock(block4, code, keyEvent);
-        }
-        if(enterPressed == 4) {
-            moveBlock(block5, code, keyEvent);
-        }
-        if(enterPressed == 5) {
-            moveBlock(block6, code, keyEvent);
         }
 
     }
