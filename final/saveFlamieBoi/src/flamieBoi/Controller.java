@@ -105,10 +105,11 @@ public class Controller implements EventHandler<KeyEvent> {
 
     public void resetBlocks() {
 
-        this.block.setLayoutX(0);
-        this.block.setLayoutY(400);
         this.block.setX(0);
         this.block.setY(0);
+        this.block.setLayoutX(0);
+        this.block.setLayoutY(400);
+
 
         this.block2.setLayoutX(100);
         this.block2.setLayoutY(400);
@@ -127,8 +128,6 @@ public class Controller implements EventHandler<KeyEvent> {
         this.block4.setLayoutY(400);
         this.block4.setX(0);
         this.block4.setY(0);
-
-
     }
 
 
@@ -306,8 +305,6 @@ public class Controller implements EventHandler<KeyEvent> {
             keyEvent.consume();
         } else if (code == KeyCode.UP || code == KeyCode.W) {
             // move block UP
-            System.out.println(blockPositionY);
-            System.out.println(stepSize);
 
             if (blockPositionY > stepSize) {
                 block.setLayoutY(block.getLayoutY() - stepSize);
