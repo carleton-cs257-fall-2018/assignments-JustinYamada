@@ -1,6 +1,8 @@
 /**
  * Main.java
- * Conor Gormally & Justin Yamada, 19 Nov 2018
+ * @author Justin Yamada
+ * @author Conor Gormally
+ * @date November 18, 2018
  *
  * The main program for a pong-like program in JavaFX. The goal
  * of the game is to keep the bouncing flame within the screen

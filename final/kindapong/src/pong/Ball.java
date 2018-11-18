@@ -1,6 +1,8 @@
 /**
  * Ball.java
- * Conor Gormally & Justin Yamada, 19 Nov 2018
+ * @author Justin Yamada
+ * @author Conor Gormally
+ * @date November 18, 2018
  *
  * A subclass of circle to set and get the ball velocity. This class also changes
  * the sprite of the ball in the view model.

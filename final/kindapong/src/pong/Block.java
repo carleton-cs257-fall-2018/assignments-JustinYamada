@@ -1,6 +1,8 @@
 /**
  * Block.java
- * Conor Gormally & Justin Yamada, 19 Nov 2018
+ * @author Justin Yamada
+ * @author Conor Gormally
+ * @date November 18, 2018
  *
  * A subclass of rectangle for the sprites of the blocks.
  */
