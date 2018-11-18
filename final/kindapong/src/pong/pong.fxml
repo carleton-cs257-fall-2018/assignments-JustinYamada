@@ -1,3 +1,6 @@
+<!--Authors: Justin Yamada and Conor Gormally -->
+<!--The window and anchor pane that supports our game board, ball, and blocks -->
+<!--This is part of our View -->
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Label?>

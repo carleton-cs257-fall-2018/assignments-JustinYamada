@@ -1,7 +1,12 @@
+/**
+ * @author Justin Yamada
+ * @author Conor Gormally
+ * @date November 18, 2018
+ */
+
 package pong;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,7 +48,6 @@ public class Controller implements EventHandler<KeyEvent> {
 
 
 
-
     public Controller() {
         this.paused = true;
         this.score = 0;
@@ -54,6 +58,7 @@ public class Controller implements EventHandler<KeyEvent> {
 
     }
 
+    //Creates a Timer object whose task is to update the animation
     private void startTimer() {
         this.timer = new java.util.Timer();
         TimerTask timerTask = new TimerTask() {
@@ -70,6 +75,7 @@ public class Controller implements EventHandler<KeyEvent> {
         this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
+    //Kills and recreates the timer object, resets the frames per second and locations of the ball and blocks
     private void gameOver(){
         this.timer.cancel();
         this.refresh();
@@ -125,61 +131,81 @@ public class Controller implements EventHandler<KeyEvent> {
 
     }
 
+
+    /**
+     * Function that checks whether or not one of 8 points (N, NE, E, SE, S, SW, W, NW) on the ball has contacted the
+     * top or side of a block
+     *
+     * @param block the block being checked
+     * @return bounceType (off the side or the top of the block)
+     */
     public int checkBounce(Block block) {
         double ballCenterX = this.ball.getCenterX() + this.ball.getLayoutX();
         double ballCenterY = this.ball.getCenterY() + this.ball.getLayoutY();
         double ballRadius = this.ball.getRadius();
-        //Ball Bottom
+
+        //bounceType is 0 if the ball does not contact the block, 1 if the ball contacts the surfaces, and 2 if
+        //the ball contacts the sides
         int bounceType = bouncePoints((ballCenterX), (ballCenterY + ballRadius), block);
+
+        //Checks if the bottom of the ball has bounced off a surface or side of the platform
         if(bounceType != 0){
             return bounceType;
         }
 
-        //Ball Lower-Left
+        //Checks if the lower left point of the ball has bounced off a surface or side of the platform
         bounceType = bouncePoints((ballCenterX - (ballRadius/Math.sqrt(2))), (ballCenterY + (ballRadius/Math.sqrt(2))), block);
         if(bounceType != 0){
 
             return bounceType;
         }
 
-        //Ball Left
+        //Checks if the left-most point of the ball has bounced off a surface or side of the platform
         bounceType = bouncePoints((ballCenterX - ballRadius), (ballCenterY), block);
         if(bounceType != 0){
             return bounceType;
         }
 
-        //Ball Upper-Left
+        //Checks if the upper left point of the ball has bounced off a surface or side of the platform
         bounceType = bouncePoints((ballCenterX - (ballRadius/Math.sqrt(2))), (ballCenterY - (ballRadius/Math.sqrt(2))), block);
         if(bounceType != 0 ){
             return bounceType;
         }
 
-        //Ball Top
+        //Checks if the top of the ball has bounced off a surface or side of the platform
         bounceType = bouncePoints((ballCenterX), (ballCenterY - ballRadius), block);
         if(bounceType != 0){
             return bounceType;
         }
 
-        //Ball Upper Right
+        //Checks if the upper right point of the ball has bounced off a surface or side of the platform
         bounceType = bouncePoints((ballCenterX + (ballRadius/Math.sqrt(2))), (ballCenterY - (ballRadius/Math.sqrt(2))), block);
         if(bounceType != 0){
             return bounceType;
         }
 
-        //Ball Right
+        //Checks if the right-most point of the ball has bounced off a surface or side of the platform
         bounceType = bouncePoints((ballCenterX + ballRadius), (ballCenterY), block);
         if(bounceType != 0){
             return bounceType;
         }
 
+        //Checks if the lower right point of the ball has bounced off a surface or side of the platform
         bounceType = bouncePoints((ballCenterX + (ballRadius/Math.sqrt(2))), (ballCenterY + (ballRadius/Math.sqrt(2))), block);
-        //Ball Lower Right
         if(bounceType != 0){
             return bounceType;
         }
         return bounceType;
     }
 
+    /**
+     * Helper function for checkBounce, which takes in the block being checked and our calculated bounce points
+     *
+     * @param bouncePointX
+     * @param bouncePointY
+     * @param block
+     * @return bounceType (off the side or the top of the block)
+     */
     private int bouncePoints(double bouncePointX, double bouncePointY, Block block) {
         double blockTop = block.getY() + block.getLayoutY();
         double blockBottom = blockTop +  block.getHeight();
@@ -203,23 +229,26 @@ public class Controller implements EventHandler<KeyEvent> {
         return 0;
     }
 
+
     private void updateAnimation() {
         double ballCenterX = this.ball.getCenterX() + this.ball.getLayoutX();
         double ballCenterY = this.ball.getCenterY() + this.ball.getLayoutY();
         double ballRadius = this.ball.getRadius();
 
-
+        //If the ball bounces off the top or bottom, we invert its Y velocity but retain the X
         if(checkBounce(block) == 1 || checkBounce(block2) == 1 || checkBounce(block3) == 1 || checkBounce(block4) == 1) {
             this.ball.setVelocityY(-this.ball.getVelocityY());
             this.score++;
             this.scoreLabel.setText(String.format("Bounces: %d", this.score));
         }
 
+        //If the ball bounces off the top or bottom, we invert its X velocity but retain the Y
         if(checkBounce(block) == 2 || checkBounce(block2) == 2 || checkBounce(block3) == 2 || checkBounce(block4) == 2) {
             this.ball.setVelocityX(-this.ball.getVelocityX());
             this.score++;
             this.scoreLabel.setText(String.format("Bounces: %d", this.score));
         }
+
         // Bounce off walls
         double ballVelocityX = this.ball.getVelocityX();
         double ballVelocityY = this.ball.getVelocityY();
@@ -238,6 +267,14 @@ public class Controller implements EventHandler<KeyEvent> {
 
     }
 
+    /**
+     * The helper function for our handle method, which takes in a particular block based on how many times shift has been
+     * pressed - effectively freezing each block once it has been moved
+     *
+     * @param block The block being moved
+     * @param code  the code from the handle method
+     * @param keyEvent the keyEvent from the handle method
+     */
     public void moveBlock(Block block, KeyCode code, KeyEvent keyEvent) {
         double blockPositionX = block.getLayoutX();
         double blockPositionY = block.getLayoutY();
@@ -303,7 +340,8 @@ public class Controller implements EventHandler<KeyEvent> {
 
     }
 
-    public void onPauseButton(ActionEvent actionEvent) {
+
+    public void onPauseButton() {
         if (this.paused && pauseButton.getText().equals("Restart")) {
             this.ball.randomVelocity();
             this.pauseButton.setText("Start");
@@ -323,7 +361,8 @@ public class Controller implements EventHandler<KeyEvent> {
 
     }
 
-    public void onSpeedUpButton(ActionEvent actionEvent) {
+    //Allows the user to manually increase the frame rate
+    public void onSpeedUpButton() {
         if(!this.paused && FRAMES_PER_SECOND != 1000) {
             this.timer.cancel();
             this.FRAMES_PER_SECOND += 10;
@@ -343,8 +382,8 @@ public class Controller implements EventHandler<KeyEvent> {
 
 
 
-
-    public void onSpeedDownButton(ActionEvent actionEvent) {
+    //Allows the user to manually decrease the frame rate
+    public void onSpeedDownButton() {
         if(!this.paused && FRAMES_PER_SECOND != 0) {
             this.timer.cancel();
             this.FRAMES_PER_SECOND -= 10;
