@@ -1,5 +1,8 @@
 Conor Gormally and Justin Yamada
 
+Final Note: 
+The game works and looks a lot better than we actually thought it would, which we're proud of. We also ended up following down our original plan for a bouncing algorithm, which doesn't work quite as well as we'd like, but works the significant majority of the time. The game resets and can be restarted, and we added buttons that allow the user to speed up and slow down the frame rate (effectively changing the viewed speed of the ball). After ~20-25 hours of work, we didn't have any more time to implement difficulty or drawing the arrow in the direction of the ball's movement, but it's kind of fun to have a ball with an unknown starting direction; we think it makes the game more difficult and fun. Thanks for all your help and great term! 
+
 Brief Explanation:
 Survival Reverse Pong: The game starts with the ball in the center of the screen, with an arrow depicting the motion of the ball’s travel. The player will place a number of horizontal barriers to prevent the ball from leaving the bottom of the box. If the ball leaves the bottom of the box the game is over. The goal of the game is to keep the ball from leaving the stage for as long as possible, where the score is determined by the time left. At the beginning of the game the user may decide the difficulty (number of bars to place), which acts as a multiplier for the score.
 
