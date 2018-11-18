@@ -49,7 +49,7 @@ public class Ball extends Circle {
 
         this.setVelocityX((random.nextInt(10)) -10);
         this.setVelocityY((random.nextInt(10)) -10);
-        if(this.getVelocityX() == 0 || this.getVelocityY() == 0) {
+        if(this.getVelocityX() == 0 || this.getVelocityX()%2 != 0 || this.getVelocityY() == 0 || this.getVelocityY()%2 != 0) {
             this.randomVelocity();
         }
     }
