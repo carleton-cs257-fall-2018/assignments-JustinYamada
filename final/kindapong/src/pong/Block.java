@@ -1,8 +1,8 @@
 /**
- * Ball.java
- * Jeff Ondich, 10/29/14.
+ * Block.java
+ * Conor Gormally & Justin Yamada, 19 Nov 2018
  *
- * A sample subclass of Sprite for CS257.
+ * A subclass of rectangle for the sprites of the blocks.
  */
 package pong;
 

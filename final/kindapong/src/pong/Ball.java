@@ -1,8 +1,9 @@
 /**
  * Ball.java
- * Jeff Ondich, 10/29/14.
+ * Conor Gormally & Justin Yamada, 19 Nov 2018
  *
- * A sample subclass of Sprite for CS257.
+ * A subclass of circle to set and get the ball velocity. This class also changes
+ * the sprite of the ball in the view model.
  */
 package pong;
 
@@ -23,21 +24,29 @@ public class Ball extends Circle {
         setFill(new ImagePattern(image));
     }
 
+    //denotes how much the ball should move based on its current velocity
+
     public void step() {
         this.setCenterX(this.getCenterX() + this.velocityX);
         this.setCenterY(this.getCenterY() + this.velocityY);
     }
 
+    /**
+     *
+     * @param positionX X coordinate to set
+     * @param positionY Y coordinate to set
+     */
     public void resetLocation(double positionX, double positionY) {
         this.setCenterX(positionX);
         this.setCenterY(positionY);
     }
 
+    //sets a random velocity and applies it to the ball
     public void randomVelocity(){
         Random random = new Random();
 
-        this.setVelocityX((random.nextInt(10))-10);
-        this.setVelocityY((random.nextInt(10))-10);
+        this.setVelocityX((random.nextInt(10)) +5);
+        this.setVelocityY((random.nextInt(10)) +5);
     }
 
     public double getVelocityX() {
