@@ -47,8 +47,11 @@ public class Ball extends Circle {
     public void randomVelocity(){
         Random random = new Random();
 
-        this.setVelocityX((random.nextInt(10)) +5);
-        this.setVelocityY((random.nextInt(10)) +5);
+        this.setVelocityX((random.nextInt(10)) -10);
+        this.setVelocityY((random.nextInt(10)) -10);
+        if(this.getVelocityX() == 0 || this.getVelocityY() == 0) {
+            this.randomVelocity();
+        }
     }
 
     public double getVelocityX() {

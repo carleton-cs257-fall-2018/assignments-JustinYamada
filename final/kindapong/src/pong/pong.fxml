@@ -19,7 +19,7 @@
          -fx-border-color:black;  -fx-border-width:1px 1px 1px 1px;" AnchorPane.topAnchor="60" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="20" >
 
 
-            <Ball fx:id="ball" layoutX="240" layoutY="80" radius="20" velocityX="-7" velocityY="10" />
+            <Ball fx:id="ball" centerX="240" centerY="80" radius="20" velocityX="-7" velocityY="10" />
             <Block fx:id="block" layoutX="0" layoutY="400" width="100" height="40"/>
             <Block fx:id="block2" layoutX="100" layoutY="400" width="100" height="40"/>
             <Block fx:id="block3" layoutX="200" layoutY="400" width="100" height="40"/>
@@ -30,9 +30,8 @@
 
         </AnchorPane>
 
-            <Label AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="0" style="-fx-font-size: 100%"
-                   text="Left: A or left-arrow; Right: D or right-arrow; Up: W or up-arrow;
-                   Down: S or down-arrow; Shift to lock a platform and move the next"  textFill="white"/>
+            <Label AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="0" style="-fx-font-size: 96%"
+                   text="Left: A or left-arrow; Right: D or right-arrow; Up: W or up-arrow; Down: S or down-arrow; Shift to lock a platform and move the next"  textFill="white"/>
 
 </AnchorPane>
 
